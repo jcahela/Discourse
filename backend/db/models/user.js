@@ -39,6 +39,8 @@ module.exports = (sequelize, DataTypes) => {
     };
     static associate(models) {
       // define association here
+      User.hasMany(models.Server, { foreignKey: 'ownerId' })
+      User.hasMany(models.Message, { foreignKey: 'userId' })
     }
   };
   User.init(
@@ -62,6 +64,9 @@ module.exports = (sequelize, DataTypes) => {
           len: [3, 256],
         },
       },
+      profilePicture: {
+        type: DataTypes.STRING,
+      },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,
         allowNull: false,
@@ -75,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       defaultScope: {
         attributes: {
-          exclude: ["hashedPassword", "email", "createdAt", "updatedAt"],
+          exclude: ["hashedPassword", "createdAt", "updatedAt"],
         },
       },
       scopes: {

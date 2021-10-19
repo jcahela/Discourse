@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
+const { User, Server, Channel, Message } = require("../../db/models")
+const asyncHandler = require('express-async-handler');
 
 // // GET /api/set-token-cookie
-// const asyncHandler = require('express-async-handler');
 // const { setTokenCookie } = require('../../utils/auth.js');
 // const { User } = require('../../db/models');
 // router.get('/set-token-cookie', asyncHandler(async (req, res) => {
@@ -43,5 +44,29 @@ router.post("/test", function (req, res) {
 router.use("/session", sessionRouter);
 
 router.use("/users", usersRouter);
+
+// router.get("/test", asyncHandler(async (req, res) => {
+//   const user1 = await User.getCurrentUserById(1)
+//   const server1 = await Server.findByPk(1, {
+//     include: User
+//   })
+//   await server1.destroy();
+//   const channel1 = await Channel.findByPk(1, {
+//     include: {
+//       model: Server,
+//       include: User
+//     }
+//   })
+//   const message1 = await Message.findByPk(1, {
+//     include: {
+//       model: Channel,
+//       include: {
+//         model: Server,
+//         include: User
+//       }
+//     }
+//   })
+//   res.json( message1);
+// }));
 
 module.exports = router;
