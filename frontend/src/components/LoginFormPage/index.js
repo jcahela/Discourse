@@ -15,7 +15,7 @@ function LoginFormPage() {
   const [passwordError, setPasswordError] = useState('')
   const [credentialsError, setCredentialsError] = useState('')
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/dashboard" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
