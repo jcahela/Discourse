@@ -1,10 +1,11 @@
 const express = require("express");
 const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
-
 const { handleValidationErrors } = require("../../utils/validation");
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User } = require("../../db/models");
+const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
+const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
@@ -50,7 +51,7 @@ const validateSignup = [
   handleValidationErrors,
 ];
 
-// Sign up
+// Sign up - no profile picture
 router.post(
   '',
   validateSignupBlankFields,
@@ -66,5 +67,28 @@ router.post(
     });
   }),
 );
+
+// Sign up - with profile picture
+router.post(
+  '/profile-picture',
+  singleMulterUpload("image"),
+  validateSignupBlankFields,
+  validateSignup,
+  asyncHandler(async (req, res) => {
+    const { email, password, username } = req.body;
+    const profileImageUrl = await singlePublicFileUpload(req.file);
+    const user = await User.create({
+      username,
+      email,
+      password: bcrypt.hashSync(password),
+      profilePicture: profileImageUrl
+    });
+    await setTokenCookie(res, user);
+
+    return res.json({
+      user,
+    })
+  })
+)
 
 module.exports = router;
