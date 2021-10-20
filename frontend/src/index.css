@@ -24,6 +24,11 @@ a {
     color: black;
 }
 
+input:-webkit-autofill {
+    -webkit-text-fill-color: #D2D3D4;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 /* a:not(.nav-container a):hover {
     text-decoration: underline;
     text-underline-offset: 3px;
