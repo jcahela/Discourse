@@ -11,7 +11,6 @@ function LoginFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [credentialsError, setCredentialsError] = useState('')
@@ -42,7 +41,9 @@ function LoginFormPage() {
 
   const loginAsDemo = async (e) => {
     e.preventDefault();
-    setErrors([]);
+    setUsernameError('');
+    setPasswordError('');
+    setCredentialsError('');
     await dispatch(login("demo@user.io", "password"))
   }
 
@@ -51,11 +52,6 @@ function LoginFormPage() {
       <LoginSignupBackgroundSvg className={"login-background"}/>
       <form className="login-form-container" onSubmit={handleSubmit}>
         <h1 className="login-header">Login</h1>
-        <ul>
-          {errors.map((error, idx) => (
-            <li className="login-errors" key={idx}>{error}</li>
-          ))}
-        </ul>
         <label className="login-credential-label">
           Username or Email
           <input
