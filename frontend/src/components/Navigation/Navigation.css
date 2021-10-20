@@ -1,3 +1,37 @@
 .profile-dropdown {
   position: absolute;
 }
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.navbar-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: 55px;
+}
+
+.navbar-header {
+  color: white;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 35px;
+  margin-left: 10px;
+}
+
+.navbar-login {
+  padding: 10px 15px;
+  border-radius: 50px;
+  background-color: white;
+}

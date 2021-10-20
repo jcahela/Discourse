@@ -4,7 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 import SignupFormPage from './components/SignupFormPage';
 import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from './store/session';
-import Navigation from './components/Navigation';
+// import Navigation from './components/Navigation';
+import LandingPage from './components/LandingPage';
 // import { Modal } from './context/Modal';
 function App() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} /> */}
       {/* <button onClick={() => setShowModal(true)}>Modal</button> */}
       {/* {showModal && (
         <Modal onClose={() => setShowModal(false)}>
@@ -26,7 +27,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <h1>Home Page</h1>
+            <LandingPage />
           </Route>
           <Route path="/login" >
             <LoginFormPage />
