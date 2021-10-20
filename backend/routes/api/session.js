@@ -32,7 +32,7 @@ router.post(
       const err = new Error('Login failed');
       err.status = 400;
       err.title = 'Login failed';
-      err.errors = ['Incorrect email/username and password combination.'];
+      err.errors = ['Incorrect email/username and password combination'];
       return next(err);
     }
 

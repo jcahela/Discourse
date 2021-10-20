@@ -24,18 +24,20 @@ function LoginFormPage() {
     setPasswordError('');
     setCredentialsError('');
     const data = await dispatch(login(credential, password))
-    const errors = data.errors;
-    errors.forEach(error => {
-      const singleErrorArr = error.split(':');
-      console.log(singleErrorArr)
-      if (singleErrorArr[0] === 'Username/Email') {
-        setUsernameError(error)
-      } else if (singleErrorArr[0] === 'Password') {
-        setPasswordError(error)
-      } else {
-        setCredentialsError(error)
-      }
-    })
+    if (data) {
+      const errors = data.errors;
+      errors.forEach(error => {
+        const singleErrorArr = error.split(':');
+        console.log(singleErrorArr)
+        if (singleErrorArr[0] === 'Username/Email') {
+          setUsernameError(error)
+        } else if (singleErrorArr[0] === 'Password') {
+          setPasswordError(error)
+        } else {
+          setCredentialsError(error)
+        }
+      })
+    }
   };
 
   const loginAsDemo = async (e) => {
@@ -80,7 +82,9 @@ function LoginFormPage() {
         </label>
         <button className="login-button" type="submit">Login</button>
         { credentialsError && (
-            <p className="login-errors">{credentialsError}</p>
+          <div className="login-credentials-error-container">
+            <p className="login-errors login-credentials-error">{credentialsError}</p>
+          </div>
           )}
         <div className="login-tosignup-container">
           <p className="login-tosignup-label">Need an account?</p><NavLink className="login-tosignup-link" to="/signup">Register</NavLink>
