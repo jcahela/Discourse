@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import * as sessionActions from "../../store/session";
+import { Redirect, NavLink } from "react-router-dom";
+import { signup } from "../../store/session";
 import LoginSignupBackgroundSvg from "../auth/LoginSignupBackgroundSvg";
 import './SignupForm.css';
 
@@ -16,64 +16,63 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/dashboard" />;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password }))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+    const data = await dispatch(signup(email, username, password))
+    if (data) {
+      setErrors(data.errors)
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    // return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
   return (
     <>
       <LoginSignupBackgroundSvg className={"signup-background"}/>
-      <h1 className="signup-header">Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="signup-form-container" onSubmit={handleSubmit}>
+        <h1 className="signup-form-header" className="signup-header">Create an account</h1>
         <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          {errors.map((error, idx) => <li className="errors-old" key={idx}>{error}</li>)}
         </ul>
-        <label>
+        <label className="signup-email-label">
           Email
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            className="signup-email-input"
           />
         </label>
-        <label>
+        <label className="signup-username-label">
           Username
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
+            className="signup-username-input"
           />
         </label>
-        <label>
+        <label className="signup-password-label">
           Password
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+            className="signup-password-input"
           />
         </label>
-        <label>
+        <label className="signup-confirm-label">
           Confirm Password
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+            className="signup-confirm-input"
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button className="signup-button" type="submit">Sign Up</button>
+        <div className="signup-tologin-container">
+          <p className="signup-tologin-label">Already have an account?</p><NavLink className="signup-tologin-link" to="/login">Login</NavLink>
+        </div>
       </form>
     </>
   );
