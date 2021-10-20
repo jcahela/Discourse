@@ -20,20 +20,15 @@
 }
 
 
-.signup-errors {
-    color: red;
-    font-size: 13px;
+.signup-error {
+    color: #fd5f5f;
+    font-size: 14px;
     margin-top: 5px;
 }
 
-.signup-credentials-error-container {
+.signup-error-container {
     width: 325px;
     margin: 0 auto;
-}
-
-.signup-credentials-error {
-    margin-top: 5px;
-    font-size: 13px;
 }
 
 .signup-header {

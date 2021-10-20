@@ -20,19 +20,21 @@
 }
 
 .login-errors {
-    color: red;
-    font-size: 13px;
+    color: #fd5f5f;
+    font-size: 14px;
     margin-top: 5px;
 }
 
 .login-credentials-error-container {
-    width: 325px;
+    width: fit-content;
     margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
 }
 
 .login-credentials-error {
-    margin-top: 5px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .login-header {

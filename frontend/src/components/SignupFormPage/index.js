@@ -57,8 +57,8 @@ function SignupFormPage() {
             className="signup-email-input"
           />
           { emailError && (
-            <div className="signup-credentials-error-container">
-              <p className="signup-errors signup-credentials-error">{emailError}</p>
+            <div className="signup-error-container">
+              <p className="signup-error">{emailError}</p>
             </div>
           )}
         </label>
@@ -71,8 +71,8 @@ function SignupFormPage() {
             className="signup-username-input"
           />
           { usernameError && (
-            <div className="signup-credentials-error-container">
-              <p className="signup-errors signup-credentials-error">{usernameError}</p>
+            <div className="signup-error-container">
+              <p className="signup-error">{usernameError}</p>
             </div>
           )}
         </label>
@@ -85,8 +85,8 @@ function SignupFormPage() {
             className="signup-password-input"
           />
           { passwordError && (
-            <div className="signup-credentials-error-container">
-              <p className="signup-errors signup-credentials-error">{passwordError}</p>
+            <div className="signup-error-container">
+              <p className="signup-error">{passwordError}</p>
             </div>
           )}
         </label>
@@ -99,8 +99,8 @@ function SignupFormPage() {
             className="signup-confirm-input"
           />
           { confirmPasswordError && (
-            <div className="signup-credentials-error-container">
-              <p className="signup-errors signup-credentials-error">{confirmPasswordError}</p>
+            <div className="signup-error-container">
+              <p className="signup-error">{confirmPasswordError}</p>
             </div>
           )}
         </label>
