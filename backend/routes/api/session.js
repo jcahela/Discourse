@@ -11,11 +11,11 @@ const router = express.Router();
 const validateLogin = [
   check("credential")
     .exists({ checkFalsy: true })
-    .notEmpty()
-    .withMessage("Please provide a valid email or username."),
+    // .notEmpty()
+    .withMessage("Username/Email: This is a required field."),
   check("password")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide a password."),
+    .withMessage("Password: This is a required field."),
   handleValidationErrors,
 ];
 
@@ -30,17 +30,15 @@ router.post(
 
     if (!user) {
       const err = new Error('Login failed');
-      err.status = 401;
+      err.status = 400;
       err.title = 'Login failed';
-      err.errors = ['The provided credentials were invalid.'];
+      err.errors = ['Incorrect email/username and password combination.'];
       return next(err);
     }
 
     await setTokenCookie(res, user);
 
-    return res.json({
-      user,
-    });
+    return res.json(user);
   }),
 );
 
