@@ -76,11 +76,12 @@ router.post(
   validateSignup,
   asyncHandler(async (req, res) => {
     const { email, password, username } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10)
     const profileImageUrl = await singlePublicFileUpload(req.file);
     const user = await User.create({
       username,
       email,
-      password: bcrypt.hashSync(password),
+      hashedPassword,
       profilePicture: profileImageUrl
     });
     await setTokenCookie(res, user);

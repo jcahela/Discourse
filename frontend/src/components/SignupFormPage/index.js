@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
-import { signup } from "../../store/session";
+import { signup, signupWithPicture } from "../../store/session";
 import LoginSignupBackgroundSvg from "../auth/LoginSignupBackgroundSvg";
 import './SignupForm.css';
 
@@ -16,8 +16,14 @@ function SignupFormPage() {
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
-
+  const [image, setImage] = useState(null)
+  
   if (sessionUser) return <Redirect to="/dashboard" />;
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +31,12 @@ function SignupFormPage() {
     setUsernameError('')
     setPasswordError('')
     setConfirmPasswordError('')
-    const data = await dispatch(signup(email, username, password))
+    let data;
+    if (image) {
+      data = await dispatch(signupWithPicture(image, email, username, password))
+    } else {
+      data = await dispatch(signup(email, username, password))
+    }
     if (data) {
       const errors = data.errors;
       errors.forEach(error => {
@@ -47,7 +58,7 @@ function SignupFormPage() {
     <>
       <LoginSignupBackgroundSvg className={"signup-background"}/>
       <form className="signup-form-container" onSubmit={handleSubmit}>
-        <h1 className="signup-form-header" className="signup-header">Create an account</h1>
+        <h1 className="signup-header">Create an account</h1>
         <label className="signup-email-label">
           Email
           <input
@@ -103,6 +114,18 @@ function SignupFormPage() {
               <p className="signup-error">{confirmPasswordError}</p>
             </div>
           )}
+        </label>
+        <label className={`signup-profile-label picture-added-${image !== null}`}>
+          { image ?
+            `Added`:(
+            `Add Profile Picture (optional)`
+          )}
+          <input 
+            type="file"
+            onChange={updateFile}
+            className="signup-profile-input" 
+
+          />
         </label>
         <button className="signup-button" type="submit">Sign Up</button>
         <div className="signup-tologin-container">

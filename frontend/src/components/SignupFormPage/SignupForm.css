@@ -70,6 +70,43 @@
     border: 1px solid #00AFF4;
 }
 
+.signup-profile-label {
+    background-color: #303339;
+    position: relative;
+    width: 247px;
+    height: 33px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    color: #D2D3D4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    transition: .3s;
+}
+
+.picture-added-true {
+    background-color: #00AFF4;
+    border-color: #00AFF4;
+    color: #303339;
+}
+
+.signup-profile-input {
+    width: 100%;
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    opacity: 0;
+    z-index: -1;
+}
+
+.signup-profile-label:hover {
+    border-color: #00AFF4;
+    cursor: pointer;
+}
+
 .signup-button {
     background-color: #5865F2;
     color: white;
