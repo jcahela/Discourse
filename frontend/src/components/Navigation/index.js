@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+// import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -30,7 +30,11 @@ function Navigation({ isLoaded }){
           />
           <span className="navbar-header">Discourse</span>
         </NavLink>
-        <NavLink className="navbar-login" to="/login">Login</NavLink>
+        { sessionUser ? (
+          <NavLink className="navbar-login" to="/dashboard">Open Discourse</NavLink>
+        ):(
+          <NavLink className="navbar-login" to="/login">Login</NavLink>
+        )}
         {/* {isLoaded && sessionLinks} */}
       </div>
   );

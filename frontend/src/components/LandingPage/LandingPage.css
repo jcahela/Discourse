@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&family=Roboto&display=swap');
 
-.landing-container {
+.landing-background {
     width: 100vw;
     height: 100vh;
     background-color: #404EED;
-    position: relative;
+    position: absolute;
+    z-index: -5;
 }
 
 .landing-clouds-svg {
@@ -12,6 +13,7 @@
     height: auto;
     position: absolute;
     bottom: 0;
+    z-index: -1;
 }
 
 .landing-graphic-left-svg {
@@ -20,6 +22,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: -1;
 }
 
 .landing-graphic-right-svg {
@@ -28,15 +31,23 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    z-index: -1;
+}
+
+.landing-welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 100;
 }
 
 .landing-header {
     font-family: 'Paytone One', sans-serif;
     color: white;
     font-size: 48px;
-    width: 40%;
+    width: 58rem;
     text-align: center;
-    margin: 0 auto;
     margin-top: 25vh;
     z-index: 1000;
 }
@@ -44,8 +55,24 @@
 .landing-sub-header {
     color: white;
     text-align: center;
-    margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 20px;
     width: 30vw;
 }
+
+.landing-action-button {
+    padding: 15px 25px;
+    border-radius: 50px;
+    background-color: #23272A;
+    transition: 0.3s;
+    color: white;
+    font-size: 22px;
+    margin-top: 40px;
+}
+
+.landing-action-button:hover {
+    box-shadow: 0px 10px 48px -5px rgba(0, 0, 0, 0.30);
+    background-color: #36393F;
+    z-index: 100;
+}
+  

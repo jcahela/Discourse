@@ -4,8 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 import SignupFormPage from './components/SignupFormPage';
 import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from './store/session';
-// import Navigation from './components/Navigation';
 import LandingPage from './components/LandingPage';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 // import { Modal } from './context/Modal';
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +35,9 @@ function App() {
           <Route path='/signup'>
             <SignupFormPage />
           </Route>
+          <ProtectedRoute path='/dashboard'>
+            <h1>Dashboard</h1>
+          </ProtectedRoute>
         </Switch>
       )}
     </>
