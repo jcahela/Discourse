@@ -1,5 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&family=Roboto&display=swap');
+
 .landing-container {
     width: 100vw;
     height: 100vh;
-    background-color: #5865F2;
+    background-color: #404EED;
+    position: relative;
+}
+
+.landing-clouds-svg {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+}
+
+.landing-graphic-left-svg {
+    width: 40%;
+    height: fit-content;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.landing-graphic-right-svg {
+    width: 40%;
+    height: fit-content;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.landing-header {
+    font-family: 'Paytone One', sans-serif;
+    color: white;
+    font-size: 48px;
+    width: 40%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 25vh;
+    z-index: 1000;
+}
+
+.landing-sub-header {
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 20px;
+    width: 30vw;
 }
