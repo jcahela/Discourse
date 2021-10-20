@@ -12,17 +12,35 @@ function SignupFormPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [emailError, setEmailError] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
   if (sessionUser) return <Redirect to="/dashboard" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setEmailError('')
+    setUsernameError('')
+    setPasswordError('')
+    setConfirmPasswordError('')
     const data = await dispatch(signup(email, username, password))
     if (data) {
-      setErrors(data.errors)
+      const errors = data.errors;
+      errors.forEach(error => {
+        if (error.includes('Email')) {
+          setEmailError(error)
+        }
+        if (error.includes('Username')) {
+          setUsernameError(error)
+        }
+        if (error.includes('Password')) {
+          setPasswordError(error)
+        }
+      })
     }
-    // return setErrors(['Confirm Password field must be the same as the Password field']);
+    if (password && password !== confirmPassword)setConfirmPasswordError('Confirm Password field must be the same as the Password field');
   };
 
   return (
@@ -30,9 +48,6 @@ function SignupFormPage() {
       <LoginSignupBackgroundSvg className={"signup-background"}/>
       <form className="signup-form-container" onSubmit={handleSubmit}>
         <h1 className="signup-form-header" className="signup-header">Create an account</h1>
-        <ul>
-          {errors.map((error, idx) => <li className="errors-old" key={idx}>{error}</li>)}
-        </ul>
         <label className="signup-email-label">
           Email
           <input
@@ -41,6 +56,11 @@ function SignupFormPage() {
             onChange={(e) => setEmail(e.target.value)}
             className="signup-email-input"
           />
+          { emailError && (
+            <div className="signup-credentials-error-container">
+              <p className="signup-errors signup-credentials-error">{emailError}</p>
+            </div>
+          )}
         </label>
         <label className="signup-username-label">
           Username
@@ -50,6 +70,11 @@ function SignupFormPage() {
             onChange={(e) => setUsername(e.target.value)}
             className="signup-username-input"
           />
+          { usernameError && (
+            <div className="signup-credentials-error-container">
+              <p className="signup-errors signup-credentials-error">{usernameError}</p>
+            </div>
+          )}
         </label>
         <label className="signup-password-label">
           Password
@@ -59,6 +84,11 @@ function SignupFormPage() {
             onChange={(e) => setPassword(e.target.value)}
             className="signup-password-input"
           />
+          { passwordError && (
+            <div className="signup-credentials-error-container">
+              <p className="signup-errors signup-credentials-error">{passwordError}</p>
+            </div>
+          )}
         </label>
         <label className="signup-confirm-label">
           Confirm Password
@@ -68,6 +98,11 @@ function SignupFormPage() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="signup-confirm-input"
           />
+          { confirmPasswordError && (
+            <div className="signup-credentials-error-container">
+              <p className="signup-errors signup-credentials-error">{confirmPasswordError}</p>
+            </div>
+          )}
         </label>
         <button className="signup-button" type="submit">Sign Up</button>
         <div className="signup-tologin-container">

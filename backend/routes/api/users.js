@@ -15,24 +15,36 @@ const validateSignupBlankFields = [
   check('username')
     .exists({ checkFalsy: true })
     .withMessage('Username: This is a required field'),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Password: This is a required field'),
   handleValidationErrors
 ]
 
 const validateSignup = [
   check('email')
-    // .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('Email: Please provide a valid email.'),
+    .withMessage('Email: Please provide a valid email.')
+    .custom(async (value) => {
+      const user = await User.findOne({ where: { email: value }})
+      if (user) {
+        return Promise.reject('Email: This email already exists')
+      }
+    }),
   check('username')
-    .exists({ checkFalsy: true })
     .isLength({ min: 4 })
-    .withMessage('Username: Please provide a username with at least 4 characters.'),
+    .withMessage('Username: Please provide a username with at least 4 characters.')
+    .custom(async (value) => {
+      const user = await User.findOne({ where: { username: value }})
+      if (user) {
+        return Promise.reject('Username: This username already exists')
+      }
+    }),
   check('username')
     .not()
     .isEmail()
     .withMessage('Username: Username cannot be an email.'),
   check('password')
-    .exists({ checkFalsy: true })
     .isLength({ min: 6 })
     .withMessage('Password: Password must be 6 characters or more.'),
   handleValidationErrors,

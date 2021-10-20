@@ -19,25 +19,22 @@
     border-radius: 10px;
 }
 
-.errors-old {
+
+.signup-errors {
     color: red;
+    font-size: 13px;
+    margin-top: 5px;
 }
 
-/* .login-errors {
-    color: red;
-    font-size: 13px;
-    margin-top: 5px;
-} */
-
-/* .login-credentials-error-container {
+.signup-credentials-error-container {
     width: 325px;
     margin: 0 auto;
-} */
+}
 
-/* .login-credentials-error {
+.signup-credentials-error {
     margin-top: 5px;
     font-size: 13px;
-} */
+}
 
 .signup-header {
     text-align: center;
