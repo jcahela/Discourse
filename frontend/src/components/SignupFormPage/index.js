@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import LoginSignupBackgroundSvg from "../auth/LoginSignupBackgroundSvg";
 import './SignupForm.css';
 
 function SignupFormPage() {
@@ -30,7 +31,8 @@ function SignupFormPage() {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <LoginSignupBackgroundSvg className={"signup-background"}/>
+      <h1 className="signup-header">Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}

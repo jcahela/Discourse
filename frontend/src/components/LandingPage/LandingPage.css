@@ -3,8 +3,8 @@
 .landing-background {
     width: 100vw;
     height: 100vh;
-    background-color: #404EED;
-    position: absolute;
+    background: linear-gradient(0deg, rgba(123,132,235,1) 0%, rgba(92,103,237,1) 50%, rgba(64,78,237,1) 100%);
+    position: absolute; 
     z-index: -5;
 }
 
