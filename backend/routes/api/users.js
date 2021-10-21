@@ -34,11 +34,18 @@ const validateSignup = [
     }),
   check('username')
     .isLength({ min: 4 })
-    .withMessage('Username: Please provide a username with at least 4 characters.')
+    .withMessage('Username: Username must be between 4 and 50 characters.')
+    .isLength({ max: 50 })
+    .withMessage('Username: Username must be between 4 and 50 characters.')
     .custom(async (value) => {
       const user = await User.findOne({ where: { username: value }})
       if (user) {
         return Promise.reject('Username: This username already exists')
+      }
+    })
+    .custom(async (value) => {
+      if (value.includes(' ')) {
+        return Promise.reject('Username: Usernames cannot contain spaces')
       }
     }),
   check('username')

@@ -31,6 +31,10 @@ function SignupFormPage() {
     setUsernameError('')
     setPasswordError('')
     setConfirmPasswordError('')
+    if (password && password !== confirmPassword) {
+      setConfirmPasswordError('Confirm Password field must be the same as the Password field');
+      return;
+    }
     let data;
     if (image) {
       data = await dispatch(signupWithPicture(image, email, username, password))
@@ -51,7 +55,6 @@ function SignupFormPage() {
         }
       })
     }
-    if (password && password !== confirmPassword)setConfirmPasswordError('Confirm Password field must be the same as the Password field');
   };
 
   return (
