@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import './NewServerForm.css'
 
-function NewServerForm() {
+function NewServerForm({ onClose }) {
     const dispatch = useDispatch();
     const [serverName, setServerName] = useState('')
     const [image, setImage] = useState(null)
@@ -19,8 +19,11 @@ function NewServerForm() {
         ))
 
         if (data) {
-            setErrors(data.errors)
+            setErrors(data.errors);
+            return
         }
+
+        onClose();
     }
 
     return ( 

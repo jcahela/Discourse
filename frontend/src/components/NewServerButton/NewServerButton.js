@@ -25,7 +25,7 @@ function NewServerButton() {
             )}
             { showServerModal && (
                 <Modal onClose={() => setShowServerModal(false)}>
-                    <NewServerForm />
+                    <NewServerForm onClose={() => setShowServerModal(false)}/>
                 </Modal>
             )}
         </div>
