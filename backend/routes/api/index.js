@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
+const serversRouter = require("./servers.js")
 const { User, Server, Channel, Message } = require("../../db/models")
 const asyncHandler = require('express-async-handler');
 
@@ -44,6 +45,8 @@ router.post("/test", function (req, res) {
 router.use("/session", sessionRouter);
 
 router.use("/users", usersRouter);
+
+router.use("/servers", serversRouter);
 
 // router.get("/test", asyncHandler(async (req, res) => {
 //   const user1 = await User.getCurrentUserById(1)

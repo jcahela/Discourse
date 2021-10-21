@@ -7,24 +7,19 @@ import * as sessionActions from './store/session';
 import LandingPage from './components/LandingPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import DashboardPage from './components/DashboardPage';
-// import { Modal } from './context/Modal';
+import { restoreServersThunk } from './store/servers';
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  // const [showModal, setShowModal] = useState(false);
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreUser())
+      .then(() => dispatch(restoreServersThunk()))
+      .then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
-      {/* <Navigation isLoaded={isLoaded} /> */}
-      {/* <button onClick={() => setShowModal(true)}>Modal</button> */}
-      {/* {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <h1>Hello I am a Modal</h1>
-        </Modal>
-      )} */}
       {isLoaded && (
         <Switch>
           <Route exact path="/">

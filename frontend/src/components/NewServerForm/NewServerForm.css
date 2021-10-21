@@ -42,6 +42,14 @@
     border: 1px solid #00AFF4;
 }
 
+.server-error-container {
+    margin-top: 5px;
+}
+
+.server-error {
+    color: #fd5f5f;
+}
+
 .new-server-button {
     background-color: #5865F2;
     color: white;
