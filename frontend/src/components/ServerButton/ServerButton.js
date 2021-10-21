@@ -36,6 +36,10 @@ function ServerButton({ server, setServerSelected, serverSelected }) {
             serverButtonContainerRef.current.classList.add('server-button-container-active')
             serverButtonNoPicRef.current?.classList.add('server-button-no-pic-active')
             serverButtonPicRef.current?.classList.add('server-button-pic-active')
+        } else {
+            serverButtonContainerRef.current.classList.remove('server-button-container-active')
+            serverButtonNoPicRef.current?.classList.remove('server-button-no-pic-active')
+            serverButtonPicRef.current?.classList.remove('server-button-pic-active')
         }
     })
 
