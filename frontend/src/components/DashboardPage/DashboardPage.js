@@ -2,16 +2,20 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ProfileButton from '../Navigation/ProfileButton';
 import NewServerButton from '../NewServerButton';
+import ServerButton from '../ServerButton/ServerButton';
 import './DashboardPage.css'
 
 function DashboardPage() {
     const [channelsExist, setChannelsExist] = useState(false)
     const sessionUser = useSelector(state => state.session.user)
-    const servers = useSelector(state => state.servers)
+    const serversArr = useSelector(state => Object.values(state.servers))
     
     return ( 
         <div className="dashboard-page-container">
             <div className="server-container">
+                {serversArr.map(server => (
+                    <ServerButton key={server.id} server={server}/>
+                ))}
                 <NewServerButton />
             </div>
             <div className="channel-container">
