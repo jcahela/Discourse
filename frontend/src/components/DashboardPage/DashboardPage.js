@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ProfileButton from '../Navigation/ProfileButton';
+import NewServerButton from '../NewServerButton';
 import './DashboardPage.css'
 
 function DashboardPage() {
@@ -9,7 +10,7 @@ function DashboardPage() {
     return ( 
         <div className="dashboard-page-container">
             <div className="server-container">
-
+                <NewServerButton />
             </div>
             <div className="channel-container">
                 <div className="session-user-container">

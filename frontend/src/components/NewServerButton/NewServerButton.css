@@ -1,0 +1,32 @@
+.new-server-button-container {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #36393F;
+    margin-top: 20px;
+    transition: .3s;
+}
+
+.new-server-button-container:hover {
+    cursor: pointer;
+    background-color: #3BA55D;
+    border-radius: 20px;
+}
+
+
+.new-server-button-plus-icon {
+    font-size: 46px;
+    color: #3BA55D;
+    border-radius: 50%;
+    width: 100%;
+    text-align: center;
+    transition: .3s;
+}
+
+.new-server-button-plus-icon:hover {
+    color: #FFFFFF;
+    border-radius: 20px;
+}
