@@ -2,6 +2,7 @@ import './NewServerButton.css'
 import { Modal } from '../../context/Modal';
 import { useState } from 'react';
 import ServerPopupMessage from '../ServerPopupMessage';
+import NewServerForm from '../NewServerForm/NewServerForm';
 
 function NewServerButton() {
     const [showServerModal, setShowServerModal] = useState(false)
@@ -24,7 +25,7 @@ function NewServerButton() {
             )}
             { showServerModal && (
                 <Modal onClose={() => setShowServerModal(false)}>
-                    <h1>New Server Modal</h1>
+                    <NewServerForm />
                 </Modal>
             )}
         </div>
