@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import ProfileButton from '../Navigation/ProfileButton';
 import './DashboardPage.css'
 
 function DashboardPage() {
@@ -14,7 +15,7 @@ function DashboardPage() {
                 <div className="session-user-container">
                     <img className="session-user-profile-pic" src={sessionUser.profilePicture} alt="" />
                     <p className="session-user-username">{sessionUser.username}</p>
-                    <span class="material-icons session-user-settings-icon">settings</span>
+                    <ProfileButton user={sessionUser}/>
                 </div>
             </div>
             <div className="chat-container">
