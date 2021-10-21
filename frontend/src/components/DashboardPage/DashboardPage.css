@@ -26,8 +26,10 @@
     display: flex;
     position: absolute;
     bottom: 10px;
-    left: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     align-items: center;
+    width: 100%;
 }
 
 .session-user-profile-pic {
@@ -43,7 +45,19 @@
     margin-left: 10px;
 }
 
-/* #BDBFC1 */
+.session-user-settings-icon {
+    color: #BDBFC1;
+    margin-left: auto;
+    font-size: 22px;
+}
+
+.session-user-settings-icon:hover {
+    cursor: pointer;
+}
+
+.session-user-username:hover {
+    cursor: default;
+}
 
 .chat-container {
     flex: auto;
@@ -56,4 +70,8 @@
 
 .chat-background-text {
     color: #6B6F76;
+}
+
+.chat-background-text:hover {
+    cursor: default;
 }

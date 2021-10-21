@@ -14,7 +14,7 @@ function DashboardPage() {
                 <div className="session-user-container">
                     <img className="session-user-profile-pic" src={sessionUser.profilePicture} alt="" />
                     <p className="session-user-username">{sessionUser.username}</p>
-                    <span class="material-icons">settings</span>
+                    <span class="material-icons session-user-settings-icon">settings</span>
                 </div>
             </div>
             <div className="chat-container">
