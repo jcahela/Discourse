@@ -16,7 +16,7 @@ function ImageDropzone({ setImage }) {
                 imageRef.current.src = reader.result
             }
         })
-    }, [])
+    }, [setImage])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({onDrop})
     return ( 
         <div {...getRootProps()}>
@@ -26,7 +26,7 @@ function ImageDropzone({ setImage }) {
                     <img className="new-server-image" ref={imageRef} src="" alt="" />
                 ):(
                     <>
-                        <span class="material-icons new-server-photo-icon">photo_camera</span>
+                        <span className="material-icons new-server-photo-icon">photo_camera</span>
                         {isDragActive ? (
                             <p className="new-server-image-text">Drop here</p>
                         ):(

@@ -6,8 +6,6 @@ function NewServerForm() {
     const [serverName, setServerName] = useState('')
     const [image, setImage] = useState(null)
 
-    console.log(image)
-
     const submitNewServer = async (e) => {
         e.preventDefault();
     }

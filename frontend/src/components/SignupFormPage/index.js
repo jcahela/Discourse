@@ -17,8 +17,6 @@ function SignupFormPage() {
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [image, setImage] = useState(null)
-
-  console.log(image)
   
   if (sessionUser) return <Redirect to="/dashboard" />;
 
