@@ -7,6 +7,8 @@ import './DashboardPage.css'
 function DashboardPage() {
     const [channelsExist, setChannelsExist] = useState(false)
     const sessionUser = useSelector(state => state.session.user)
+    const servers = useSelector(state => state.servers)
+    
     return ( 
         <div className="dashboard-page-container">
             <div className="server-container">
