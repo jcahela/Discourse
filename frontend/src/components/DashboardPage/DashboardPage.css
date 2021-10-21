@@ -9,7 +9,7 @@
 .server-container {
     width: 85px;
     height: 100vh;
-    flex: initial;
+    flex: 0 0 auto;
     background-color: #202225;
 }
 
@@ -17,7 +17,7 @@
 .channel-container {
     width: 250px;
     height: 100vh;
-    flex: initial;
+    flex: 0 0 auto;
     background-color: #2F3136;
     position: relative;
 }
