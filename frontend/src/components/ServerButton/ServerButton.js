@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import './ServerButton.css'
 
 function ServerButton({ server }) {
-    const [showServerPopup, setShowServerPopup] = useState(true);
+    const [showServerPopup, setShowServerPopup] = useState(false);
     const [noPicContent, setNoPicContent] = useState('')
 
     const showPopupMessage = () => {

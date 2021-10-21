@@ -8,7 +8,7 @@ import './DashboardPage.css'
 function DashboardPage() {
     const [channelsExist, setChannelsExist] = useState(false)
     const sessionUser = useSelector(state => state.session.user)
-    const serversArr = useSelector(state => Object.values(state.servers))
+    const serversArr = useSelector(state => Object.values(state.servers).sort((a, b) => (a.createdAt < b.createdAt ? 1: -1)))
     
     return ( 
         <div className="dashboard-page-container">
