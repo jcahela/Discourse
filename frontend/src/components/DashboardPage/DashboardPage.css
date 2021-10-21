@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300&family=Paytone+One&family=Roboto&display=swap');
+
+.dashboard-page-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+}
+
+.server-container {
+    width: 85px;
+    height: 100vh;
+    flex: initial;
+    background-color: #202225;
+}
+
+
+.channel-container {
+    width: 250px;
+    height: 100vh;
+    flex: initial;
+    background-color: #2F3136;
+    position: relative;
+}
+
+.session-user-container {
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    align-items: center;
+}
+
+.session-user-profile-pic {
+    width: 35px;
+    height: 35px;
+}
+
+.session-user-username {
+    color: white;
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+/* #BDBFC1 */
+
+.chat-container {
+    flex: auto;
+    background-color: #36393F;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-background-text {
+    color: #6B6F76;
+}

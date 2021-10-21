@@ -6,6 +6,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from './store/session';
 import LandingPage from './components/LandingPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import DashboardPage from './components/DashboardPage';
 // import { Modal } from './context/Modal';
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <ProtectedRoute path='/dashboard'>
-            <h1>Dashboard</h1>
+            <DashboardPage />
           </ProtectedRoute>
         </Switch>
       )}
