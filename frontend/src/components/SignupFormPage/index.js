@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import { signup, signupWithPicture } from "../../store/session";
 import LoginSignupBackgroundSvg from "../auth/LoginSignupBackgroundSvg";
+import ImageDropzone from '../ImageDropzone'
 import './SignupForm.css';
 
 function SignupFormPage() {
@@ -19,11 +20,6 @@ function SignupFormPage() {
   const [image, setImage] = useState(null)
   
   if (sessionUser) return <Redirect to="/dashboard" />;
-
-  const updateFile = (e) => {
-    const file = e.target.files[0];
-    if (file) setImage(file)
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,18 +114,7 @@ function SignupFormPage() {
             </div>
           )}
         </label>
-        <label className={`signup-profile-label picture-added-${image !== null}`}>
-          { image ?
-            `Added`:(
-            `Add Profile Picture (optional)`
-          )}
-          <input 
-            type="file"
-            onChange={updateFile}
-            className="signup-profile-input" 
-
-          />
-        </label>
+        <ImageDropzone setImage={setImage}/>
         <button className="signup-button" type="submit">Sign Up</button>
         <div className="signup-tologin-container">
           <p className="signup-tologin-label">Already have an account?</p><NavLink className="signup-tologin-link" to="/login">Login</NavLink>

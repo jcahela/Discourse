@@ -63,6 +63,10 @@
     transition: .3s;
 }
 
+.signup-confirm-input {
+    margin-bottom: 20px;
+}
+
 .signup-email-input:focus,
 .signup-username-input:focus,
 .signup-password-input:focus,
