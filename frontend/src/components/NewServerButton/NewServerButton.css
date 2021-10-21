@@ -1,3 +1,8 @@
+.new-server-button-holder {
+    width: fit-content;
+    position: relative;
+}
+
 .new-server-button-container {
     width: 55px;
     height: 55px;
