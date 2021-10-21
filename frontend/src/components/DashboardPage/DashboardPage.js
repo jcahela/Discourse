@@ -7,18 +7,22 @@ import './DashboardPage.css'
 
 function DashboardPage() {
     const [channelsExist, setChannelsExist] = useState(false)
+    const [serverSelected, setServerSelected] = useState(null);
     const sessionUser = useSelector(state => state.session.user)
     const serversArr = useSelector(state => Object.values(state.servers).sort((a, b) => (a.createdAt < b.createdAt ? 1: -1)))
-    
+
     return ( 
         <div className="dashboard-page-container">
             <div className="server-container">
                 {serversArr.map(server => (
-                    <ServerButton key={server.id} server={server}/>
+                    <ServerButton key={server.id} server={server} setServerSelected={setServerSelected} serverSelected={serverSelected}/>
                 ))}
                 <NewServerButton />
             </div>
             <div className="channel-container">
+                <div className="server-name-container">
+                    <h1 className="server-name">{serverSelected?.name}</h1>
+                </div>
                 <div className="session-user-container">
                     <img className="session-user-profile-pic" src={sessionUser.profilePicture} alt="" />
                     <p className="session-user-username">{sessionUser.username}</p>

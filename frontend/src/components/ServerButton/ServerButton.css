@@ -21,6 +21,10 @@
     border-radius: 17px;
 }
 
+.server-button-container-active {
+    background-color: #5865F2;
+    border-radius: 17px;    
+}
 
 .server-button-no-pic-content {
     font-size: 18px;
@@ -40,6 +44,10 @@
     color: #EDEFFE;
 }
 
+.server-button-no-pic-active {
+    color: #EDEFFE;
+}
+
 .server-button-pic-content {
     width: 100%;
     height: 100%;
@@ -50,5 +58,9 @@
 }
 
 .server-button-pic-content:hover {
+    border-radius: 17px;
+}
+
+.server-button-pic-active {
     border-radius: 17px;
 }
