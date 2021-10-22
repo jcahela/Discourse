@@ -1,0 +1,36 @@
+.server-settings-container {
+    height: 100px;
+    width: 200px;
+    position: absolute;
+    bottom: -60px;
+    right: 5px;
+    height: fit-content;
+    background-color: #18191C;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.server-settings-button {
+    color: #D2D3D4;
+    padding: 8px 10px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.server-settings-button:hover,
+.server-settings-button:hover > span {
+    background-color: #4752C4;
+    color: white;
+}
+
+.server-settings-icon {
+    margin-left: auto;
+    color: #D2D3D4;
+}
+
+.test-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: red;
+}

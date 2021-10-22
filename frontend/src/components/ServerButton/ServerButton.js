@@ -48,7 +48,7 @@ function ServerButton({ server, setServerSelected, serverSelected }) {
             serverButtonPicRef.current?.classList.remove('server-button-pic-active')
             setWhiteLineActive(false);
         }
-    })
+    }, [serverSelected?.id, server?.id])
 
     const setSelected = () => {
         setServerSelected(server);

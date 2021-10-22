@@ -34,6 +34,7 @@
     align-items: center;
     padding: 0 15px;
     transition: .3s;
+    position: relative;
 }
 
 .server-name-container:hover {
