@@ -13,8 +13,8 @@ const validateCreateServerFields = [
         .exists({ checkFalsy: true })
         .withMessage('You must enter a server name'),
     check('serverName')
-        .isLength({ max: 100})
-        .withMessage('Server name must be less than 100 characters.'),
+        .isLength({ max: 50})
+        .withMessage('Server name must be less than 50 characters.'),
     handleValidationErrors,
 ]
 
