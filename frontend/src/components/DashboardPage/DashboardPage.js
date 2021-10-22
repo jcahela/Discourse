@@ -12,6 +12,7 @@ import './DashboardPage.css'
 function DashboardPage() {
     const [channelsExist, setChannelsExist] = useState(false)
     const [serverSelected, setServerSelected] = useState(null);
+    const serverFromState = useSelector(state => state.servers[serverSelected?.id])
     const [showServerSettingsMenu, setShowServerSettingsMenu] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const sessionUser = useSelector(state => state.session.user)
@@ -50,9 +51,9 @@ function DashboardPage() {
                 <NewServerButton />
             </div>
             <div className="channel-container">
-                { serverSelected && <div className="server-name-container" onClick={openMenu}>
-                    <h1 className="server-name">{serverSelected?.name}</h1>
-                    {serverSelected?.ownerId === sessionUser.id && (
+                { serverFromState && <div className="server-name-container" onClick={openMenu}>
+                    <h1 className="server-name">{serverFromState?.name}</h1>
+                    {serverFromState?.ownerId === sessionUser.id && (
                         <div className="server-options-icon-container">
                             {showServerSettingsMenu ? (
                                 <span className="material-icons server-options-icon">close</span>
@@ -65,7 +66,7 @@ function DashboardPage() {
                     )}
                     { showModal && (
                         <Modal onClose={() => setShowModal(false)}>
-                            <SettingsOverlay server={serverSelected} onClose={() => setShowModal(false)} setServerSelected={setServerSelected}/>
+                            <SettingsOverlay server={serverFromState} onClose={() => setShowModal(false)} setServerSelected={setServerSelected}/>
                         </Modal>
                     )}
                 </div>}

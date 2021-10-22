@@ -27,7 +27,6 @@ function LoginFormPage() {
       const errors = data.errors;
       errors.forEach(error => {
         const singleErrorArr = error.split(':');
-        console.log(singleErrorArr)
         if (singleErrorArr[0] === 'Username/Email') {
           setUsernameError(error)
         } else if (singleErrorArr[0] === 'Password') {

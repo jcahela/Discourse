@@ -11,8 +11,8 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
     const serverFromState = useSelector(state => state.servers[server.id])
     const [noPicContent, setNoPicContent] = useState('');
     const [changeIconMessage, setShowChangeIconMessage] = useState(false)
-    const [serverName, setServerName] = useState(serverFromState.name)
-    const [image, setImage] = useState(serverFromState.serverPicture)
+    const [serverName, setServerName] = useState(serverFromState?.name)
+    const [image, setImage] = useState(serverFromState?.serverPicture)
     const [imageChanged, setImageChanged] = useState(false);
     const [serverEditErrors, setServerEditErrors] = useState([])
 
@@ -37,7 +37,6 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
     const updateFile = (e) => {
         const file = e.target.files[0];
         if (file) {
-            console.log('getting in updateFile if statement')
             setImageChanged(true)
             setImage(file)
             const reader = new FileReader();
@@ -60,7 +59,7 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
 
     const removeImage = (e) => {
         setImage(null);
-        if (serverFromState.serverPicture === null) {
+        if (serverFromState?.serverPicture === null) {
             setImageChanged(false)
         }  else {
             setImageChanged(true)
@@ -113,7 +112,7 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
                         </div>
                     ))}
                 </label>
-                <button className={`server-settings-save-button disabled-${!imageChanged && serverName === serverFromState.name}`} disabled={!imageChanged && serverName === serverFromState.name}>Save Changes</button>
+                <button className={`server-settings-save-button disabled-${!imageChanged && serverName === serverFromState?.name}`} disabled={!imageChanged && serverName === serverFromState?.name}>Save Changes</button>
             </form>
         </>
     );

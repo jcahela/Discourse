@@ -58,26 +58,31 @@ router.patch(
     singleMulterUpload("image"),
     validateCreateServerFields,
     asyncHandler(async (req, res) => {
-        console.log(req.file, 'INCOMING REQ.FILE')
-        console.log(req.body, 'INCOMING REQ.BODY')
         const { serverName, image } = req.body;
         const serverId = req.params.id;
         const serverToUpdate = await Server.findOne({ where: { id: serverId} })
         if (req.file) {
-            console.log(req.file)
             const serverImageUrl = await singlePublicFileUpload(req.file);
             await serverToUpdate.update({
                 name: serverName,
                 serverPicture: serverImageUrl
             })
         } else {
-            console.log(image, 'THIS IS THE DESTRUCTURED IMAGE IF REMOVING AN IMAGE FROM A SERVER')
             await serverToUpdate.update({
                 name: serverName,
                 serverPicture: image || null
             })
         }
         res.json(serverToUpdate);
+}));
+
+router.delete(
+    '/:id(\\d+)',
+    asyncHandler(async (req, res) => {
+        const serverId = req.params.id;
+        const serverToDelete = await Server.findOne({ where: { id: serverId} })
+        await serverToDelete.destroy();
+        res.json(serverToDelete);
 }))
     
     

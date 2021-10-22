@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const RESTORE_SERVERS = 'servers/RESTORE_SERVERS'
 const ADD_SERVER = 'servers/ADD_SERVER'
 const EDIT_SERVER = 'servers/EDIT_SERVER'
+const DELETE_SERVER = 'servers/DELETE_SERVER'
 
 const restoreServers = (servers) => ({
     type: RESTORE_SERVERS,
@@ -16,6 +17,11 @@ const addServer = (server) => ({
 
 const editServer = (server) => ({
     type: EDIT_SERVER,
+    payload: server
+})
+
+const deleteServer = (server) => ({
+    type: DELETE_SERVER,
     payload: server
 })
 
@@ -51,17 +57,13 @@ export const addServerThunk = (image, serverName) => async (dispatch) => {
     }
 
     const data = await response.json();
-    console.log(data.errors)
 }
 
 export const editServerThunk = ({image, serverName, serverId}) => async (dispatch) => {
     const formData = new FormData();
     formData.append("serverName", serverName);
-    
-    console.log(image);
-    console.log("INSIDE EDIT SERVER THUNK")
+
     if (image) formData.append("image", image);
-    console.log(formData.getAll("image"))
 
     const response = await csrfFetch(`/api/servers/${serverId}`, {
         method: "PATCH",
@@ -76,6 +78,20 @@ export const editServerThunk = ({image, serverName, serverId}) => async (dispatc
     } else {
         const data = await response.json();
         if (data.errors) return data;
+    }
+}
+
+export const deleteServerThunk = (serverId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/servers/${serverId}`, {
+        method: "DELETE"
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        await dispatch(deleteServer(data));
+        return null; 
+    } else {
+        return ['Something went wrong. Please refresh and try again']
     }
 }
 
@@ -97,6 +113,10 @@ function serversReducer(state = initialState, action) {
         case EDIT_SERVER:
             const serverEdit = action.payload;
             newState[serverEdit.id] = serverEdit;
+            return newState;
+        case DELETE_SERVER:
+            const serverDelete = action.payload;
+            delete newState[serverDelete.id]
             return newState;
         default:
             return state;

@@ -1,6 +1,9 @@
 import { Modal } from '../../context/Modal'
 import { useState } from 'react';
 import ServerSettingsInfo from '../ServerSettingsInfo';
+import DeleteServerForm from '../DeleteServerForm';
+import DeleteChannelForm from '../DeleteChannelForm';
+
 import './SettingsOverlay.css'
 
 function SettingsOverlay({ server, onClose, channel, setServerSelected }) {
@@ -25,7 +28,11 @@ function SettingsOverlay({ server, onClose, channel, setServerSelected }) {
             </div>
             { showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <h1>Test second modal for delete</h1>
+                    {server ? (
+                        <DeleteServerForm server={server} onCloseOuter={onClose} onCloseInner={() => setShowModal(false)}/>
+                    ):(
+                        <DeleteChannelForm />
+                    )}
                 </Modal>
             ) }
         </div>
