@@ -20,10 +20,19 @@
     margin-right: 5px;
 }
 
+.overlay-options-list > div {
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
 .overlay-name {
     color: #8E9297;
-    font-size: 20px;
+    font-size: 16px;
     margin: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+    width: 200px;
 }
 
 .overlay-overview-selector {
@@ -35,6 +44,11 @@
 .overlay-delete-button {
     color: #ED4143;
     padding: 5px;
+}
+
+.overlay-delete-button:hover {
+    background-color: #34373C;
+    cursor: pointer;
 }
 
 .overlay-info {
