@@ -1,21 +1,26 @@
 import { Modal } from '../../context/Modal'
-import { useState } from 'react';
-
+import { useState, useCallback, useRef } from 'react';
+import ServerSettingsInfo from '../ServerSettingsInfo';
 import './SettingsOverlay.css'
 
-function SettingsOverlay({ server, onClose }) {
+function SettingsOverlay({ server, onClose, channel }) {
     const [showModal, setShowModal] = useState();
 
     return ( 
         <div className="overlay-container">
             <div className="overlay-options">
                 <div className="overlay-options-list">
-                    <h1 className="overlay-name">{server.name}</h1>
+                    <h1 className="overlay-name">{server ? server.name: channel.name}</h1>
                     <div className="overlay-overview-selector">Overview</div>
-                    <div onClick={() => setShowModal(true)} className="overlay-delete-button">Delete Server</div>
+                    <div onClick={() => setShowModal(true)} className="overlay-delete-button">Delete {server ? 'Server':'Channel'}</div>
                 </div>
             </div>
             <div className="overlay-info">
+                {server ? (
+                    <ServerSettingsInfo server={server}/>
+                ):(
+                    <h1>Add ChannelSettingsInfo Component and pass in channel as prop</h1>
+                )}
                 <div onClick={onClose} className="close-settings">x</div>
             </div>
             { showModal && (

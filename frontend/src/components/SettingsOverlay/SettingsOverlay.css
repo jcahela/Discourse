@@ -16,7 +16,7 @@
     width: fit-content;
     position: absolute;
     right: 0;
-    margin-top: 50px;
+    margin-top: 100px;
     margin-right: 5px;
 }
 
@@ -56,11 +56,15 @@
     height: 100%;
     flex: 1 1 auto;
     position: relative;
+    padding-left: 50px;
+    padding-right: 500px;
+    padding-top: 100px;
+    padding-bottom: 50px;
 }
 
 .close-settings {
     position: absolute;
-    right: 100px;
+    right: 350px;
     top: 100px;
     color: #8E9297;
     border: 1px solid;

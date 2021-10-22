@@ -1,0 +1,134 @@
+.server-settings-form {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.server-settings-pic-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5865F2;
+    position: relative;
+}
+
+.server-settings-pic-container:hover {
+    cursor: pointer;
+}
+
+.server-settings-info-pic {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.server-settings-info-no-pic {
+    font-size: 28px;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: .3s;
+    color: white;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.change-icon-message {
+    position: absolute;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    background-color: #000000a4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.insert-photo-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #DCDDDE;
+}
+
+.server-settings-icon-label {
+    position: relative;
+}
+
+.server-settings-icon-file-input {
+    position: absolute;
+    width: 20px;
+    bottom: 1000px;
+}
+
+.remove-image-button {
+    color: white;
+    border: 1px solid;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    margin-top: 60px;
+    margin-left: 30px;
+    white-space: pre;
+}
+
+.remove-image-button:hover {
+    cursor: pointer;
+}
+
+.server-settings-name-label {
+    color: #B9BBBE;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+}
+
+.server-settings-name-input {
+    margin-top: 5px;
+    background-color: #303339;
+    height: 33px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    color: #D2D3D4;
+    padding-left: 10px;
+    transition: .3s;
+    width: 320px;
+}
+
+.server-settings-name-input:hover,
+.server-settings-name-input:focus {
+    border: 1px solid #00AFF4;
+}
+
+.server-settings-save-button {
+    background-color: #45C06C;
+    color: white;
+    width: 120px;
+    margin: 0 auto;
+    margin-top: 30px;
+    height: 40px;
+    border-radius: 5px;
+    transition: .3s;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.disabled-true {
+    background-color: #97bba3;
+    color: #d8d8d8;
+    cursor: not-allowed;
+}
