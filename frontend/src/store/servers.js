@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const RESTORE_SERVERS = 'servers/RESTORE_SERVERS'
 const ADD_SERVER = 'servers/ADD_SERVER'
+const EDIT_SERVER = 'servers/EDIT_SERVER'
 
 const restoreServers = (servers) => ({
     type: RESTORE_SERVERS,
@@ -10,6 +11,11 @@ const restoreServers = (servers) => ({
 
 const addServer = (server) => ({
     type: ADD_SERVER,
+    payload: server
+})
+
+const editServer = (server) => ({
+    type: EDIT_SERVER,
     payload: server
 })
 
@@ -49,6 +55,19 @@ export const addServerThunk = (image, serverName) => async (dispatch) => {
     console.log(data.errors)
 }
 
+export const editServerThunk = (image, serverName, serverId) => async (dispatch) => {
+    const formData = new FormData();
+    formData.append("serverName", serverName);
+
+    if (image) formData.append("image", image);
+
+    const response = await csrfFetch(`/api/servers/${serverId}`, {
+        method: "PATCH",
+        headers: {"Content-Type": "multipart/form-data"},
+        body: formData
+    })
+}
+
 const initialState = { }
 
 function serversReducer(state = initialState, action) {
@@ -63,6 +82,10 @@ function serversReducer(state = initialState, action) {
             servers.forEach(server => {
                 newState[server.id] = server
             })
+            return newState;
+        case EDIT_SERVER:
+            const serverEdit = action.payload;
+            newState[serverEdit.id] = serverEdit;
             return newState;
         default:
             return state;

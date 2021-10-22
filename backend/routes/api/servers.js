@@ -21,7 +21,7 @@ const validateCreateServerFields = [
 router.get('/', asyncHandler(async(req, res) => {
     const servers = await Server.findAll();
     return res.json(servers)
-}))
+}));
 
 router.post(
     "/",
@@ -51,8 +51,16 @@ router.post(
         
         return res.json(newServer)
         
+}));
+
+router.patch(
+    '/:id(\\d+)',
+    singleMulterUpload("image"),
+    asyncHandler(async (req, res) => {
+        const serverId = req.params.id;
+        const serverToUpdate = await Server.findOne({ where: { id: serverId} })
+        
     }))
-    
 
 
 module.exports = router;
