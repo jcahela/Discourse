@@ -29,7 +29,7 @@ function ServerButton({ server, setServerSelected, serverSelected }) {
         })
 
         setNoPicContent(serverNameInitials);
-    })
+    }, [server.name])
 
     useEffect(() => {
         if (serverSelected?.id === server.id) {
