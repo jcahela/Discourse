@@ -43,7 +43,6 @@ export const addServerThunk = (image, serverName) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('in success part of thunk')
         await dispatch(addServer(data))
         return null;
     } else {
@@ -55,17 +54,29 @@ export const addServerThunk = (image, serverName) => async (dispatch) => {
     console.log(data.errors)
 }
 
-export const editServerThunk = (image, serverName, serverId) => async (dispatch) => {
+export const editServerThunk = ({image, serverName, serverId}) => async (dispatch) => {
     const formData = new FormData();
     formData.append("serverName", serverName);
-
+    
+    console.log(image);
+    console.log("INSIDE EDIT SERVER THUNK")
     if (image) formData.append("image", image);
+    console.log(formData.getAll("image"))
 
     const response = await csrfFetch(`/api/servers/${serverId}`, {
         method: "PATCH",
         headers: {"Content-Type": "multipart/form-data"},
         body: formData
     })
+
+    if (response.ok) {
+        const data = await response.json();
+        await dispatch(editServer(data))
+        return data;
+    } else {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
 }
 
 const initialState = { }

@@ -64,6 +64,7 @@
 
 .server-settings-icon-label {
     position: relative;
+    height: fit-content;
 }
 
 .server-settings-icon-file-input {
@@ -93,6 +94,7 @@
     display: flex;
     flex-direction: column;
     margin-left: auto;
+    height: fit-content;
 }
 
 .server-settings-name-input {
@@ -110,6 +112,12 @@
 .server-settings-name-input:hover,
 .server-settings-name-input:focus {
     border: 1px solid #00AFF4;
+}
+
+.server-edit-errors {
+    font-size: 14px;
+    color: #fd5f5f;
+    margin-top: 10px;
 }
 
 .server-settings-save-button {

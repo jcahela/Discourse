@@ -1,14 +1,20 @@
 import { useEffect, useState, useRef } from 'react';
+import { editServerThunk } from '../../store/servers';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './ServerSettingsInfo.css'
 
-function ServerSettingsInfo({ server }) {
+function ServerSettingsInfo({ server, onClose, setServerSelected }) {
+    const dispatch = useDispatch();
     const imageRef = useRef();
     const noPicRef = useRef();
+    const serverFromState = useSelector(state => state.servers[server.id])
     const [noPicContent, setNoPicContent] = useState('');
     const [changeIconMessage, setShowChangeIconMessage] = useState(false)
-    const [serverName, setServerName] = useState(server.name)
-    const [image, setImage] = useState(server.serverPicture)
+    const [serverName, setServerName] = useState(serverFromState.name)
+    const [image, setImage] = useState(serverFromState.serverPicture)
     const [imageChanged, setImageChanged] = useState(false);
+    const [serverEditErrors, setServerEditErrors] = useState([])
 
     useEffect(() => {
         const serverName = server.name;
@@ -24,9 +30,14 @@ function ServerSettingsInfo({ server }) {
         setNoPicContent(serverNameInitials);
     }, [server.name])
     
+    const resetValue = (e) => {
+        e.target.value = null;
+    }
+
     const updateFile = (e) => {
         const file = e.target.files[0];
         if (file) {
+            console.log('getting in updateFile if statement')
             setImageChanged(true)
             setImage(file)
             const reader = new FileReader();
@@ -47,18 +58,29 @@ function ServerSettingsInfo({ server }) {
         if (noPicRef.current) noPicRef.current.innerText = noPicContent;
     }
 
-    const removeImage = () => {
+    const removeImage = (e) => {
         setImage(null);
-        if (server.serverPicture === null) {
+        if (serverFromState.serverPicture === null) {
             setImageChanged(false)
         }  else {
             setImageChanged(true)
         }
     }
 
-    const submitEdit = (e) => {
+    const submitEdit = async (e) => {
         e.preventDefault();
-        console.log('hi')
+        const data = await dispatch(editServerThunk({
+            image,
+            serverName,
+            serverId: server.id
+        }))
+        if (data.errors) {
+            setServerEditErrors(data.errors);
+            return
+        } else {
+            setServerSelected(data)
+            onClose();
+        }
     }
 
     return ( 
@@ -74,7 +96,7 @@ function ServerSettingsInfo({ server }) {
                         { changeIconMessage && <div className="change-icon-message">CHANGE ICON</div>}
                         <span className="material-icons insert-photo-icon">insert_photo</span>
                     </div>
-                    <input className="server-settings-icon-file-input" onChange={updateFile} type="file" />
+                    <input className="server-settings-icon-file-input" onClick={resetValue} onChange={updateFile} type="file" />
                 </label>
                 <div onClick={removeImage} className="remove-image-button">Remove Image</div>
                 <label className="server-settings-name-label">
@@ -85,8 +107,13 @@ function ServerSettingsInfo({ server }) {
                         onChange={(e) => setServerName(e.target.value)} 
                         className="server-settings-name-input"
                     />
+                    {serverEditErrors.map((error, index) => (
+                        <div className="server-edit-errors" key={index}>
+                            {error}
+                        </div>
+                    ))}
                 </label>
-                <button className={`server-settings-save-button disabled-${!imageChanged && serverName === server.name}`} disabled={!imageChanged && serverName === server.name}>Save Changes</button>
+                <button className={`server-settings-save-button disabled-${!imageChanged && serverName === serverFromState.name}`} disabled={!imageChanged && serverName === serverFromState.name}>Save Changes</button>
             </form>
         </>
     );

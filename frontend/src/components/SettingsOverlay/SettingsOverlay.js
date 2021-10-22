@@ -1,9 +1,9 @@
 import { Modal } from '../../context/Modal'
-import { useState, useCallback, useRef } from 'react';
+import { useState } from 'react';
 import ServerSettingsInfo from '../ServerSettingsInfo';
 import './SettingsOverlay.css'
 
-function SettingsOverlay({ server, onClose, channel }) {
+function SettingsOverlay({ server, onClose, channel, setServerSelected }) {
     const [showModal, setShowModal] = useState();
 
     return ( 
@@ -17,7 +17,7 @@ function SettingsOverlay({ server, onClose, channel }) {
             </div>
             <div className="overlay-info">
                 {server ? (
-                    <ServerSettingsInfo server={server}/>
+                    <ServerSettingsInfo server={server} onClose={onClose} setServerSelected={setServerSelected}/>
                 ):(
                     <h1>Add ChannelSettingsInfo Component and pass in channel as prop</h1>
                 )}

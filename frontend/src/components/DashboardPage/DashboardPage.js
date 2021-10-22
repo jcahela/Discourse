@@ -25,15 +25,15 @@ function DashboardPage() {
       };
 
     useEffect(() => {
-    if (!showServerSettingsMenu) return;
+        if (!showServerSettingsMenu) return;
 
-    const closeMenu = () => {
-        setShowServerSettingsMenu(false);
-    };
+        const closeMenu = () => {
+            setShowServerSettingsMenu(false);
+        };
 
-    document.addEventListener('click', closeMenu);
-    
-    return () => document.removeEventListener("click", closeMenu);
+        document.addEventListener('click', closeMenu);
+        
+        return () => document.removeEventListener("click", closeMenu);
     }, [showServerSettingsMenu]);
 
     return ( 
@@ -65,7 +65,7 @@ function DashboardPage() {
                     )}
                     { showModal && (
                         <Modal onClose={() => setShowModal(false)}>
-                            <SettingsOverlay server={serverSelected} onClose={() => setShowModal(false)}/>
+                            <SettingsOverlay server={serverSelected} onClose={() => setShowModal(false)} setServerSelected={setServerSelected}/>
                         </Modal>
                     )}
                 </div>}

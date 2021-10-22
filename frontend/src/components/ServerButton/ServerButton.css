@@ -76,7 +76,7 @@
 .server-button-pic-content {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: inherit;
     object-fit: cover;
     transition: .3s;
     text-align: center;
