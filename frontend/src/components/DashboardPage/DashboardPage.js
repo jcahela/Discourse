@@ -22,6 +22,10 @@ function DashboardPage() {
             <div className="channel-container">
                 <div className="server-name-container">
                     <h1 className="server-name">{serverSelected?.name}</h1>
+                    {serverSelected?.ownerId === sessionUser.id && (
+                        <div className="server-options-icon-container">
+                            <span class="material-icons server-options-icon">expand_more</span>
+                        </div>)}
                 </div>
                 <div className="session-user-container">
                     <img className="session-user-profile-pic" src={sessionUser.profilePicture} alt="" />
