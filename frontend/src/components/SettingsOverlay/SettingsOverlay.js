@@ -1,6 +1,6 @@
-import './ServerSettingsOverlay.css'
+import './SettingsOverlay.css'
 
-function ServerSettingsOverlay({ server, onClose }) {
+function SettingsOverlay({ server, onClose }) {
     return ( 
         <div className="overlay-container">
             <div className="overlay-options"></div>
@@ -12,4 +12,4 @@ function ServerSettingsOverlay({ server, onClose }) {
     );
 }
 
-export default ServerSettingsOverlay;
+export default SettingsOverlay;

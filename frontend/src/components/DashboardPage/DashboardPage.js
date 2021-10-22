@@ -4,7 +4,7 @@ import ProfileButton from '../Navigation/ProfileButton';
 import NewServerButton from '../NewServerButton';
 import ServerButton from '../ServerButton/ServerButton';
 import ServerSettingsDropdown from '../ServerSettingsDropdown/ServerSettingsDropdown';
-import ServerSettingsOverlay from '../ServerSettingsOverlay';
+import SettingsOverlay from '../SettingsOverlay';
 
 import { Modal } from '../../context/Modal';
 import './DashboardPage.css'
@@ -65,7 +65,7 @@ function DashboardPage() {
                     )}
                     { showModal && (
                         <Modal onClose={() => setShowModal(false)}>
-                            <ServerSettingsOverlay server={serverSelected} onClose={() => setShowModal(false)}/>
+                            <SettingsOverlay server={serverSelected} onClose={() => setShowModal(false)}/>
                         </Modal>
                     )}
                 </div>}
