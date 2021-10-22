@@ -1,7 +1,6 @@
 .overlay-container {
     height: 100vh;
     width: 100vw;
-    background-color: red;
     display: flex;
 }
 
@@ -10,6 +9,32 @@
     width: 35%;
     background-color: #2F3136;
     flex: 0 0 auto;
+    position: relative;
+}
+
+.overlay-options-list {
+    width: fit-content;
+    position: absolute;
+    right: 0;
+    margin-top: 50px;
+    margin-right: 5px;
+}
+
+.overlay-name {
+    color: #8E9297;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.overlay-overview-selector {
+    color: white;
+    background-color: #393C43;
+    padding: 5px;
+}
+
+.overlay-delete-button {
+    color: #ED4143;
+    padding: 5px;
 }
 
 .overlay-info {
