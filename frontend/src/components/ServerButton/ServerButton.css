@@ -1,6 +1,31 @@
 .server-button-holder {
     width: fit-content;
     position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.white-line-true {
+    position: absolute;
+    left: 0;
+    top: 35px;
+    width: 4px;
+    height: 25px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: white;
+}
+
+.white-line-active-true {
+    position: absolute;
+    left: 0;
+    top: 28px;
+    width: 4px;
+    height: 40px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: white;   
 }
 
 .server-button-container {

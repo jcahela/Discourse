@@ -15,7 +15,12 @@ function DashboardPage() {
         <div className="dashboard-page-container">
             <div className="server-container">
                 {serversArr.map(server => (
-                    <ServerButton key={server.id} server={server} setServerSelected={setServerSelected} serverSelected={serverSelected}/>
+                    <ServerButton 
+                        key={server.id} 
+                        server={server} 
+                        setServerSelected={setServerSelected} 
+                        serverSelected={serverSelected}
+                    />
                 ))}
                 <NewServerButton />
             </div>
@@ -24,7 +29,7 @@ function DashboardPage() {
                     <h1 className="server-name">{serverSelected?.name}</h1>
                     {serverSelected?.ownerId === sessionUser.id && (
                         <div className="server-options-icon-container">
-                            <span class="material-icons server-options-icon">expand_more</span>
+                            <span className="material-icons server-options-icon">expand_more</span>
                         </div>)}
                 </div>
                 <div className="session-user-container">
