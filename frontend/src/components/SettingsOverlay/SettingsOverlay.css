@@ -51,6 +51,12 @@
     cursor: pointer;
 }
 
+.overview-header {
+    color: white;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
 .overlay-info {
     background-color: #36393F;
     height: 100%;

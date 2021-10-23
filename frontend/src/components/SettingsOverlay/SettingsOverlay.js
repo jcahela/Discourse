@@ -1,6 +1,7 @@
 import { Modal } from '../../context/Modal'
 import { useState } from 'react';
 import ServerSettingsInfo from '../ServerSettingsInfo';
+import ChannelSettingsInfo from '../ChannelSettingsInfo';
 import DeleteServerForm from '../DeleteServerForm';
 import DeleteChannelForm from '../DeleteChannelForm';
 
@@ -19,10 +20,11 @@ function SettingsOverlay({ server, onClose, channel, setServerSelected }) {
                 </div>
             </div>
             <div className="overlay-info">
+                <h1 className="overview-header">{server ? 'Server':'Channel'} Overview</h1>
                 {server ? (
                     <ServerSettingsInfo server={server} onClose={onClose} setServerSelected={setServerSelected}/>
                 ):(
-                    <h1>Add ChannelSettingsInfo Component and pass in channel as prop</h1>
+                    <ChannelSettingsInfo channel={channel} onClose={onClose}/>
                 )}
                 <div onClick={onClose} className="close-settings">x</div>
             </div>
