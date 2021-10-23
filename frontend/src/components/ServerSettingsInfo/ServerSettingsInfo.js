@@ -82,6 +82,9 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
         }
     }
 
+    const serverNameNotChanged = serverName === serverFromState?.name
+    const serverNameContainsOnlySpaces = serverName.replace(/\s/g, '').length === 0
+
     return ( 
         <>
             <form onSubmit={submitEdit} className="server-settings-form">
@@ -112,7 +115,7 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
                         </div>
                     ))}
                 </label>
-                <button className={`server-settings-save-button disabled-${!imageChanged && serverName === serverFromState?.name}`} disabled={!imageChanged && serverName === serverFromState?.name}>Save Changes</button>
+                <button className={`server-settings-save-button disabled-${!imageChanged && serverNameNotChanged || serverNameContainsOnlySpaces}`} disabled={!imageChanged && serverNameNotChanged || serverNameContainsOnlySpaces}>Save Changes</button>
             </form>
         </>
     );

@@ -21,7 +21,9 @@ const validateCreateServerFields = [
 const validateEditServerFields = [
     check('serverName')
         .custom((value) => {
-            if (/^\s*$/.test(value)) {
+            console.log(value.replace(/\s/g, ''))
+            console.log(value.replace(/\s/g, '').length === 0)
+            if (value.replace(/\s/g, '').length === 0) {
                 return Promise.reject('Server Name cannot contain only spaces')
             }
         }),
@@ -67,7 +69,6 @@ router.patch(
     '/:id(\\d+)',
     singleMulterUpload("image"),
     validateCreateServerFields,
-    validateEditServerFields,
     asyncHandler(async (req, res) => {
         const { serverName, image } = req.body;
         const serverId = req.params.id;

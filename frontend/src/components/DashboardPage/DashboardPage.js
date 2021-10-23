@@ -70,6 +70,10 @@ function DashboardPage() {
                         </Modal>
                     )}
                 </div>}
+                
+
+
+
                 <div className="session-user-container">
                     <img className="session-user-profile-pic" src={sessionUser.profilePicture} alt="" />
                     <p className="session-user-username">{sessionUser.username}</p>
