@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import DashboardPage from './components/DashboardPage';
 import { restoreServersThunk } from './store/servers';
+import { restoreChannelsThunk } from './store/channels';
 
 function App() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
       .then(() => dispatch(restoreServersThunk()))
+      .then(() => dispatch(restoreChannelsThunk()))
       .then(() => setIsLoaded(true));
   }, [dispatch]);
 

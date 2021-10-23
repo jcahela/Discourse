@@ -39,6 +39,15 @@
     border: 1px solid #00AFF4;
 }
 
+.channel-error-container {
+    margin-top: 5px;
+    white-space: pre;
+}
+
+.channel-error {
+    color: #fd5f5f;
+}
+
 .new-channel-cancel-submit-container {
     display: flex;
     justify-content: flex-end;

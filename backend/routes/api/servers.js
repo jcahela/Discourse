@@ -14,19 +14,7 @@ const validateCreateServerFields = [
         .withMessage('You must enter a server name'),
     check('serverName')
         .isLength({ max: 50})
-        .withMessage('Server name must be less than 50 characters.'),
-    handleValidationErrors,
-]
-
-const validateEditServerFields = [
-    check('serverName')
-        .custom((value) => {
-            console.log(value.replace(/\s/g, ''))
-            console.log(value.replace(/\s/g, '').length === 0)
-            if (value.replace(/\s/g, '').length === 0) {
-                return Promise.reject('Server Name cannot contain only spaces')
-            }
-        }),
+        .withMessage('Server name can\'t be more than 50 characters'),
     handleValidationErrors,
 ]
 
@@ -98,5 +86,5 @@ router.delete(
 }))
     
     
-    module.exports = router;
+module.exports = router;
     

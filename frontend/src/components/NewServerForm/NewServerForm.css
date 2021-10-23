@@ -44,6 +44,7 @@
 
 .server-error-container {
     margin-top: 5px;
+    white-space: pre;
 }
 
 .server-error {

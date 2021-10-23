@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { addChannelThunk } from '../../store/channels';
+import { useDispatch } from 'react-redux';
+
 import './NewChannelForm.css'
 
 function NewChannelForm({ server, onClose }) {
+    const dispatch = useDispatch();
     const [channelName, setChannelName] = useState('')
+    const [newChannelErrors, setNewChannelErrors] = useState([])
 
-    const submitAddChannel = (e) => {
+    const submitAddChannel = async (e) => {
         e.preventDefault();
         
         const newChannel = {
@@ -12,7 +17,12 @@ function NewChannelForm({ server, onClose }) {
             serverId: server.id
         }
 
-        console.log(newChannel);
+        const data = await dispatch(addChannelThunk(newChannel));
+        if (data) {
+            setNewChannelErrors(data.errors);
+            return;
+        } 
+        onClose();
     }
 
     const channelNameContainsOnlySpaces = channelName.replace(/\s/g, '').length === 0
@@ -28,6 +38,11 @@ function NewChannelForm({ server, onClose }) {
                     value={channelName}
                     onChange={(e) => setChannelName(e.target.value)}
                 />
+                {newChannelErrors.map((error, index) => (
+                        <div key={index} className="channel-error-container">
+                            <p className="channel-error">{error}</p>
+                        </div>
+                ))}
             </label>
             <div className="new-channel-cancel-submit-container">
                 <span className="new-channel-cancel-button" onClick={onClose}>Cancel</span>
