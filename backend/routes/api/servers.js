@@ -16,8 +16,11 @@ const validateCreateServerFields = [
         .isLength({ max: 50})
         .withMessage('Server name must be less than 50 characters.'),
     handleValidationErrors,
+]
+
+const validateEditServerFields = [
     check('serverName')
-        .custom(value => {
+        .custom((value) => {
             if (/^\s*$/.test(value)) {
                 return Promise.reject('Server Name cannot contain only spaces')
             }
@@ -64,6 +67,7 @@ router.patch(
     '/:id(\\d+)',
     singleMulterUpload("image"),
     validateCreateServerFields,
+    validateEditServerFields,
     asyncHandler(async (req, res) => {
         const { serverName, image } = req.body;
         const serverId = req.params.id;
