@@ -19,7 +19,7 @@ router.get('/', requireAuth, asyncHandler(async (req, res) => {
     return res.json(channels);
 }));
 
-router.post('/', requireAuth, asyncHandler(async (req, res) => {
+router.post('/', validateNewChannels, requireAuth, asyncHandler(async (req, res) => {
     const { name, serverId } = req.body;
     const newChannel = await Channel.create({
         serverId,
