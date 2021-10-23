@@ -5,6 +5,7 @@ import NewServerButton from '../NewServerButton';
 import ServerButton from '../ServerButton/ServerButton';
 import ServerSettingsDropdown from '../ServerSettingsDropdown/ServerSettingsDropdown';
 import SettingsOverlay from '../SettingsOverlay';
+import NewChannelForm from '../NewChannelForm';
 
 import { Modal } from '../../context/Modal';
 import './DashboardPage.css'
@@ -14,7 +15,8 @@ function DashboardPage() {
     const [serverSelected, setServerSelected] = useState(null);
     const serverFromState = useSelector(state => state.servers[serverSelected?.id])
     const [showServerSettingsMenu, setShowServerSettingsMenu] = useState(false)
-    const [showModal, setShowModal] = useState(false)
+    const [showSettingsModal, setShowSettingsModal] = useState(false)
+    const [showNewChannelModal, setShowNewChannelModal] = useState(false)
     const sessionUser = useSelector(state => state.session.user)
     const serversArr = useSelector(state => Object.values(state.servers).sort((a, b) => (a.createdAt < b.createdAt ? 1: -1)))
 
@@ -37,6 +39,9 @@ function DashboardPage() {
         return () => document.removeEventListener("click", closeMenu);
     }, [showServerSettingsMenu]);
 
+    const currentUserIsOwner = serverFromState?.ownerId === sessionUser.id
+    
+
     return ( 
         <div className="dashboard-page-container">
             <div className="server-container">
@@ -51,26 +56,41 @@ function DashboardPage() {
                 <NewServerButton />
             </div>
             <div className="channel-container">
-                { serverFromState && <div className="server-name-container" onClick={openMenu}>
-                    <h1 className="server-name">{serverFromState?.name}</h1>
-                    {serverFromState?.ownerId === sessionUser.id && (
-                        <div className="server-options-icon-container">
-                            {showServerSettingsMenu ? (
-                                <span className="material-icons server-options-icon">close</span>
-                            ):(
-                                <span className="material-icons server-options-icon">expand_more</span>
-                            )}
-                        </div>)}
-                    {showServerSettingsMenu && (
-                        <ServerSettingsDropdown setShowModal={setShowModal}/>
-                    )}
-                    { showModal && (
-                        <Modal onClose={() => setShowModal(false)}>
-                            <SettingsOverlay server={serverFromState} onClose={() => setShowModal(false)} setServerSelected={setServerSelected}/>
-                        </Modal>
-                    )}
-                </div>}
-                
+                { serverFromState && 
+                    <div className="server-name-container" onClick={openMenu}>
+                        <h1 className="server-name">{serverFromState?.name}</h1>
+                        { currentUserIsOwner && 
+                            <div className="server-options-icon-container">
+                                {showServerSettingsMenu ? (
+                                    <span className="material-icons server-options-icon">close</span>
+                                ):(
+                                    <span className="material-icons server-options-icon">expand_more</span>
+                                )}
+                            </div>
+                        }
+                        {showServerSettingsMenu && (
+                            <ServerSettingsDropdown setShowModal={setShowSettingsModal}/>
+                        )}
+                        { showSettingsModal && (
+                            <Modal onClose={() => setShowSettingsModal(false)}>
+                                <SettingsOverlay server={serverFromState} onClose={() => setShowSettingsModal(false)} setServerSelected={setServerSelected}/>
+                            </Modal>
+                        )}
+                    </div>
+                }
+                { serverFromState && 
+                    <div className="text-channels-container">
+                        <p className="text-channels-header">TEXT CHANNELS</p>
+                        <div className="new-text-channel-button-container">
+                            { currentUserIsOwner && <span onClick={() => setShowNewChannelModal(true)} class="material-icons new-channel-button">add</span>}
+                            { showNewChannelModal && 
+                                <Modal onClose={() => setShowNewChannelModal(false)}>
+                                    <NewChannelForm onClose={() => setShowNewChannelModal(false)}/>
+                                </Modal>
+                            }
+                        </div>
+                    </div>
+                }
 
 
 

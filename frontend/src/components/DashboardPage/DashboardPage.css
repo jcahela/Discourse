@@ -66,6 +66,38 @@
     color: #D7D7D8;
 }
 
+.text-channels-container {
+    display: flex;
+    padding: 15px;
+    align-items: center;
+}
+
+.text-channels-header {
+    color: #6B6F76;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: default;
+}
+
+.text-channels-container:hover > p {
+    color: #D4D5D6;
+    font-weight: normal;
+}
+
+.new-text-channel-button-container {
+    margin-left: auto;
+}
+
+.new-channel-button {
+    color: #6B6F76;
+    font-size: 20px;
+}
+
+.new-channel-button:hover {
+    cursor: pointer;
+    color: #D4D5D6;
+}
+
 .session-user-container {
     display: flex;
     position: absolute;
