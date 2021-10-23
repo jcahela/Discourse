@@ -67,8 +67,13 @@
 }
 
 .text-channels-container {
-    display: flex;
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-channels-header-container {
+    display: flex;
     align-items: center;
 }
 
@@ -79,7 +84,7 @@
     cursor: default;
 }
 
-.text-channels-container:hover > p {
+.text-channels-header-container:hover > p {
     color: #D4D5D6;
     font-weight: normal;
 }

@@ -6,6 +6,7 @@ import ServerButton from '../ServerButton/ServerButton';
 import ServerSettingsDropdown from '../ServerSettingsDropdown/ServerSettingsDropdown';
 import SettingsOverlay from '../SettingsOverlay';
 import NewChannelForm from '../NewChannelForm';
+import ChannelButton from '../ChannelButton';
 
 import { Modal } from '../../context/Modal';
 import './DashboardPage.css'
@@ -19,6 +20,7 @@ function DashboardPage() {
     const [showNewChannelModal, setShowNewChannelModal] = useState(false)
     const sessionUser = useSelector(state => state.session.user)
     const serversArr = useSelector(state => Object.values(state.servers).sort((a, b) => (a.createdAt < b.createdAt ? 1: -1)))
+    const channelsArr = useSelector(state => Object.values(state.channels).filter(channel => channel.serverId === serverFromState?.id).sort((a, b) => a.createdAt < b.createdAt ? 1: -1))
 
     const openMenu = () => {
         if (showServerSettingsMenu) return;
@@ -80,15 +82,20 @@ function DashboardPage() {
                 }
                 { serverFromState && 
                     <div className="text-channels-container">
-                        <p className="text-channels-header">TEXT CHANNELS</p>
-                        <div className="new-text-channel-button-container">
-                            { currentUserIsOwner && <span onClick={() => setShowNewChannelModal(true)} className="material-icons new-channel-button">add</span>}
-                            { showNewChannelModal && 
-                                <Modal onClose={() => setShowNewChannelModal(false)}>
-                                    <NewChannelForm server={serverFromState} onClose={() => setShowNewChannelModal(false)}/>
-                                </Modal>
-                            }
+                        <div className="text-channels-header-container">
+                            <p className="text-channels-header">TEXT CHANNELS</p>
+                            <div className="new-text-channel-button-container">
+                                { currentUserIsOwner && <span onClick={() => setShowNewChannelModal(true)} className="material-icons new-channel-button">add</span>}
+                                { showNewChannelModal && 
+                                    <Modal onClose={() => setShowNewChannelModal(false)}>
+                                        <NewChannelForm server={serverFromState} onClose={() => setShowNewChannelModal(false)}/>
+                                    </Modal>
+                                }
+                            </div>
                         </div>
+                        {channelsArr.map((channel, index) => (
+                            <ChannelButton key={index} channel={channel} />
+                        ))}
                     </div>
                 }
 
