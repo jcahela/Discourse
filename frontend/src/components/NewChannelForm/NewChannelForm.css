@@ -70,7 +70,8 @@
 }
 
 .new-channel-disabled-true {
-    background-color: #9199f1;
+    background-color: rgb(147, 155, 241);
+    color: rgb(185, 189, 236);
 }
 
 .new-channel-disabled-true:hover {

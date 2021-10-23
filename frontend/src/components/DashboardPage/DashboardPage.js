@@ -82,10 +82,10 @@ function DashboardPage() {
                     <div className="text-channels-container">
                         <p className="text-channels-header">TEXT CHANNELS</p>
                         <div className="new-text-channel-button-container">
-                            { currentUserIsOwner && <span onClick={() => setShowNewChannelModal(true)} class="material-icons new-channel-button">add</span>}
+                            { currentUserIsOwner && <span onClick={() => setShowNewChannelModal(true)} className="material-icons new-channel-button">add</span>}
                             { showNewChannelModal && 
                                 <Modal onClose={() => setShowNewChannelModal(false)}>
-                                    <NewChannelForm onClose={() => setShowNewChannelModal(false)}/>
+                                    <NewChannelForm server={serverFromState} onClose={() => setShowNewChannelModal(false)}/>
                                 </Modal>
                             }
                         </div>
