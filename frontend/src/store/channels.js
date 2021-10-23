@@ -58,7 +58,7 @@ export const editChannelThunk = (channel) => async (dispatch) => {
             topic
         })
     });
-
+    
     if (response.ok) {
         const channel = await response.json();
         await dispatch(editChannel(channel));

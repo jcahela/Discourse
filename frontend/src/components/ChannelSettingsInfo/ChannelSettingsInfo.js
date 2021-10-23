@@ -8,6 +8,7 @@ function ChannelSettingsInfo({ channel, onClose }) {
     const [channelName, setChannelName] = useState(channel.name);
     const [initialTopicValue, setInitialTopicValue] = useState(channel.topic || '')
     const [channelTopic, setChannelTopic] = useState(channel.topic || '');
+    const [channelEditErrors, setChannelEditErrors] = useState([]);
 
     const nameChanged = channelName !== channel.name;
     const topicChanged = channelTopic !== initialTopicValue;
@@ -20,7 +21,8 @@ function ChannelSettingsInfo({ channel, onClose }) {
             topic: channelTopic
         }
         const data = await dispatch(editChannelThunk(editedChannel));
-        console.log(data);
+        if (data) setChannelEditErrors(data.errors)
+        onClose();
     }
     
     return ( 

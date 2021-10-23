@@ -29,7 +29,7 @@ router.post('/', validateNewChannels, requireAuth, asyncHandler(async (req, res)
 }))
 
 router.patch(
-    '/id(\\d+)',
+    '/:id(\\d+)',
     validateNewChannels,
     asyncHandler(async (req, res) => {
         const channelId = req.params.id;
@@ -39,7 +39,7 @@ router.patch(
 
         await channelToUpdate.update({
             name,
-            topic
+            topic: topic || null
         });
 
         res.json(channelToUpdate);
