@@ -14,6 +14,13 @@ const validateNewChannels = [
     handleValidationErrors,
 ]
 
+const validateEditChannels = [
+    check('name')
+        .isLength({ max: 25 })
+        .withMessage('Channel name can\'t be more than 25 characters'),
+    handleValidationErrors,
+]
+
 router.get('/', requireAuth, asyncHandler(async (req, res) => {
     const channels = await Channel.findAll();
     return res.json(channels);
@@ -30,7 +37,7 @@ router.post('/', validateNewChannels, requireAuth, asyncHandler(async (req, res)
 
 router.patch(
     '/:id(\\d+)',
-    validateNewChannels,
+    validateEditChannels,
     asyncHandler(async (req, res) => {
         const channelId = req.params.id;
         const { name, topic } = req.body;

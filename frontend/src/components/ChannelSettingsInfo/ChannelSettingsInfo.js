@@ -6,7 +6,7 @@ import './ChannelSettingsInfo.css'
 function ChannelSettingsInfo({ channel, onClose }) {
     const dispatch = useDispatch();
     const [channelName, setChannelName] = useState(channel.name);
-    const [initialTopicValue, setInitialTopicValue] = useState(channel.topic || '')
+    const [initialTopicValue] = useState(channel.topic || '')
     const [channelTopic, setChannelTopic] = useState(channel.topic || '');
     const [channelEditErrors, setChannelEditErrors] = useState([]);
 
@@ -21,7 +21,11 @@ function ChannelSettingsInfo({ channel, onClose }) {
             topic: channelTopic
         }
         const data = await dispatch(editChannelThunk(editedChannel));
-        if (data) setChannelEditErrors(data.errors)
+        console.log(data)
+        if (data) {
+            setChannelEditErrors(data.errors)
+            return
+        } 
         onClose();
     }
     
@@ -35,6 +39,11 @@ function ChannelSettingsInfo({ channel, onClose }) {
                     value={channelName}
                     onChange={(e) => setChannelName(e.target.value)}
                 />
+                {channelEditErrors.map((error, index) => (
+                        <div className="server-edit-errors" key={index}>
+                            {error}
+                        </div>
+                    ))}
             </label>
             <label className="channel-settings-topic-label">
                 Channel Topic (Optional)

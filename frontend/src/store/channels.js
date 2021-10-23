@@ -61,6 +61,7 @@ export const editChannelThunk = (channel) => async (dispatch) => {
     
     if (response.ok) {
         const channel = await response.json();
+        console.log(channel, 'INSIDE EDIT CHANNEL THUNK RESPONSE.OK')
         await dispatch(editChannel(channel));
         return null;
     } else {
