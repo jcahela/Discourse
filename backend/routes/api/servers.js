@@ -16,6 +16,13 @@ const validateCreateServerFields = [
         .isLength({ max: 50})
         .withMessage('Server name must be less than 50 characters.'),
     handleValidationErrors,
+    check('serverName')
+        .custom(value => {
+            if (/^\s*$/.test(value)) {
+                return Promise.reject('Server Name cannot contain only spaces')
+            }
+        }),
+    handleValidationErrors,
 ]
 
 router.get('/', asyncHandler(async(req, res) => {

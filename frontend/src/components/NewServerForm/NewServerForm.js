@@ -45,7 +45,7 @@ function NewServerForm({ onClose }) {
                         </div>
                     ))}
                 </label>
-                <button className="new-server-button" type="submit">Create Server</button>
+                <button className={`new-server-button new-server-disabled-${/^\s*$/.test(serverName)}`} type="submit" disabled={/^\s*$/.test(serverName)}>Create Server</button>
 
             </form>
         </div>

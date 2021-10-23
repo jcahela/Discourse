@@ -59,9 +59,23 @@
     height: 40px;
     border-radius: 5px;
     transition: .3s;
+
+}
+
+.new-server-button:hover {
+    background-color: #5865F2;
 }
 
 .new-server-button:hover {
     cursor: pointer;
     background-color: #4752C4;
+}
+
+.new-server-disabled-true {
+    background-color: #9199f1;
+}
+
+.new-server-disabled-true:hover {
+    background-color: #9199f1;
+    cursor: not-allowed;
 }
