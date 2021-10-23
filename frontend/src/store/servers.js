@@ -55,8 +55,6 @@ export const addServerThunk = (image, serverName) => async (dispatch) => {
         const data = await response.json();
         if (data.errors) return data
     }
-
-    const data = await response.json();
 }
 
 export const editServerThunk = ({image, serverName, serverId}) => async (dispatch) => {
