@@ -1,18 +1,26 @@
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 import './ChannelButton.css'
 
 function ChannelButton({ channel }) {
     const sessionUser = useSelector(state => state.session.user);
     const servers = useSelector(state => state.servers);
+    const [showChannelSettingsIcon, setShowChannelSettingsIcon] = useState(false);
 
     const channelOwnerId = servers[channel.serverId]["ownerId"]
     const currentUserIsOwner = sessionUser.id === channelOwnerId;
     return ( 
-        <div className="channel-name-container">
+        <div 
+            className="channel-name-container"
+            onMouseOver={() => setShowChannelSettingsIcon(true)}
+            onMouseLeave={() => setShowChannelSettingsIcon(false)}
+        >
             <span className="channel-name-hashtag">#</span>
             <p className="channel-name">{channel.name}</p>
-            { currentUserIsOwner && <span class="material-icons">settings</span> }
+            <div className="channel-settings-container">
+                { currentUserIsOwner && showChannelSettingsIcon && <span className="material-icons channel-settings-icon">settings</span> }
+            </div>
         </div>
     );
 }
