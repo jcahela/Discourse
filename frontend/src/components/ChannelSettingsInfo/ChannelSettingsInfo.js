@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux'
+import { editChannelThunk } from '../../store/channels';
 import './ChannelSettingsInfo.css'
 
 function ChannelSettingsInfo({ channel, onClose }) {
@@ -11,14 +12,15 @@ function ChannelSettingsInfo({ channel, onClose }) {
     const nameChanged = channelName !== channel.name;
     const topicChanged = channelTopic !== initialTopicValue;
 
-    const submitEditChannel = (e) => {
+    const submitEditChannel = async (e) => {
         e.preventDefault();
         const editedChannel = {
-            serverId: channel.serverId,
+            id: channel.id,
             name: channelName,
             topic: channelTopic
         }
-        console.log(editedChannel);
+        const data = await dispatch(editChannelThunk(editedChannel));
+        console.log(data);
     }
     
     return ( 

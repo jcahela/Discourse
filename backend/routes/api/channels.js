@@ -28,4 +28,22 @@ router.post('/', validateNewChannels, requireAuth, asyncHandler(async (req, res)
     return res.json(newChannel)
 }))
 
+router.patch(
+    '/id(\\d+)',
+    validateNewChannels,
+    asyncHandler(async (req, res) => {
+        const channelId = req.params.id;
+        const { name, topic } = req.body;
+
+        const channelToUpdate = await Channel.findOne({ where: {id: channelId} });
+
+        await channelToUpdate.update({
+            name,
+            topic
+        });
+
+        res.json(channelToUpdate);
+    })
+    )
+
 module.exports = router;
