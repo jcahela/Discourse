@@ -16,6 +16,7 @@ function DashboardPage() {
     const [serverSelected, setServerSelected] = useState(null);
     const [channelSelected, setChannelSelected] = useState(null);
     const serverFromState = useSelector(state => state.servers[serverSelected?.id])
+    const channelFromState = useSelector(state => state.channels[channelSelected?.id])
     const [showServerSettingsMenu, setShowServerSettingsMenu] = useState(false)
     const [showSettingsModal, setShowSettingsModal] = useState(false)
     const [showNewChannelModal, setShowNewChannelModal] = useState(false)
@@ -109,7 +110,7 @@ function DashboardPage() {
             </div>
             <div className="chat-container">
                 { channelSelected ? (
-                    <ChannelContent channel={channelSelected} />
+                    <ChannelContent channel={channelFromState} />
                 ):(
                     <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />
                 )}
