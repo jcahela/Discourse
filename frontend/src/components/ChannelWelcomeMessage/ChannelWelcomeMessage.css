@@ -39,12 +39,12 @@
     margin-top: 15px;
     padding: 8px;
     border-radius: 5px;
+    width: fit-content;
 }
 
 .channel-welcome-edit-channel-container:hover {
     cursor: pointer;
     background-color: #3A3E44;
-    width: fit-content;
 }
 
 .channel-welcome-edit-channel-icon,
