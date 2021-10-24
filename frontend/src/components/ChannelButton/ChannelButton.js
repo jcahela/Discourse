@@ -12,7 +12,6 @@ function ChannelButton({ channel, setChannelSelected, channelSelected }) {
     const [showChannelSettingsIconHover, setShowChannelSettingsIconHover] = useState(false);
 
     const openChannelSettingsOverlay = () => {
-        // setShowChannelSettingsIcon(false);
         setShowChannelSettingsModal(true);
     }
 

@@ -5,15 +5,15 @@ import './ChannelSettingsInfo.css'
 
 function ChannelSettingsInfo({ channel, onClose }) {
     const dispatch = useDispatch();
-    const [channelName, setChannelName] = useState(channel.name);
-    const [initialTopicValue] = useState(channel.topic || '')
-    const [channelTopic, setChannelTopic] = useState(channel.topic || '');
+    const [channelName, setChannelName] = useState(channel?.name);
+    const [initialTopicValue] = useState(channel?.topic || '')
+    const [channelTopic, setChannelTopic] = useState(channel?.topic || '');
     const [channelNameError, setChannelNameError] = useState('');
     const [channelTopicError, setChannelTopicError] = useState('')
     const [nameCharacterCounter, setNameCharacterCounter] = useState(25 - channelName.length)
     const [topicCharacterCounter, setTopicCharacterCounter] = useState(255 - channelTopic.length)
 
-    const nameChanged = channelName !== channel.name;
+    const nameChanged = channelName !== channel?.name;
     const topicChanged = channelTopic !== initialTopicValue;
     const channelNameContainsOnlySpaces = channelName.replace(/\s/g, '').length === 0
     const topicNameContainsOnlySpaces = channelTopic.replace(/\s/g, '').length === 0

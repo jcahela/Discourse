@@ -24,7 +24,7 @@ function DeleteChannelForm({ channel, onCloseOuter, onCloseInner, setChannelSele
             <h1 className="delete-channel-header">Delete Channel</h1>
             <p className="delete-channel-confirm-message">
                 Are you sure you want to delete #
-                <span className="delete-channel-name">{channel.name}</span>
+                <span className="delete-channel-name">{channel?.name}</span>
                 ? This action cannot be undone.
             </p>
             <div className="delete-channel-cancel-submit-container">

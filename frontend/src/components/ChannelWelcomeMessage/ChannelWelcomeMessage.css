@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Vidaloka&display=swap');
+
+.channel-welcome-message-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-welcome-hashtag {
+    width: 68px;
+    height: 68px;
+    font-size: 48px;
+    color: white;
+    border-radius: 50%;
+    background-color: #4F545C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Vidaloka', serif;
+}
+
+.channel-welcome-header,
+.channel-welcome-name {
+    color: white;
+    font-weight: bolder;
+}
+
+.channel-welcome-header {
+    margin-top: 15px;
+}
+
+.channel-welcome-subheader {
+    color: #B9BBBE;
+    margin-top: 15px;
+}
+
+.channel-welcome-edit-channel-container {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.channel-welcome-edit-channel-container:hover {
+    cursor: pointer;
+    background-color: #3A3E44;
+    width: fit-content;
+}
+
+.channel-welcome-edit-channel-icon,
+.channel-welcome-edit-channel {
+    color: #00AFF4;
+}
+
+.channel-welcome-edit-channel-icon {
+    font-size: 17px;
+}
+
+.channel-welcome-edit-channel {
+    margin-left: 5px;
+}

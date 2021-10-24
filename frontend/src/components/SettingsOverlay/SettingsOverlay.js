@@ -14,7 +14,7 @@ function SettingsOverlay({ server, onClose, channel, setServerSelected, setChann
         <div className="overlay-container">
             <div className="overlay-options">
                 <div className="overlay-options-list">
-                    <h1 className="overlay-name">{server ? server.name: channel.name}</h1>
+                    <h1 className="overlay-name">{server ? server?.name: channel?.name}</h1>
                     <div className="overlay-overview-selector">Overview</div>
                     <div onClick={() => setShowModal(true)} className="overlay-delete-button">Delete {server ? 'Server':'Channel'}</div>
                 </div>
