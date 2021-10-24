@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&display=swap');
+
 .channel-settings-form {
     position: relative;
     width: 100%;
@@ -13,6 +15,7 @@
     flex-direction: column;
     height: fit-content;
     margin-top: 20px;
+    position: relative;
 }
 
 .channel-settings-name-input {
@@ -32,6 +35,12 @@
     border: 1px solid #00AFF4;
 }
 
+.channel-edit-errors {
+    font-size: 14px;
+    color: #fd5f5f;
+    margin-top: 10px;
+}
+
 .channel-settings-topic-textarea {
     margin-top: 5px;
     background-color: #303339;
@@ -42,6 +51,20 @@
     width: 100%;
     padding: 5px 10px;
     resize: none;
+}
+
+.topic-character-counter,
+.channel-name-character-counter {
+    color: #9B979A;
+    font-family: 'Inconsolata', monospace;
+    font-size: 15px;
+    position: absolute;
+    bottom: 3px;
+    right: 0;
+}
+
+.character-length-exceeded-true {
+    color: #fd5f5f;
 }
 
 .channel-settings-save-button {

@@ -8,25 +8,54 @@ function ChannelSettingsInfo({ channel, onClose }) {
     const [channelName, setChannelName] = useState(channel.name);
     const [initialTopicValue] = useState(channel.topic || '')
     const [channelTopic, setChannelTopic] = useState(channel.topic || '');
-    const [channelEditErrors, setChannelEditErrors] = useState([]);
+    const [channelNameError, setChannelNameError] = useState('');
+    const [channelTopicError, setChannelTopicError] = useState('')
+    const [nameCharacterCounter, setNameCharacterCounter] = useState(25 - channelName.length)
+    const [topicCharacterCounter, setTopicCharacterCounter] = useState(255 - channelTopic.length)
 
     const nameChanged = channelName !== channel.name;
     const topicChanged = channelTopic !== initialTopicValue;
+    const channelNameContainsOnlySpaces = channelName.replace(/\s/g, '').length === 0
+    const topicNameContainsOnlySpaces = channelTopic.replace(/\s/g, '').length === 0
 
     const submitEditChannel = async (e) => {
         e.preventDefault();
+        setChannelNameError('');
+        setChannelTopicError('');
+        if (topicNameContainsOnlySpaces && channelTopic.length > 0) {
+            setChannelTopicError('Topic cannot contain only spaces.');
+            if (channelNameContainsOnlySpaces && channelName.length > 0) {
+                setChannelNameError('Channel name cannot contain only spaces.');
+            }
+            return;
+        }
         const editedChannel = {
             id: channel.id,
             name: channelName,
             topic: channelTopic
         }
         const data = await dispatch(editChannelThunk(editedChannel));
-        console.log(data)
         if (data) {
-            setChannelEditErrors(data.errors)
+            data.errors.forEach(error => {
+                if (error.toLowerCase().includes('channel')) {
+                    setChannelNameError(error)
+                } else {
+                    setChannelTopicError(error)
+                }
+            });
             return
         } 
         onClose();
+    }
+
+    const updateName = (e) => {
+        setChannelName(e.target.value);
+        setNameCharacterCounter(25 - e.target.value.length);
+    }
+
+    const updateTopic = (e) => {
+        setChannelTopic(e.target.value);
+        setTopicCharacterCounter(255 - e.target.value.length);
     }
     
     return ( 
@@ -37,14 +66,13 @@ function ChannelSettingsInfo({ channel, onClose }) {
                     type="text" 
                     className="channel-settings-name-input"
                     value={channelName}
-                    onChange={(e) => setChannelName(e.target.value)}
+                    onChange={updateName}
                 />
-                {channelEditErrors.map((error, index) => (
-                        <div className="server-edit-errors" key={index}>
-                            {error}
-                        </div>
-                    ))}
+                <p className={`channel-name-character-counter character-length-exceeded-${nameCharacterCounter < 0}`}>{nameCharacterCounter}</p>
             </label>
+                <div className="channel-edit-errors">
+                    {channelNameError}
+                </div>
             <label className="channel-settings-topic-label">
                 Channel Topic (Optional)
                 <textarea 
@@ -53,10 +81,14 @@ function ChannelSettingsInfo({ channel, onClose }) {
                     className="channel-settings-topic-textarea"
                     placeholder="Let everyone know how to use this channel"
                     value={channelTopic}
-                    onChange={(e) => setChannelTopic(e.target.value)}
+                    onChange={updateTopic}
                 ></textarea>
+                <p className={`topic-character-counter character-length-exceeded-${topicCharacterCounter < 0}`}>{topicCharacterCounter}</p>
             </label>
-            <button className={`channel-settings-save-button channel-settings-disabled-${!nameChanged && !topicChanged}`}>Save Changes</button>
+                <div className="channel-edit-errors">
+                    {channelTopicError}
+                </div>
+            <button className={`channel-settings-save-button channel-settings-disabled-${(!nameChanged && !topicChanged)}`} disabled={(!nameChanged && !topicChanged)}>Save Changes</button>
         </form>
     );
 }

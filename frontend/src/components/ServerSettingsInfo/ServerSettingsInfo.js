@@ -110,12 +110,12 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
                         className="server-settings-name-input"
                     />
                     {serverEditErrors.map((error, index) => (
-                        <div className="server-edit-errors" key={index}>
+                        <div className="channel-edit-errors" key={index}>
                             {error}
                         </div>
                     ))}
                 </label>
-                <button className={`server-settings-save-button disabled-${!imageChanged && serverNameNotChanged || serverNameContainsOnlySpaces}`} disabled={!imageChanged && serverNameNotChanged || serverNameContainsOnlySpaces}>Save Changes</button>
+                <button className={`server-settings-save-button disabled-${!(imageChanged && serverNameNotChanged) || serverNameContainsOnlySpaces}`} disabled={!(imageChanged && serverNameNotChanged) || serverNameContainsOnlySpaces}>Save Changes</button>
             </form>
         </>
     );

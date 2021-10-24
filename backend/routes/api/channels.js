@@ -18,6 +18,12 @@ const validateEditChannels = [
     check('name')
         .isLength({ max: 25 })
         .withMessage('Channel name can\'t be more than 25 characters'),
+    check('name')
+        .exists({ checkFalsy:true })
+        .withMessage('You must enter a channel name'),
+    check('topic')
+        .isLength({max: 255})
+        .withMessage('Topic can\'t be more than 255 characters'),
     handleValidationErrors,
 ]
 
@@ -40,7 +46,12 @@ router.patch(
     validateEditChannels,
     asyncHandler(async (req, res) => {
         const channelId = req.params.id;
-        const { name, topic } = req.body;
+        const { name } = req.body;
+        let { topic } = req.body;
+
+        if (topic.replace(/\s/g, '').length === 0) {
+            topic = null;
+        }
 
         const channelToUpdate = await Channel.findOne({ where: {id: channelId} });
 

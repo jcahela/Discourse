@@ -16,7 +16,7 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING(25)
+        type: Sequelize.STRING(50)
       },
       topic: {
         type: Sequelize.STRING(255)
