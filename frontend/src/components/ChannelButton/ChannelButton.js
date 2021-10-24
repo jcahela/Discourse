@@ -5,7 +5,7 @@ import SettingsOverlay from '../SettingsOverlay';
 
 import './ChannelButton.css'
 
-function ChannelButton({ channel }) {
+function ChannelButton({ channel, setChannelSelected }) {
     const sessionUser = useSelector(state => state.session.user);
     const servers = useSelector(state => state.servers);
     const [showChannelSettingsIcon, setShowChannelSettingsIcon] = useState(false);
@@ -16,6 +16,11 @@ function ChannelButton({ channel }) {
         setShowChannelSettingsModal(true);
     }
 
+    const setChannel = () => {
+        setChannelSelected(channel);
+        console.log(channel);
+    }
+
     const channelOwnerId = servers[channel.serverId]["ownerId"]
     const currentUserIsOwner = sessionUser.id === channelOwnerId;
     return ( 
@@ -23,6 +28,7 @@ function ChannelButton({ channel }) {
             className="channel-name-container"
             onMouseEnter={() => setShowChannelSettingsIcon(true)}
             onMouseLeave={() => setShowChannelSettingsIcon(false)}
+            onClick={setChannel}
         >
             <span className="channel-name-hashtag">#</span>
             <p className="channel-name">{channel.name}</p>

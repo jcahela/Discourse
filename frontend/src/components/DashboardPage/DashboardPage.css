@@ -172,11 +172,3 @@
     justify-content: center;
     align-items: center;
 }
-
-.chat-background-text {
-    color: #6B6F76;
-}
-
-.chat-background-text:hover {
-    cursor: default;
-}

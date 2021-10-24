@@ -14,6 +14,7 @@ import './DashboardPage.css'
 function DashboardPage() {
     const [channelsExist, setChannelsExist] = useState(false)
     const [serverSelected, setServerSelected] = useState(null);
+    const [channelSelected, setChannelSelected] = useState(null);
     const serverFromState = useSelector(state => state.servers[serverSelected?.id])
     const [showServerSettingsMenu, setShowServerSettingsMenu] = useState(false)
     const [showSettingsModal, setShowSettingsModal] = useState(false)
@@ -53,6 +54,7 @@ function DashboardPage() {
                         server={server} 
                         setServerSelected={setServerSelected} 
                         serverSelected={serverSelected}
+                        setChannelSelected={setChannelSelected}
                     />
                 ))}
                 <NewServerButton />
@@ -94,7 +96,7 @@ function DashboardPage() {
                             </div>
                         </div>
                         {channelsArr.map((channel, index) => (
-                            <ChannelButton key={index} channel={channel} />
+                            <ChannelButton key={index} channel={channel} setChannelSelected={setChannelSelected}/>
                         ))}
                     </div>
                 }
@@ -108,12 +110,7 @@ function DashboardPage() {
                 </div>
             </div>
             <div className="chat-container">
-                { !channelsExist && (
-                    <>
-                        <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />
-                        <p className="chat-background-text">No channels exist...yet</p>    
-                    </>
-                )}
+                { !channelSelected && <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />}
             </div>
         </div>
     );
