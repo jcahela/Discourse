@@ -15,6 +15,7 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
     const [image, setImage] = useState(serverFromState?.serverPicture)
     const [imageChanged, setImageChanged] = useState(false);
     const [serverEditErrors, setServerEditErrors] = useState([])
+    const [nameCharacterCounter, setNameCharacterCounter] = useState(50 - serverName.length)
 
     useEffect(() => {
         const serverName = server.name;
@@ -68,6 +69,10 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
 
     const submitEdit = async (e) => {
         e.preventDefault();
+        if (serverNameContainsOnlySpaces && serverName.length > 0) {
+            setServerEditErrors(['Server name cannot contain only spaces.']);
+            return;
+        }
         const data = await dispatch(editServerThunk({
             image,
             serverName,
@@ -82,7 +87,12 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
         }
     }
 
-    const serverNameNotChanged = serverName === serverFromState?.name
+    const updateServerName = (e) => {
+        setServerName(e.target.value);
+        setNameCharacterCounter(50 - e.target.value.length);
+    }
+
+    const serverNameChanged = serverName !== serverFromState?.name
     const serverNameContainsOnlySpaces = serverName.replace(/\s/g, '').length === 0
 
     return ( 
@@ -106,16 +116,17 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
                     <input 
                         type="text"
                         value={serverName}
-                        onChange={(e) => setServerName(e.target.value)} 
+                        onChange={updateServerName} 
                         className="server-settings-name-input"
                     />
+                    <p className={`server-edit-name-character-counter server-edit-character-length-exceeded-${nameCharacterCounter < 0}`}>{nameCharacterCounter}</p>
                     {serverEditErrors.map((error, index) => (
-                        <div className="channel-edit-errors" key={index}>
+                        <div className="server-edit-errors" key={index}>
                             {error}
                         </div>
                     ))}
                 </label>
-                <button className={`server-settings-save-button disabled-${!(imageChanged && serverNameNotChanged) || serverNameContainsOnlySpaces}`} disabled={!(imageChanged && serverNameNotChanged) || serverNameContainsOnlySpaces}>Save Changes</button>
+                <button className={`server-settings-save-button disabled-${!imageChanged && !serverNameChanged}`} disabled={!imageChanged && !serverNameChanged}>Save Changes</button>
             </form>
         </>
     );
