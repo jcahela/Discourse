@@ -1,9 +1,9 @@
-import ServerPopupMessage from '../ServerPopupMessage';
+// import ServerPopupMessage from '../ServerPopupMessage';
 import { useState, useEffect, useRef } from 'react';
 import './ServerButton.css'
 
 function ServerButton({ server, setServerSelected, serverSelected, setChannelSelected, setShowChannelSettingsIcon }) {
-    const [showServerPopup, setShowServerPopup] = useState(false);
+    // const [showServerPopup, setShowServerPopup] = useState(false);
     const [noPicContent, setNoPicContent] = useState('');
     const [whiteLine, setWhiteLine] = useState(false);
     const [whiteLineActive, setWhiteLineActive] = useState(false);
@@ -13,12 +13,12 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
     const whiteLineRef = useRef();
 
     const showPopupMessage = () => {
-        setShowServerPopup(true);
+        // setShowServerPopup(true);
         setWhiteLine(true);
     }
 
     const hidePopupMessage = () => {
-        setShowServerPopup(false)
+        // setShowServerPopup(false)
         setWhiteLine(false);
     }
 
@@ -74,9 +74,9 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
                     <span ref={serverButtonNoPicRef} className="server-button-no-pic-content">{noPicContent}</span>
                 )}
             </div>
-            { showServerPopup && (
+            {/* { showServerPopup && (
                 <ServerPopupMessage content={server.name} />
-            )}
+            )} */}
         </div>
     );
 }
