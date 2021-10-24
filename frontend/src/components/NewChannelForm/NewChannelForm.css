@@ -21,6 +21,7 @@
     flex-direction: column;
     color: white;
     margin-top: 15px;
+    position: relative;
 }
 
 .new-channel-name-input {
@@ -31,6 +32,7 @@
     border: 1px solid #000000;
     color: #D2D3D4;
     padding-left: 10px;
+    padding-right: 25px;
     transition: .3s;
 }
 
@@ -45,6 +47,19 @@
 }
 
 .channel-error {
+    color: #fd5f5f;
+}
+
+.new-channel-name-character-counter {
+    color: #9B979A;
+    font-family: 'Inconsolata', monospace;
+    font-size: 15px;
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+}
+
+.new-channel-character-length-exceeded-true {
     color: #fd5f5f;
 }
 
