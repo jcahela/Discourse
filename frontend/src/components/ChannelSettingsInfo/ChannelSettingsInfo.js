@@ -22,11 +22,12 @@ function ChannelSettingsInfo({ channel, onClose }) {
         e.preventDefault();
         setChannelNameError('');
         setChannelTopicError('');
+        if (channelNameContainsOnlySpaces && channelName.length > 0) {
+            setChannelNameError('Channel name cannot contain only spaces.');
+            return;
+        }
         if (topicNameContainsOnlySpaces && channelTopic.length > 0) {
             setChannelTopicError('Topic cannot contain only spaces.');
-            if (channelNameContainsOnlySpaces && channelName.length > 0) {
-                setChannelNameError('Channel name cannot contain only spaces.');
-            }
             return;
         }
         const editedChannel = {
