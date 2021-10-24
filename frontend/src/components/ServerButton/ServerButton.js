@@ -2,7 +2,7 @@ import ServerPopupMessage from '../ServerPopupMessage';
 import { useState, useEffect, useRef } from 'react';
 import './ServerButton.css'
 
-function ServerButton({ server, setServerSelected, serverSelected, setChannelSelected }) {
+function ServerButton({ server, setServerSelected, serverSelected, setChannelSelected, setShowChannelSettingsIcon }) {
     const [showServerPopup, setShowServerPopup] = useState(false);
     const [noPicContent, setNoPicContent] = useState('');
     const [whiteLine, setWhiteLine] = useState(false);
@@ -54,6 +54,7 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
         setServerSelected(server);
         setWhiteLineActive(true);
         setChannelSelected(null);
+        setShowChannelSettingsIcon(false)
     }
 
     return (

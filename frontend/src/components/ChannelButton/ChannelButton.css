@@ -16,6 +16,7 @@
 .channel-settings-container {
     margin-left: auto;
     width: 20px;
+    height: 20px;
 }
 
 .channel-name-hashtag {
@@ -27,6 +28,9 @@
 
 .channel-name {
     color: #6B6F76;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .channel-name-container:hover > p {
@@ -44,4 +48,12 @@
 
 .channel-settings-icon:hover {
     cursor: pointer;
+}
+
+.channel-selected-true {
+    background-color: #393C43;
+}
+
+.channel-selected-true > p {
+    color: white;
 }

@@ -19,6 +19,7 @@ function DashboardPage() {
     const [showServerSettingsMenu, setShowServerSettingsMenu] = useState(false)
     const [showSettingsModal, setShowSettingsModal] = useState(false)
     const [showNewChannelModal, setShowNewChannelModal] = useState(false)
+    const [showChannelSettingsIcon, setShowChannelSettingsIcon] = useState(false);
     const sessionUser = useSelector(state => state.session.user)
     const serversArr = useSelector(state => Object.values(state.servers).sort((a, b) => (a.createdAt < b.createdAt ? 1: -1)))
     const channelsArr = useSelector(state => Object.values(state.channels).filter(channel => channel.serverId === serverFromState?.id).sort((a, b) => a.createdAt < b.createdAt ? 1: -1))
@@ -55,6 +56,7 @@ function DashboardPage() {
                         setServerSelected={setServerSelected} 
                         serverSelected={serverSelected}
                         setChannelSelected={setChannelSelected}
+                        setShowChannelSettingsIcon={setShowChannelSettingsIcon}
                     />
                 ))}
                 <NewServerButton />
@@ -96,7 +98,7 @@ function DashboardPage() {
                             </div>
                         </div>
                         {channelsArr.map((channel, index) => (
-                            <ChannelButton key={index} channel={channel} setChannelSelected={setChannelSelected}/>
+                            <ChannelButton key={index} channel={channel} setChannelSelected={setChannelSelected} channelSelected={channelSelected} setShowChannelSettingsIcon={setShowChannelSettingsIcon} showChannelSettingsIcon={showChannelSettingsIcon}/>
                         ))}
                     </div>
                 }

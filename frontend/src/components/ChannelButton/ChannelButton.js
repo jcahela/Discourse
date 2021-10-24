@@ -1,15 +1,15 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import SettingsOverlay from '../SettingsOverlay';
 
 import './ChannelButton.css'
 
-function ChannelButton({ channel, setChannelSelected }) {
+function ChannelButton({ channel, setChannelSelected, channelSelected, setShowChannelSettingsIcon, showChannelSettingsIcon }) {
     const sessionUser = useSelector(state => state.session.user);
     const servers = useSelector(state => state.servers);
-    const [showChannelSettingsIcon, setShowChannelSettingsIcon] = useState(false);
     const [showChannelSettingsModal, setShowChannelSettingsModal] = useState(false);
+    const [showChannelSettingsIconHover, setShowChannelSettingsIconHover] = useState(false);
 
     const openChannelSettingsOverlay = () => {
         setShowChannelSettingsIcon(false);
@@ -18,26 +18,50 @@ function ChannelButton({ channel, setChannelSelected }) {
 
     const setChannel = () => {
         setChannelSelected(channel);
+        setShowChannelSettingsIconHover(false);
         console.log(channel);
+    }
+
+    const addHighlightEffect = () => {
+        if (channelSelected?.id !== channel?.id) {
+            setShowChannelSettingsIconHover(true)
+        }
+    }
+
+    const removeHighlightEffect = () => {
+        if (channelSelected?.id !== channel?.id) {
+            setShowChannelSettingsIconHover(false)
+        }
     }
 
     const channelOwnerId = servers[channel.serverId]["ownerId"]
     const currentUserIsOwner = sessionUser.id === channelOwnerId;
     return ( 
         <div 
-            className="channel-name-container"
-            onMouseEnter={() => setShowChannelSettingsIcon(true)}
-            onMouseLeave={() => setShowChannelSettingsIcon(false)}
+            className={`channel-name-container channel-selected-${channelSelected?.id === channel?.id}`}
+            onMouseEnter={addHighlightEffect}
+            onMouseLeave={removeHighlightEffect}
             onClick={setChannel}
         >
             <span className="channel-name-hashtag">#</span>
             <p className="channel-name">{channel.name}</p>
             <div className="channel-settings-container">
-                { currentUserIsOwner && showChannelSettingsIcon && 
+                { currentUserIsOwner && channelSelected?.id === channel?.id && 
                     <span 
                         className="material-icons channel-settings-icon"
                         onClick={openChannelSettingsOverlay}
-                    >settings</span> }
+                    >
+                        settings
+                    </span> 
+                }
+                { currentUserIsOwner && channelSelected?.id !== channel?.id && showChannelSettingsIconHover &&
+                    <span 
+                    className="material-icons channel-settings-icon"
+                    onClick={openChannelSettingsOverlay}
+                    >
+                        settings
+                    </span> 
+                }
             </div>
             { showChannelSettingsModal && 
                 <Modal onClose={() => setShowChannelSettingsModal(false)}>
