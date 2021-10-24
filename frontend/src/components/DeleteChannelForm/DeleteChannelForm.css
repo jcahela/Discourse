@@ -1,3 +1,61 @@
-.delete-channel-test {
-    color: blue;
+.delete-channel-form {
+    border: 1px solid;
+    width: fit-content;
+    height: 200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 22rem;
+    padding: 30px 30px 10px;
+    background-color: #36393F;
+    border-radius: 10px;
+}
+
+.delete-channel-header {
+    color: white;
+    font-size: 26px;
+    font-weight: normal;
+    font-weight: 600;
+    text-shadow: 1px 1px 0px rgb(0, 0, 0);
+}
+
+.delete-channel-confirm-message {
+    color: #FFFFFF;
+    margin-top: 30px;
+}
+
+.delete-channel-name {
+    color: white;
+    font-weight: 600;
+}
+
+
+.delete-channel-cancel-submit-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: auto;
+}
+
+.delete-channel-cancel {
+    color: white;
+    margin-right: 20px;
+}
+
+.delete-channel-button {
+    background-color: #ED4143;
+    color: white;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+.delete-channel-cancel:hover,
+.delete-channel-button:hover {
+    cursor: pointer;
+}
+
+.delete-channel-error {
+    color: #fd5f5f;
 }

@@ -62,6 +62,13 @@ router.patch(
 
         res.json(channelToUpdate);
     })
-    )
+);
+
+router.delete('/:id(\\d+)', asyncHandler( async(req, res) => {
+    const channelId = req.params.id;
+    const channelToDelete = await Channel.findOne({ where: {id: channelId} });
+    await channelToDelete.destroy();
+    res.json(channelToDelete.id)
+}))
 
 module.exports = router;
