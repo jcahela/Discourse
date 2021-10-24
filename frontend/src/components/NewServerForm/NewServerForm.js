@@ -10,6 +10,7 @@ function NewServerForm({ onClose }) {
     const [serverName, setServerName] = useState('')
     const [image, setImage] = useState(null)
     const [errors, setErrors] = useState([])
+    const [nameCharacterCounter, setNameCharacterCounter] = useState(50 - serverName.length)
 
     const submitNewServer = async (e) => {
         e.preventDefault();
@@ -26,6 +27,11 @@ function NewServerForm({ onClose }) {
         onClose();
     }
 
+    const updateServerName = (e) => {
+        setServerName(e.target.value);
+        setNameCharacterCounter(50 - e.target.value.length);
+    }
+
     return ( 
         <div className="new-server-form-container">
             <form className="new-server-form" onSubmit={submitNewServer}>
@@ -36,15 +42,16 @@ function NewServerForm({ onClose }) {
                     <input
                         type="text"
                         value={serverName}
-                        onChange={(e) => setServerName(e.target.value)}
+                        onChange={updateServerName}
                         className="new-server-name-input"
                     />
-                    {errors.map((error, index) => (
-                        <div key={index} className="server-error-container">
-                            <p className="server-error">{error}</p>
-                        </div>
-                    ))}
+                    <p className={`new-server-name-character-counter new-server-character-length-exceeded-${nameCharacterCounter < 0}`}>{nameCharacterCounter}</p>
                 </label>
+                {errors.map((error, index) => (
+                    <div key={index} className="server-error-container">
+                        <p className="server-error">{error}</p>
+                    </div>
+                ))}
                 <button className={`new-server-button new-server-disabled-${/^\s*$/.test(serverName)}`} type="submit" disabled={/^\s*$/.test(serverName)}>Create Server</button>
 
             </form>
