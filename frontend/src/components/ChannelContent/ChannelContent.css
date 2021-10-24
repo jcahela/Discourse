@@ -1,0 +1,51 @@
+.channel-content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-content-header-container {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border-bottom: solid 1px #202225;
+    flex: 0 0 auto;
+}
+
+.channel-content-header-hashtag {
+    color: #6B6F76;
+    font-size: 28px;
+    font-family: 'Vidaloka', serif;
+    margin-left: 20px;
+}
+
+.channe-content-header {
+    color: white;
+    font-size: 18px;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.channel-content-messages-container {
+    flex: auto;
+    overflow: auto;
+    margin-right: 5px;
+}
+
+.channel-content-chat-input-container {
+    border: 1px solid blue;
+    height: 100px;
+    flex: 0 0 auto;
+}
+
+.channel-content-messages-container::-webkit-scrollbar {
+    background-color: rgba(255, 0, 0, 0);
+    width: 10px;
+}
+
+.channel-content-messages-container::-webkit-scrollbar-thumb {
+    background-color: #232529;
+    margin-left: 2px;
+    border-radius: 100px;
+}

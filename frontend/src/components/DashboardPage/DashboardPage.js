@@ -7,6 +7,7 @@ import ServerSettingsDropdown from '../ServerSettingsDropdown/ServerSettingsDrop
 import SettingsOverlay from '../SettingsOverlay';
 import NewChannelForm from '../NewChannelForm';
 import ChannelButton from '../ChannelButton';
+import ChannelContent from '../ChannelContent';
 
 import { Modal } from '../../context/Modal';
 import './DashboardPage.css'
@@ -102,8 +103,6 @@ function DashboardPage() {
                     </div>
                 }
 
-
-
                 <div className="session-user-container">
                     <img className="session-user-profile-pic" src={sessionUser.profilePicture} alt="" />
                     <p className="session-user-username">{sessionUser.username}</p>
@@ -111,7 +110,11 @@ function DashboardPage() {
                 </div>
             </div>
             <div className="chat-container">
-                { !channelSelected && <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />}
+                { channelSelected ? (
+                    <ChannelContent channel={channelSelected} />
+                ):(
+                    <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />
+                )}
             </div>
         </div>
     );
