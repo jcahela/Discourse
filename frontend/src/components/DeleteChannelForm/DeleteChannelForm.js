@@ -3,7 +3,7 @@ import { deleteChannelThunk } from '../../store/channels';
 import { useDispatch } from 'react-redux';
 import './DeleteChannelForm.css'
 
-function DeleteChannelForm({ channel, onCloseOuter, onCloseInner }) {
+function DeleteChannelForm({ channel, onCloseOuter, onCloseInner, setChannelSelected }) {
     const dispatch = useDispatch();
     const [deleteChannelError, setDeleteChannelError] = useState('')
 
@@ -13,6 +13,7 @@ function DeleteChannelForm({ channel, onCloseOuter, onCloseInner }) {
         if (data) {
             setDeleteChannelError(data);
         } else {
+            setChannelSelected(null);
             onCloseInner();
             onCloseOuter();
         }

@@ -7,7 +7,7 @@ import DeleteChannelForm from '../DeleteChannelForm';
 
 import './SettingsOverlay.css'
 
-function SettingsOverlay({ server, onClose, channel, setServerSelected }) {
+function SettingsOverlay({ server, onClose, channel, setServerSelected, setChannelSelected }) {
     const [showModal, setShowModal] = useState();
 
     return ( 
@@ -33,7 +33,7 @@ function SettingsOverlay({ server, onClose, channel, setServerSelected }) {
                     {server ? (
                         <DeleteServerForm server={server} onCloseOuter={onClose} onCloseInner={() => setShowModal(false)}/>
                     ):(
-                        <DeleteChannelForm channel={channel} onCloseOuter={onClose} onCloseInner={() => setShowModal(false)}/>
+                        <DeleteChannelForm channel={channel} onCloseOuter={onClose} onCloseInner={() => setShowModal(false)} setChannelSelected={setChannelSelected}/>
                     )}
                 </Modal>
             ) }

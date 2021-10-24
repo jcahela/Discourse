@@ -5,14 +5,14 @@ import SettingsOverlay from '../SettingsOverlay';
 
 import './ChannelButton.css'
 
-function ChannelButton({ channel, setChannelSelected, channelSelected, setShowChannelSettingsIcon, showChannelSettingsIcon }) {
+function ChannelButton({ channel, setChannelSelected, channelSelected }) {
     const sessionUser = useSelector(state => state.session.user);
     const servers = useSelector(state => state.servers);
     const [showChannelSettingsModal, setShowChannelSettingsModal] = useState(false);
     const [showChannelSettingsIconHover, setShowChannelSettingsIconHover] = useState(false);
 
     const openChannelSettingsOverlay = () => {
-        setShowChannelSettingsIcon(false);
+        // setShowChannelSettingsIcon(false);
         setShowChannelSettingsModal(true);
     }
 
@@ -68,7 +68,7 @@ function ChannelButton({ channel, setChannelSelected, channelSelected, setShowCh
             </div>
             { showChannelSettingsModal && 
                 <Modal onClose={() => setShowChannelSettingsModal(false)}>
-                    <SettingsOverlay channel={channel} onClose={() => setShowChannelSettingsModal(false)}/>
+                    <SettingsOverlay channel={channel} onClose={() => setShowChannelSettingsModal(false)} setChannelSelected={setChannelSelected}/>
                 </Modal>
             }
         </div>
