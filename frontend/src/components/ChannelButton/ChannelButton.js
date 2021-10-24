@@ -17,6 +17,9 @@ function ChannelButton({ channel, setChannelSelected, channelSelected, setShowCh
     }
 
     const setChannel = () => {
+        if (channelSelected.id === channel.id) {
+            return;
+        }
         setChannelSelected(channel);
         setShowChannelSettingsIconHover(false);
         console.log(channel);

@@ -11,6 +11,7 @@
 
 .channel-name-container:hover {
     background-color: #393C43;
+    cursor: pointer;
 }
 
 .channel-settings-container {
@@ -38,7 +39,7 @@
 }
 
 .channel-name:hover {
-    cursor: default;
+    cursor: pointer;
 }
 
 .channel-settings-icon {
