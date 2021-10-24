@@ -12,7 +12,6 @@ import { Modal } from '../../context/Modal';
 import './DashboardPage.css'
 
 function DashboardPage() {
-    const [channelsExist, setChannelsExist] = useState(false)
     const [serverSelected, setServerSelected] = useState(null);
     const [channelSelected, setChannelSelected] = useState(null);
     const serverFromState = useSelector(state => state.servers[serverSelected?.id])

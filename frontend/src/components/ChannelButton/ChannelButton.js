@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import SettingsOverlay from '../SettingsOverlay';
 
