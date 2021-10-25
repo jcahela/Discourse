@@ -12,6 +12,22 @@ import ChannelContent from '../ChannelContent';
 import { Modal } from '../../context/Modal';
 import './DashboardPage.css'
 
+// socket chat instance
+import { io } from 'socket.io-client';
+
+let serverUrl;
+if (process.env.NODE_ENV === "production") {
+    serverUrl = 'https://localhost:5000'
+} else {
+    serverUrl = 'http://localhost:5000'
+}
+
+const socket = io(serverUrl);
+
+socket.on('connect', () => {
+  console.log(`You connected with id: ${socket.id}`);
+})
+
 function DashboardPage() {
     const [serverSelected, setServerSelected] = useState(null);
     const [channelSelected, setChannelSelected] = useState(null);
@@ -110,7 +126,7 @@ function DashboardPage() {
             </div>
             <div className="chat-container">
                 { channelSelected ? (
-                    <ChannelContent channel={channelFromState} setChannelSelected={setChannelSelected}/>
+                    <ChannelContent channel={channelFromState} setChannelSelected={setChannelSelected} socket={socket}/>
                 ):(
                     <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />
                 )}

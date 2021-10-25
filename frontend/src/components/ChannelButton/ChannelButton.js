@@ -21,7 +21,6 @@ function ChannelButton({ channel, setChannelSelected, channelSelected }) {
         }
         setChannelSelected(channel);
         setShowChannelSettingsIconHover(false);
-        console.log(channel);
     }
 
     const addHighlightEffect = () => {
