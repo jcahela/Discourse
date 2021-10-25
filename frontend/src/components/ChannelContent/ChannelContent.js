@@ -13,12 +13,6 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
 
     const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
 
-  // socket.emit('fake-message', {
-  //   userId: 1,
-  //   channelId: 20,
-  //   content: 'This is a message object that will represent a message',
-  // })
-
     useEffect(() => {
         socket.on('receive-message', message => {
             dispatch(addMessage(message));
@@ -33,7 +27,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
             content: message
         }
         socket.emit('message', newMessage);
-        
+        setMessage('');
     }
 
     return ( 
@@ -46,7 +40,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
 
             <div className="channel-content-messages-container">
                 {orderedMessages.map(message => (
-                    <div style={{color: "red"}}>{message.content}</div>
+                    <div className="channel-content-message">{message.content}</div>
                 ))}
                 <ChannelWelcomeMessage channel={channel} setChannelSelected={setChannelSelected}/>
             </div>

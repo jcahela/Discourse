@@ -36,10 +36,38 @@
     flex-direction: column-reverse;
 }
 
+.channel-content-message {
+    color: #DCDDDE;
+}
+
 .channel-content-chat-input-container {
-    border: 1px solid blue;
-    height: 70px;
+    height: 100px;
+    width: 100%;
     flex: 0 0 auto;
+}
+
+.new-message-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.new-message-label {
+    width: 100%;
+    height: 100%;
+}
+
+.new-message-input {
+    background-color: #40444B;
+    width: 95%;
+    height: 100%;
+    border-radius: 15px;
+    color: #DCDDDE;
+    padding-left: 20px;
 }
 
 .channel-content-messages-container::-webkit-scrollbar {

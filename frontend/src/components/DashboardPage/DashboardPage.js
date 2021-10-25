@@ -15,14 +15,14 @@ import './DashboardPage.css'
 // socket chat instance
 import { io } from 'socket.io-client';
 
-let serverUrl;
-if (process.env.NODE_ENV === "production") {
-    serverUrl = 'https://localhost:5000'
-} else {
-    serverUrl = 'http://localhost:5000'
-}
+// let serverUrl;
+// if (process.env.NODE_ENV === "production") {
+//     serverUrl = 'https://localhost:5000'
+// } else {
+//     serverUrl = 'http://localhost:5000'
+// }
 
-const socket = io(serverUrl);
+const socket = io('http://localhost:5000');
 
 socket.on('connect', () => {
   console.log(`You connected with id: ${socket.id}`);
