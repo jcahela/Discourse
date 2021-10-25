@@ -3,7 +3,7 @@ const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const { handleValidationErrors } = require("../../utils/validation")
 const { requireAuth } = require("../../utils/auth")
-const { Channel } = require("../../db/models");
+const { Channel, Message } = require("../../db/models");
 
 const router = express.Router();
 
@@ -69,6 +69,10 @@ router.delete('/:id(\\d+)', asyncHandler( async(req, res) => {
     const channelToDelete = await Channel.findOne({ where: {id: channelId} });
     await channelToDelete.destroy();
     res.json(channelToDelete.id)
+}))
+
+router.get('/:id(\\d+)/messages', asyncHandler( async(req, res) => {
+    const channelId = req.params.id;
 }))
 
 module.exports = router;

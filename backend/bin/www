@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-const { createServer } = require("http");
-const { Server } = require("socket.io");
-
 const { port } = require('../config');
-
 const app = require('../app');
 const db = require('../db/models');
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+const storeMessage = require("../routes/socket")
+
 const httpServer = createServer(app);
+
 const io = new Server(httpServer, {
   cors: {
     origin: ['http://localhost:3000']
@@ -17,7 +18,7 @@ io.on("connection", socket => {
   console.log('THIS IS THIS SOCKET ID ------->', socket.id)
   socket.on('message', (message) => {
     io.emit('receive-message', message)
-    console.log(message);
+    storeMessage(message);
   })
 })
 

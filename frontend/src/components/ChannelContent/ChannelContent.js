@@ -1,10 +1,11 @@
 import ChannelWelcomeMessage from '../ChannelWelcomeMessage';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './ChannelContent.css'
 
 function ChannelContent({ channel, setChannelSelected, socket }) {
+    const dispatch = useDispatch();
     const [message, setMessage] = useState('');
     const sessionUser = useSelector(state => state.session.user);
 
@@ -18,7 +19,11 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
         socket.on('receive-message', message => {
             console.log(message);
         })
-    }, [])
+    }, [socket])
+
+    useEffect(() => {
+        
+    })
 
     const submitMessage = (e) => {
         e.preventDefault();
@@ -53,7 +58,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                             onChange={(e) => setMessage(e.target.value)}
                         />
                     </label>
-                    <button className="new-message-submit">Submit</button>
+                    <button className="new-message-submit"></button>
                 </form>
             </div>
         </div>
@@ -61,87 +66,3 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
 }
 
 export default ChannelContent;
-
-{/* <p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p>
-<p style={{color: 'white'}}>message here to see what it'll look like</p> */}

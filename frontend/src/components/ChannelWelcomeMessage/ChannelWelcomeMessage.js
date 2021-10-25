@@ -12,7 +12,7 @@ function ChannelWelcomeMessage({ channel, setChannelSelected }) {
             <h1 className="channel-welcome-header">Welcome to <span className="channel-welcome-name">#{channel?.name}</span>!</h1>
             <p className="channel-welcome-subheader">This is the start of the #{channel?.name} channel. {channel?.topic}</p>
             <div onClick={() => setShowChannelSettingsModal(true)} className="channel-welcome-edit-channel-container">
-                <span class="material-icons channel-welcome-edit-channel-icon">edit</span>
+                <span className="material-icons channel-welcome-edit-channel-icon">edit</span>
                 <p className="channel-welcome-edit-channel">Edit Channel</p>
             </div>
             { showChannelSettingsModal && 
