@@ -39,9 +39,35 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
             </div>
 
             <div className="channel-content-messages-container">
-                {orderedMessages.map(message => (
-                    <div className="channel-content-message">{message.content}</div>
-                ))}
+                {orderedMessages.map((message, index) => {
+                    const nextMessage = orderedMessages[index+1]
+                    const nextMessageSameOwnerAsCurrentMessage = nextMessage?.User?.id === message?.User?.id
+                    const messageDate = new Date(message.createdAt)
+                    const formattedDate = messageDate.toLocaleString();
+                    return (
+                        nextMessageSameOwnerAsCurrentMessage ? (
+                            <div className="message-without-profile-pic-container">
+                                <div className="message-profile-standin"></div>
+                                <div className="username-message-container">
+                                    <div className="channel-content-message">{message.content}</div>
+                                </div>
+                            </div>
+                        ):(
+                            <div className="message-with-profile-pic-container">
+                                <div className="message-profile-pic-container">
+                                    <img className="message-profile-pic" src={message.User.profilePicture} alt="" />
+                                </div>
+                                <div className="username-message-container">
+                                    <div className="message-username">{message.User.username}<span className="message-date-time">{formattedDate}</span></div>
+                                    
+                                    <div className="channel-content-message">{message.content}</div>
+                                </div>
+                            </div>
+                        )
+                    
+                    )
+
+                })}
                 <ChannelWelcomeMessage channel={channel} setChannelSelected={setChannelSelected}/>
             </div>
 
