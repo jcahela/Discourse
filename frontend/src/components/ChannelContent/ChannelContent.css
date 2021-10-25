@@ -93,6 +93,7 @@
 .channel-content-message {
     color: #DCDDDE;
     margin-top: 5px;
+    word-break: break-word;
 }
 
 .channel-content-chat-input-container {
