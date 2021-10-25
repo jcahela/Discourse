@@ -27,7 +27,7 @@ const validateEditChannels = [
     handleValidationErrors,
 ]
 
-router.get('/', requireAuth, asyncHandler(async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
     const channels = await Channel.findAll();
     return res.json(channels);
 }));
