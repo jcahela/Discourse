@@ -10,6 +10,27 @@ import DashboardPage from './components/DashboardPage';
 import { restoreServersThunk } from './store/servers';
 import { restoreChannelsThunk } from './store/channels';
 
+// socket chat instance
+import { io } from 'socket.io-client';
+
+let serverUrl;
+if (process.env.NODE_ENV === "production") {
+    serverUrl = 'https://localhost:5000'
+} else {
+    serverUrl = 'http://localhost:5000'
+}
+
+const socket = io(serverUrl);
+
+socket.on('connect', () => {
+  console.log(`You connected with id: ${socket.id}`)
+  socket.emit('fake-message', {
+    userId: 1,
+    channelId: 20,
+    content: 'This is a message object that will represent a message',
+  })
+})
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
