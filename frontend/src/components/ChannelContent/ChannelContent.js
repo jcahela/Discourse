@@ -9,6 +9,9 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const dispatch = useDispatch();
     const [message, setMessage] = useState('');
     const sessionUser = useSelector(state => state.session.user);
+    const messages = useSelector(state => Object.values(state.messages).filter(message => message.channelId === channel?.id))
+
+    const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
 
   // socket.emit('fake-message', {
   //   userId: 1,
@@ -20,7 +23,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
         socket.on('receive-message', message => {
             dispatch(addMessage(message));
         })
-    }, [socket])
+    }, [dispatch, socket])
 
     const submitMessage = (e) => {
         e.preventDefault();
@@ -42,6 +45,9 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
             </div>
 
             <div className="channel-content-messages-container">
+                {orderedMessages.map(message => (
+                    <div style={{color: "red"}}>{message.content}</div>
+                ))}
                 <ChannelWelcomeMessage channel={channel} setChannelSelected={setChannelSelected}/>
             </div>
 
