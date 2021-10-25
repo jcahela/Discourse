@@ -1,6 +1,7 @@
 import ChannelWelcomeMessage from '../ChannelWelcomeMessage';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { addMessage } from '../../store/messages';
 
 import './ChannelContent.css'
 
@@ -17,13 +18,9 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
 
     useEffect(() => {
         socket.on('receive-message', message => {
-            console.log(message);
+            dispatch(addMessage(message));
         })
     }, [socket])
-
-    useEffect(() => {
-        
-    })
 
     const submitMessage = (e) => {
         e.preventDefault();

@@ -9,6 +9,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import DashboardPage from './components/DashboardPage';
 import { restoreServersThunk } from './store/servers';
 import { restoreChannelsThunk } from './store/channels';
+import { restoreMessagesThunk } from './store/messages';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function App() {
     dispatch(sessionActions.restoreUser())
       .then(() => dispatch(restoreServersThunk()))
       .then(() => dispatch(restoreChannelsThunk()))
+      .then(() => dispatch(restoreMessagesThunk()))
       .then(() => setIsLoaded(true));
   }, [dispatch]);
 
