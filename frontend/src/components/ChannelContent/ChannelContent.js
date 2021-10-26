@@ -10,9 +10,10 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const messageRef = useRef();
     const [message, setMessage] = useState('');
     const sessionUser = useSelector(state => state.session.user);
-    const messages = useSelector(state => Object.values(state.messages).filter(message => message.channelId === channel?.id))
-    const [messageCharacterCounter, setMessageCharacterCounter] = useState(0)
-    const [messageError, setMessageError] = useState('')
+    const messages = useSelector(state => Object.values(state.messages).filter(message => message.channelId === channel?.id));
+    const [messageCharacterCounter, setMessageCharacterCounter] = useState(0);
+    const [messageError, setMessageError] = useState('');
+    const [showHoverTime, setShowHoverTime] = useState(false);
 
     const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
 
@@ -76,10 +77,19 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                     const nextMessageSameOwnerAsCurrentMessage = nextMessage?.User?.id === message?.User?.id
                     const messageDate = new Date(message.createdAt)
                     const formattedDate = messageDate.toLocaleString();
+                    const formattedTime = messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    
                     return (
                         nextMessageSameOwnerAsCurrentMessage ? (
-                            <div key={message.id} className="message-without-profile-pic-container">
-                                <div className="message-profile-standin"></div>
+                            <div 
+                                key={message.id} 
+                                className="message-without-profile-pic-container"
+                                onMouseOver={() => setShowHoverTime(message.id)}
+                                onMouseLeave={() => setShowHoverTime(false)}
+                            >
+                                <div className="message-profile-standin">
+                                    { showHoverTime === message.id && <p className="message-hover-time">{formattedTime}</p>}
+                                </div>
                                 <div className="username-message-container">
                                     <div className="channel-content-message">{message.content}</div>
                                 </div>

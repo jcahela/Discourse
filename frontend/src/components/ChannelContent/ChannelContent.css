@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vidaloka&display=swap');
 
 .channel-content-container {
     width: 100%;
@@ -49,8 +50,8 @@
 .channel-content-messages-container {
     flex: auto;
     overflow: auto;
-    margin-right: 5px;
-    padding-left: 20px;
+    /* margin-right: 5px; */
+    /* margin-left: 20px; */
     display: flex;
     flex-direction: column-reverse;
 }
@@ -59,6 +60,7 @@
     display: flex;
     margin-top: 20px;
     align-items: flex-start;
+    width: 100%;
 }
 
 
@@ -71,13 +73,39 @@
 .message-without-profile-pic-container {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .message-profile-standin {
     width: 47px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: flex-end; */
+}
+
+.message-hover-time {
+    font-size: 10px;
+    color: #6B6F75;
+    white-space: pre;
+    width: 100%;
+    margin-top: 8px;
+    font-family: Helvetica, sans-serif;
 }
 
 /* ****************************************** */
+
+.message-with-profile-pic-container,
+.message-without-profile-pic-container {
+    padding-left: 20px;
+    padding-right: 5px;
+}
+
+.message-with-profile-pic-container:hover,
+.message-without-profile-pic-container:hover {
+    background-color: #32353B;
+    
+}
 
 .message-profile-pic {
     height: 100%;
