@@ -123,7 +123,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                             onChange={handleChange}
                             onKeyDown={handleEnter}
                             ref={messageRef}
-                            placeholder={`Message #${channel.name}`}
+                            placeholder={`Message #${channel?.name}`}
                         ></textarea>
                         <p className={`message-character-counter message-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
                         { messageError && 
