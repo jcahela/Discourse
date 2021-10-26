@@ -47,7 +47,7 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
                     </div>
             </form>
         ):(
-            <div className="channel-content-message">{message.content}</div>
+            <div className="channel-content-message">{message.content}{message.updatedAt !== message.createdAt && <span className="message-edited-true">(edited)</span>}</div>
         )
     );
 }
