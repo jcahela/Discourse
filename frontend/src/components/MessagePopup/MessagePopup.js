@@ -1,9 +1,6 @@
 import './MessagePopup.css'
 
 function MessagePopup({ message, setMessageBeingEdited }) {
-
-
-    
     const handleDelete = () => {
         setMessageBeingEdited(false);
     }

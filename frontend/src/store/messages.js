@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const RESTORE_MESSAGES = 'messages/RESTORE_MESSAGES'
 const ADD_MESSAGE = 'messages/ADD_MESSAGE'
+const EDIT_MESSAGE = 'messages/EDIT_MESSAGE'
 
 const restoreMessages = (messages) => ({
     type: RESTORE_MESSAGES,
@@ -10,6 +11,11 @@ const restoreMessages = (messages) => ({
 
 export const addMessage = (message) => ({
     type: ADD_MESSAGE,
+    payload: message
+})
+
+export const editMessage = (message) => ({
+    type: EDIT_MESSAGE,
     payload: message
 })
 
@@ -37,6 +43,10 @@ function messagesReducer(state = initialState, action) {
         case ADD_MESSAGE:
             const message = action.payload;
             newState[message.id] = message;
+            return newState;
+        case EDIT_MESSAGE:
+            const editedMessage = action.payload;
+            newState[editedMessage.id] = editedMessage;
             return newState;
         default:
             return state;

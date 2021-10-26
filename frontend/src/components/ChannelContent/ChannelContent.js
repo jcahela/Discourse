@@ -1,7 +1,7 @@
 import ChannelWelcomeMessage from '../ChannelWelcomeMessage';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addMessage } from '../../store/messages';
+import { addMessage, editMessage } from '../../store/messages';
 import MessagePopup from '../MessagePopup';
 import MessageDisplay from '../MessageDisplay';
 
@@ -17,7 +17,6 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const [messageError, setMessageError] = useState('');
     const [showHoverTime, setShowHoverTime] = useState(false);
     const [showMessagePopup, setShowMessagePopup] = useState(false);
-    const [messagePopupBeingHovered, setMessagePopupBeingHovered] = useState(false);
     const [messageBeingEdited, setMessageBeingEdited] = useState(false);
 
     const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
@@ -25,6 +24,10 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     useEffect(() => {
         socket.on('receive-message', message => {
             dispatch(addMessage(message));
+        });
+
+        socket.on('receive-message-edit', message => {
+            dispatch(editMessage(message))
         })
     }, [dispatch, socket])
 
@@ -108,7 +111,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                                 <div className="username-message-container">
                                     <MessageDisplay socket={socket} setMessageBeingEdited={setMessageBeingEdited} message={message} messageBeingEdited={messageBeingEdited}/>
                                 </div>
-                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setMessagePopupBeingHovered={setMessagePopupBeingHovered}/>}
+                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited}/>}
                             </div>
                         ):(
                             <div 
@@ -125,7 +128,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                                     
                                     <MessageDisplay socket={socket} setMessageBeingEdited={setMessageBeingEdited} message={message} messageBeingEdited={messageBeingEdited}/>
                                 </div>
-                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setMessagePopupBeingHovered={setMessagePopupBeingHovered}/>}
+                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited}/>}
                             </div>
                         )
                     

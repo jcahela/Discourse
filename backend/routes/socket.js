@@ -11,4 +11,14 @@ const storeMessage = async (message) => {
     return createdMessage
 }
 
-module.exports = storeMessage;
+const editMessage = async (message) => {
+    const {id, content} = message;
+    const messageToEdit = await Message.findOne({ where: {id} , include: User });
+    messageToEdit.update({ content });
+    return messageToEdit
+}
+
+module.exports = {
+    storeMessage, 
+    editMessage
+};

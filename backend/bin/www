@@ -4,7 +4,7 @@ const app = require('../app');
 const db = require('../db/models');
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const storeMessage = require("../routes/socket")
+const { storeMessage, editMessage } = require("../routes/socket")
 
 const httpServer = createServer(app);
 
@@ -17,9 +17,15 @@ const io = new Server(httpServer, {
 
 io.on("connection", socket => {
   console.log('THIS IS THIS SOCKET ID ------->', socket.id)
+
   socket.on('message', async (message) => {
     const storedMessage = await storeMessage(message);
     io.emit('receive-message', storedMessage)
+  });
+
+  socket.on('message-edit', async (message) => {
+    const editedMessage = await editMessage(message);
+    io.emit('receive-message-edit', editedMessage)
   })
 })
 
