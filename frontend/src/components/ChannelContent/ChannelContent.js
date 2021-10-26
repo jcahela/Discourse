@@ -2,6 +2,8 @@ import ChannelWelcomeMessage from '../ChannelWelcomeMessage';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addMessage } from '../../store/messages';
+import MessagePopup from '../MessagePopup';
+import MessageDisplay from '../MessageDisplay';
 
 import './ChannelContent.css'
 
@@ -14,6 +16,9 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const [messageCharacterCounter, setMessageCharacterCounter] = useState(0);
     const [messageError, setMessageError] = useState('');
     const [showHoverTime, setShowHoverTime] = useState(false);
+    const [showMessagePopup, setShowMessagePopup] = useState(false);
+    const [messagePopupBeingHovered, setMessagePopupBeingHovered] = useState(false);
+    const [messageBeingEdited, setMessageBeingEdited] = useState(false);
 
     const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
 
@@ -57,6 +62,22 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
         }
     }
 
+    const handleHoverOn = (messageId) => {
+        if (messagePopupBeingHovered) {
+            return;
+        }
+        setShowHoverTime(messageId);
+        setShowMessagePopup(messageId)
+    }
+
+    const handleHoverOff = () => {
+        if (messagePopupBeingHovered) {
+            return;
+        }
+        setShowHoverTime(false)
+        setShowMessagePopup(false)
+    }
+
     return ( 
         <div className="channel-content-container">
 
@@ -84,26 +105,33 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                             <div 
                                 key={message.id} 
                                 className="message-without-profile-pic-container"
-                                onMouseOver={() => setShowHoverTime(message.id)}
-                                onMouseLeave={() => setShowHoverTime(false)}
+                                onMouseOver={() => handleHoverOn(message.id)}
+                                onMouseLeave={handleHoverOff}
                             >
                                 <div className="message-profile-standin">
                                     { showHoverTime === message.id && <p className="message-hover-time">{formattedTime}</p>}
                                 </div>
                                 <div className="username-message-container">
-                                    <div className="channel-content-message">{message.content}</div>
+                                    <MessageDisplay message={message} messageBeingEdited={messageBeingEdited}/>
                                 </div>
+                                { showMessagePopup === message.id && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setMessagePopupBeingHovered={setMessagePopupBeingHovered}/>}
                             </div>
                         ):(
-                            <div key={message.id} className="message-with-profile-pic-container">
+                            <div 
+                                key={message.id} 
+                                className="message-with-profile-pic-container"
+                                onMouseOver={() => handleHoverOn(message.id)}
+                                onMouseLeave={handleHoverOff}
+                            >
                                 <div className="message-profile-pic-container">
                                     <img className="message-profile-pic" src={message.User.profilePicture} alt="" />
                                 </div>
                                 <div className="username-message-container">
                                     <div className="message-username">{message.User.username}<span className="message-date-time">{formattedDate}</span></div>
                                     
-                                    <div className="channel-content-message">{message.content}</div>
+                                    <MessageDisplay message={message} messageBeingEdited={messageBeingEdited}/>
                                 </div>
+                                { showMessagePopup === message.id && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setMessagePopupBeingHovered={setMessagePopupBeingHovered}/>}
                             </div>
                         )
                     

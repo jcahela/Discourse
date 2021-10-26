@@ -50,8 +50,6 @@
 .channel-content-messages-container {
     flex: auto;
     overflow: auto;
-    /* margin-right: 5px; */
-    /* margin-left: 20px; */
     display: flex;
     flex-direction: column-reverse;
 }
@@ -81,7 +79,6 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    /* align-items: flex-end; */
 }
 
 .message-hover-time {
@@ -99,6 +96,7 @@
 .message-without-profile-pic-container {
     padding-left: 20px;
     padding-right: 5px;
+    position: relative;
 }
 
 .message-with-profile-pic-container:hover,
