@@ -121,7 +121,13 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                                     { showHoverTime === message.id && <p className="message-hover-time">{formattedTime}</p>}
                                 </div>
                                 <div className="username-message-container">
-                                    <MessageDisplay socket={socket} setMessageBeingEdited={setMessageBeingEdited} message={message} messageBeingEdited={messageBeingEdited}/>
+                                    <MessageDisplay 
+                                        socket={socket} 
+                                        setMessageBeingEdited={setMessageBeingEdited} 
+                                        message={message} 
+                                        messageBeingEdited={messageBeingEdited} 
+                                        setShowDeleteMessageModal={setShowDeleteMessageModal}
+                                    />
                                 </div>
                                 { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
                             </div>
@@ -137,7 +143,13 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                                 <div className="username-message-container">
                                     <div className="message-username">{message.User.username}<span className="message-date-time">{formattedDate}</span></div>
                                     
-                                    <MessageDisplay socket={socket} setMessageBeingEdited={setMessageBeingEdited} message={message} messageBeingEdited={messageBeingEdited}/>
+                                    <MessageDisplay 
+                                        socket={socket} 
+                                        setMessageBeingEdited={setMessageBeingEdited} 
+                                        message={message} 
+                                        messageBeingEdited={messageBeingEdited}
+                                        setShowDeleteMessageModal={setShowDeleteMessageModal}
+                                    />
                                 </div>
                                 { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
                             </div>

@@ -60,3 +60,21 @@
     color: #6B6F75;
     margin-left: 3px;
 }
+
+.message-edit-error {
+    color: #fd5f5f;
+    font-size: 13px;
+    margin-left: 20px;
+}
+
+.message-edit-character-counter {
+    color: #9B979A;
+    position: absolute;
+    right: 40px;
+    bottom: 0px;
+    font-size: 12px;
+}
+
+.message-edit-counter-negative-true {
+    color: #fd5f5f;
+}
