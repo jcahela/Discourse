@@ -11,6 +11,8 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const [message, setMessage] = useState('');
     const sessionUser = useSelector(state => state.session.user);
     const messages = useSelector(state => Object.values(state.messages).filter(message => message.channelId === channel?.id))
+    const [messageCharacterCounter, setMessageCharacterCounter] = useState(0)
+    const [messageError, setMessageError] = useState('')
 
     const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
 
@@ -29,17 +31,29 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
         }
         socket.emit('message', newMessage);
         setMessage('');
+        setMessageCharacterCounter(0)
+    }
+
+    const handleChange = (e) => {
+        setMessage(e.target.value)
+        setMessageCharacterCounter(0+e.target.value.length)
     }
 
     const handleEnter = (e) => {
-        e.preventDefault();
-        setMessage(e.target.value);
-        
-        const currentMessage = messageRef.current.value;
-
-        if (/^\s*$/.test(currentMessage)) {
+        if (messageCharacterCounter > 2000 && e.key === "Enter") {
+            e.preventDefault();
+            setMessageError('Message cannot exceed 2000 characters.');
             return;
-        } else if (/\n$/.test(currentMessage)) submitMessage(e);
+        }
+        
+        if (/^\s*$/.test(message)) {
+            return;
+        } 
+        
+        if (e.key === "Enter") {
+            submitMessage(e);
+            setMessageError('')
+        }
     }
 
     return ( 
@@ -90,9 +104,14 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                             type="text" 
                             className="new-message-input"
                             value={message}
-                            onChange={handleEnter}
+                            onChange={handleChange}
+                            onKeyDown={handleEnter}
                             ref={messageRef}
                         ></textarea>
+                        <p className={`message-character-counter message-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
+                        { messageError && 
+                            <p className="message-error">{messageError}</p>
+                        }
                     </label>
                     <button className="new-message-submit"></button>
                 </form>
