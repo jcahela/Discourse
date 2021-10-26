@@ -1,5 +1,5 @@
 import ChannelWelcomeMessage from '../ChannelWelcomeMessage';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addMessage } from '../../store/messages';
 
@@ -7,6 +7,7 @@ import './ChannelContent.css'
 
 function ChannelContent({ channel, setChannelSelected, socket }) {
     const dispatch = useDispatch();
+    const messageRef = useRef();
     const [message, setMessage] = useState('');
     const sessionUser = useSelector(state => state.session.user);
     const messages = useSelector(state => Object.values(state.messages).filter(message => message.channelId === channel?.id))
@@ -28,6 +29,17 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
         }
         socket.emit('message', newMessage);
         setMessage('');
+    }
+
+    const handleEnter = (e) => {
+        e.preventDefault();
+        setMessage(e.target.value);
+        
+        const currentMessage = messageRef.current.value;
+
+        if (/^\s*$/.test(currentMessage)) {
+            return;
+        } else if (/\n$/.test(currentMessage)) submitMessage(e);
     }
 
     return ( 
@@ -74,12 +86,13 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
             <div onSubmit={submitMessage} className="channel-content-chat-input-container">
                 <form className="new-message-form">
                     <label className="new-message-label">
-                        <input 
+                        <textarea 
                             type="text" 
                             className="new-message-input"
                             value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                        />
+                            onChange={handleEnter}
+                            ref={messageRef}
+                        ></textarea>
                     </label>
                     <button className="new-message-submit"></button>
                 </form>
