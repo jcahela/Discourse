@@ -1,8 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './MessageDisplay.css'
 
-function MessageDisplay({ setMessageBeingEdited, messageBeingEdited, message }) {
+function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, message }) {
+    const dispatch = useDispatch();
     const [editedMessage, setEditedMessage] = useState(message.content)
+
+    useEffect(() => {
+        socket.on('receive-edit', message => {
+            console.log(message)
+        })
+    }, [dispatch, socket])
 
     const handleEscEnter = (e) => {
         if (e.key === "Escape") {
@@ -22,7 +30,11 @@ function MessageDisplay({ setMessageBeingEdited, messageBeingEdited, message }) 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Submitted');
+        const newMessage = {
+            id: message.id,
+            content: editedMessage
+        }
+        socket.emit('message-edit', newMessage)
         setMessageBeingEdited(false);
         setEditedMessage(message.content)
     }
