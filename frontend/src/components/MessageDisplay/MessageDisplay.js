@@ -27,11 +27,16 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
         }
 
         if (e.key === "Enter" && messageCharacterCounter === 0) {
+            setEditMessageError('');
             setMessageBeingEdited(false);
             setEditedMessage(message.content);
             setShowDeleteMessageModal(message.id);
             return
         }
+
+        if (/^\s*$/.test(editedMessage)) {
+            return;
+        } 
 
         if (e.key === "Enter") {
             handleSubmit(e)
@@ -59,6 +64,11 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
             setEditMessageError('Message cannot exceed 2000 characters.');
             return;
         }
+
+        if (/^\s*$/.test(editedMessage)) {
+            setEditMessageError('Messages cannot contain only spaces.')
+            return;
+        } 
 
         setEditMessageError('');
 
