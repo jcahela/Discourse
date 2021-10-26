@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { Modal } from '../../context/Modal';
-import DeleteMessageForm from '../DeleteMessageForm';
 import './MessageDisplay.css'
 
 function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, message, setShowDeleteMessageModal }) {
