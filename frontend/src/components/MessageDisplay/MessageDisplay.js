@@ -28,7 +28,6 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
         }
         socket.emit('message-edit', newMessage)
         setMessageBeingEdited(false);
-        // setEditedMessage(message.content)
     }
 
     return ( 

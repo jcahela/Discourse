@@ -1,9 +1,11 @@
 import ChannelWelcomeMessage from '../ChannelWelcomeMessage';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addMessage, editMessage } from '../../store/messages';
+import { addMessage, editMessage, deleteMessage } from '../../store/messages';
 import MessagePopup from '../MessagePopup';
 import MessageDisplay from '../MessageDisplay';
+import DeleteMessageForm from '../DeleteMessageForm';
+import { Modal } from '../../context/Modal';
 
 import './ChannelContent.css'
 
@@ -18,6 +20,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const [showHoverTime, setShowHoverTime] = useState(false);
     const [showMessagePopup, setShowMessagePopup] = useState(false);
     const [messageBeingEdited, setMessageBeingEdited] = useState(false);
+    const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
 
     const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
 
@@ -27,7 +30,11 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
         });
 
         socket.on('receive-message-edit', message => {
-            dispatch(editMessage(message))
+            dispatch(editMessage(message));
+        });
+
+        socket.on('receive-message-delete', deletedMessageId => {
+            dispatch(deleteMessage(deletedMessageId));
         })
     }, [dispatch, socket])
 
@@ -98,9 +105,14 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                     const formattedTime = messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                     
                     return (
-                        nextMessageSameOwnerAsCurrentMessage ? (
+                        <div key={message.id}>
+                        { showDeleteMessageModal === message.id &&
+                            <Modal onClose={() => setShowDeleteMessageModal(false)} message={message}>
+                                <DeleteMessageForm onClose={() => setShowDeleteMessageModal(false)} message={message} socket={socket}/>
+                            </Modal>
+                        }
+                        {nextMessageSameOwnerAsCurrentMessage ? (
                             <div 
-                                key={message.id} 
                                 className="message-without-profile-pic-container"
                                 onMouseOver={() => handleHoverOn(message.id)}
                                 onMouseLeave={handleHoverOff}
@@ -111,11 +123,10 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                                 <div className="username-message-container">
                                     <MessageDisplay socket={socket} setMessageBeingEdited={setMessageBeingEdited} message={message} messageBeingEdited={messageBeingEdited}/>
                                 </div>
-                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited}/>}
+                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
                             </div>
                         ):(
                             <div 
-                                key={message.id} 
                                 className="message-with-profile-pic-container"
                                 onMouseOver={() => handleHoverOn(message.id)}
                                 onMouseLeave={handleHoverOff}
@@ -128,14 +139,16 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                                     
                                     <MessageDisplay socket={socket} setMessageBeingEdited={setMessageBeingEdited} message={message} messageBeingEdited={messageBeingEdited}/>
                                 </div>
-                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited}/>}
+                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
                             </div>
-                        )
+                        )}
+                        </div>
                     
                     )
 
                 })}
                 <ChannelWelcomeMessage channel={channel} setChannelSelected={setChannelSelected}/>
+                
             </div>
 
             <div onSubmit={submitMessage} className="channel-content-chat-input-container">

@@ -4,7 +4,7 @@ const app = require('../app');
 const db = require('../db/models');
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const { storeMessage, editMessage } = require("../routes/socket")
+const { storeMessage, editMessage, deleteMessage } = require("../routes/socket")
 
 const httpServer = createServer(app);
 
@@ -26,6 +26,11 @@ io.on("connection", socket => {
   socket.on('message-edit', async (message) => {
     const editedMessage = await editMessage(message);
     io.emit('receive-message-edit', editedMessage)
+  });
+
+  socket.on('message-delete', async (messageId) => {
+    const deletedMessageId = await deleteMessage(messageId);
+    io.emit('receive-message-delete', deletedMessageId)
   })
 })
 

@@ -18,7 +18,15 @@ const editMessage = async (message) => {
     return messageToEdit
 }
 
+const deleteMessage = async (messageId) => {
+    const messageToDelete = await Message.findByPk(messageId);
+    console.log('THIS IS THE MESSAGE I WANT TO DELETE', messageToDelete)
+    await messageToDelete.destroy();
+    return messageId;
+}
+
 module.exports = {
     storeMessage, 
-    editMessage
+    editMessage,
+    deleteMessage
 };

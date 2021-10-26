@@ -1,8 +1,12 @@
+
 import './MessagePopup.css'
 
-function MessagePopup({ message, setMessageBeingEdited }) {
+function MessagePopup({ message, setMessageBeingEdited, setShowMessagePopup, setShowDeleteMessageModal }) {
+
     const handleDelete = () => {
         setMessageBeingEdited(false);
+        setShowDeleteMessageModal(message.id);
+        setShowMessagePopup(false);
     }
 
     return ( 
