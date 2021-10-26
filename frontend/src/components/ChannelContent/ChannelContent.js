@@ -112,7 +112,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                                     { showHoverTime === message.id && <p className="message-hover-time">{formattedTime}</p>}
                                 </div>
                                 <div className="username-message-container">
-                                    <MessageDisplay message={message} messageBeingEdited={messageBeingEdited}/>
+                                    <MessageDisplay setMessageBeingEdited={setMessageBeingEdited} message={message} messageBeingEdited={messageBeingEdited}/>
                                 </div>
                                 { showMessagePopup === message.id && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setMessagePopupBeingHovered={setMessagePopupBeingHovered}/>}
                             </div>
@@ -129,7 +129,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                                 <div className="username-message-container">
                                     <div className="message-username">{message.User.username}<span className="message-date-time">{formattedDate}</span></div>
                                     
-                                    <MessageDisplay message={message} messageBeingEdited={messageBeingEdited}/>
+                                    <MessageDisplay setMessageBeingEdited={setMessageBeingEdited} message={message} messageBeingEdited={messageBeingEdited}/>
                                 </div>
                                 { showMessagePopup === message.id && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setMessagePopupBeingHovered={setMessagePopupBeingHovered}/>}
                             </div>
