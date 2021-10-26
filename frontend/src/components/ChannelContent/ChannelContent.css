@@ -29,6 +29,23 @@
     margin-left: 10px;
 }
 
+.channel-content-header-divider {
+    color: #B9BBBE;
+    font-size: 24px;
+    font-weight: 200;
+    margin-left: 10px;
+}
+
+.channel-content-topic {
+    color: #B9BBBE;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 70%;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
 .channel-content-messages-container {
     flex: auto;
     overflow: auto;

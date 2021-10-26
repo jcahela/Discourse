@@ -62,6 +62,12 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
             <div className="channel-content-header-container">
                 <span className="channel-content-header-hashtag">#</span>
                 <h1 className="channel-content-header">{channel?.name}</h1>
+                { channel?.topic && 
+                    <>
+                        <span className="channel-content-header-divider">|</span>
+                        <p className="channel-content-topic">{channel.topic}</p>
+                    </>
+                }
             </div>
 
             <div className="channel-content-messages-container">
@@ -72,14 +78,14 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                     const formattedDate = messageDate.toLocaleString();
                     return (
                         nextMessageSameOwnerAsCurrentMessage ? (
-                            <div className="message-without-profile-pic-container">
+                            <div key={message.id} className="message-without-profile-pic-container">
                                 <div className="message-profile-standin"></div>
                                 <div className="username-message-container">
                                     <div className="channel-content-message">{message.content}</div>
                                 </div>
                             </div>
                         ):(
-                            <div className="message-with-profile-pic-container">
+                            <div key={message.id} className="message-with-profile-pic-container">
                                 <div className="message-profile-pic-container">
                                     <img className="message-profile-pic" src={message.User.profilePicture} alt="" />
                                 </div>
@@ -107,6 +113,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                             onChange={handleChange}
                             onKeyDown={handleEnter}
                             ref={messageRef}
+                            placeholder={`Message #${channel.name}`}
                         ></textarea>
                         <p className={`message-character-counter message-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
                         { messageError && 
