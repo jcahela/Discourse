@@ -82,9 +82,8 @@
     width: 300px;
     position: absolute;
     bottom: 0;
-    right: 25%;
     left: 50%;
-    margin-left: -140px;
+    transform: translateX(-45%);
 }
 
 .about-links-dev-name {

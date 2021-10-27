@@ -88,6 +88,15 @@ function LoginFormPage() {
           <p className="login-todemo-label">Want to try the website out?</p><NavLink onClick={loginAsDemo} className="login-todemo-link" to="/signup">Login as a demo user</NavLink>
         </div>
       </form>
+      <div className="about-links-container">
+        <p className="about-links-dev-name">Created By Jason Cahela</p>
+        <a href="https://github.com/jcahela" target="_blank" rel="noreferrer">
+            <img className="about-links-image" src="https://cdn.discordapp.com/attachments/886336420552269847/889198252417761290/GitHub-Mark-Light-32px.png" alt="" />
+        </a>
+        <a href="https://www.linkedin.com/in/jason-cahela/" target="_blank" rel="noreferrer">
+            <img className="about-links-image" src="https://cdn.discordapp.com/attachments/886336420552269847/888542913594806272/768px-LinkedIn_logo_initials.png" alt="" />
+        </a>
+      </div>
     </>
   );
 }
