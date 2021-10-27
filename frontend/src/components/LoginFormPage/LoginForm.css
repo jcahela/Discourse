@@ -112,4 +112,71 @@
 .login-tosignup-link:hover,
 .login-todemo-link:hover {
     text-decoration: underline;
+    cursor: pointer;
+}
+
+.demo-user-options-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #232529;
+    height: 400px;
+    width: 600px;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.demo-user-header {
+    color: rgba(255, 255, 255, 0.925);
+    margin-top: 35px;
+}
+
+.demo-user-choices-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.demo-user-container {
+    position: relative;
+    transition: 0.3s;
+    filter: brightness(30%);
+}
+
+.demo-user-container:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    filter: brightness(100%);
+}
+
+.demo-user-container > p {
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.demo-user-container:hover > p {
+    opacity: 1;
+}
+
+.demo-user-container:hover > img {
+    filter: blur(0);
+}
+
+.demo-user-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.demo-user-username {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 24px;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    text-shadow: 2px 2px 1px rgb(0, 0, 0);
 }

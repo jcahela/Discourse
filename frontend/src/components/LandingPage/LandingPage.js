@@ -2,7 +2,7 @@ import Navigation from '../Navigation';
 import LandingCloudsSvg from './LandingCloudsSvg';
 import LandingGraphicLeft from './LandingGraphicLeft';
 import LandingGraphicRight from './LandingGraphicRight';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './LandingPage.css'
 
 function LandingPage() {
