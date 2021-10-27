@@ -61,6 +61,9 @@
     width: 100%;
 }
 
+.message-with-profile-pic-container .channel-content-message {
+    padding-left: 1.5px;
+}
 
 .message-profile-pic-container {
     height: 45px;
@@ -172,15 +175,15 @@
     padding: 10px;
     padding-left: 50px;
     padding-right: 50px;
-    padding-top: 20px;
+    padding-top: 22px;
     box-sizing: border-box;
 }
 
 .message-character-counter {
     color: #9B979A;
     position: absolute;
-    right: 5px;
-    bottom: 0px;
+    right: 10px;
+    bottom: 3px;
     font-size: 12px;
 }
 
@@ -215,11 +218,15 @@
 .emoji-selector {
     position: absolute;
     left: 30px;
-    top: 40px;
+    top: 38px;
     z-index: 3;
-    font-size: 18px;
+    font-size: 24px;
+    filter: grayscale();
+    transition: .1s;
 }
 
 .emoji-selector:hover {
     cursor: pointer;
+    transform: scale(1.2);
+    filter: grayscale(0);
 }

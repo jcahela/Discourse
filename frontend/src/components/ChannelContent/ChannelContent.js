@@ -7,7 +7,7 @@ import MessageDisplay from '../MessageDisplay';
 import DeleteMessageForm from '../DeleteMessageForm';
 import { Modal } from '../../context/Modal';
 
-import data from 'emoji-mart/data/facebook.json'
+import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css'
 import { NimblePicker  } from 'emoji-mart'
 
@@ -26,6 +26,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const [messageBeingEdited, setMessageBeingEdited] = useState(false);
     const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
     const [showEmojiPicker, setShowEmojiPicker] = useState('');
+    const [emoji, setEmoji] = useState('😁')
 
     const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
 
@@ -113,6 +114,18 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
         }
     }
 
+    const shuffleEmoji = () => {
+        const emojiArr = ['😆','😍','😁','😃','🤣','😅','🥰','😊','😗','😛', '🙄','🤩','☹️','🤗','😷','🤑','😴','🤤','😎','🤓']
+        console.log(emojiArr.length)
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+        const randomIndex = getRandomInt(0, 20);
+        setEmoji(emojiArr[randomIndex]);
+    }
+
     return ( 
         <div className="channel-content-container">
 
@@ -198,15 +211,15 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                 <form className="new-message-form">
                     { showEmojiPicker && 
                         <NimblePicker 
-                            set='apple'
-                            data={data} 
+                            set='google'
+                            data={data}
                             theme={"dark"} 
                             style={{position: 'absolute', zIndex: 3, left: "10px", bottom: "100px"}} 
                             onSelect={(emoji) => handleEmoji(emoji)}
                         />
                     }
 
-                    <p onClick={handleEmojiPicker} className="emoji-selector">😁</p>
+                    <p onMouseOver={shuffleEmoji} onClick={handleEmojiPicker} className="emoji-selector">{emoji}</p>
                     <label className="new-message-label">
                         <textarea 
                             type="text" 
