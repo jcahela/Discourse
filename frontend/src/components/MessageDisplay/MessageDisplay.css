@@ -78,3 +78,19 @@
 .message-edit-counter-negative-true {
     color: #fd5f5f;
 }
+
+.emoji-selector-edit {
+    position: absolute;
+    right: 50px;
+    top: 60px;
+    z-index: 3;
+    font-size: 24px;
+    filter: grayscale();
+    transition: .1s;
+}
+
+.emoji-selector-edit:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    filter: grayscale(0);
+}

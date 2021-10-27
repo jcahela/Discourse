@@ -26,7 +26,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const [messageBeingEdited, setMessageBeingEdited] = useState(false);
     const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
     const [showEmojiPicker, setShowEmojiPicker] = useState('');
-    const [emoji, setEmoji] = useState('😁')
+    const [emoji, setEmoji] = useState('😁');
 
     const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
 
@@ -116,7 +116,6 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
 
     const shuffleEmoji = () => {
         const emojiArr = ['😆','😍','😁','😃','🤣','😅','🥰','😊','😗','😛', '🙄','🤩','☹️','🤗','😷','🤑','😴','🤤','😎','🤓']
-        console.log(emojiArr.length)
         function getRandomInt(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);

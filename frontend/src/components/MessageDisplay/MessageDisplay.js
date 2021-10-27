@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './MessageDisplay.css'
+import data from 'emoji-mart/data/google.json'
+import 'emoji-mart/css/emoji-mart.css'
+import { NimblePicker  } from 'emoji-mart'
 
 function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, message, setShowDeleteMessageModal }) {
+    const editMessageRef = useRef();
     const [editedMessage, setEditedMessage] = useState(message.content);
     const [editMessageError, setEditMessageError] = useState('');
     const [messageCharacterCounter, setMessageCharacterCounter] = useState(message.content.length);
-
+    const [showEmojiPicker, setShowEmojiPicker] = useState('');
+    const [emoji, setEmoji] = useState('😁');
+    
     const handleChange = (e) => {
         setEditedMessage(e.target.value);
         setMessageCharacterCounter(e.target.value.length);
@@ -42,10 +48,11 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
     }
 
     const handleCancel = () => {
+        setShowEmojiPicker(false);
         setMessageBeingEdited(false);
         setEditMessageError('');
         setEditedMessage(message.content);
-        setMessageCharacterCounter(message.content.length)
+        setMessageCharacterCounter(message.content.length);
     }
 
     const handleSubmit = (e) => {
@@ -69,6 +76,7 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
         } 
 
         setEditMessageError('');
+        setShowEmojiPicker(false);
 
         const newMessage = {
             id: message.id,
@@ -78,10 +86,48 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
         setMessageBeingEdited(false);
     }
 
+    const handleEmoji = (emoji) => {
+        setEditedMessage(editedMessage + emoji.native);
+        editMessageRef.current.focus();
+        setShowEmojiPicker(false);
+    }
+
+    const handleEmojiPicker = () => {
+        if (showEmojiPicker) {
+            setShowEmojiPicker(false);
+        } else {
+            setShowEmojiPicker(true);
+        }
+    }
+
+    const shuffleEmoji = () => {
+        const emojiArr = ['😆','😍','😁','😃','🤣','😅','🥰','😊','😗','😛', '🙄','🤩','☹️','🤗','😷','🤑','😴','🤤','😎','🤓']
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+        const randomIndex = getRandomInt(0, 20);
+        setEmoji(emojiArr[randomIndex]);
+    }
+
     return ( 
         messageBeingEdited === message.id ? (
             <form className="message-edit-form" onSubmit={handleSubmit}>
+                    { showEmojiPicker && 
+                        <NimblePicker 
+                            set='google'
+                            data={data}
+                            theme={"dark"} 
+                            style={{position: 'absolute', zIndex: 3, right: "60px", bottom: "100px"}} 
+                            onSelect={(emoji) => handleEmoji(emoji)}
+                        />
+                    }
+
+                    <p onMouseOver={shuffleEmoji} onClick={handleEmojiPicker} className="emoji-selector-edit">{emoji}</p>
+                    
                     <textarea 
+                        ref={editMessageRef}
                         className="message-edit-input" 
                         value={editedMessage} 
                         onChange={handleChange}
