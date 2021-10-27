@@ -7,6 +7,10 @@ import MessageDisplay from '../MessageDisplay';
 import DeleteMessageForm from '../DeleteMessageForm';
 import { Modal } from '../../context/Modal';
 
+import data from 'emoji-mart/data/facebook.json'
+import 'emoji-mart/css/emoji-mart.css'
+import { NimblePicker  } from 'emoji-mart'
+
 import './ChannelContent.css'
 
 function ChannelContent({ channel, setChannelSelected, socket }) {
@@ -21,6 +25,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const [showMessagePopup, setShowMessagePopup] = useState(false);
     const [messageBeingEdited, setMessageBeingEdited] = useState(false);
     const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
+    const [showEmojiPicker, setShowEmojiPicker] = useState('');
 
     const orderedMessages = messages.sort((a, b) => a.createdAt < b.createdAt ? 1: -1)
 
@@ -37,6 +42,18 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
             dispatch(deleteMessage(deletedMessageId));
         })
     }, [dispatch, socket])
+
+    useEffect(() => {
+        if (!showEmojiPicker) return;
+
+        const closeMenu = () => {
+            setShowEmojiPicker(false);
+        };
+
+        document.querySelector('.new-message-input').addEventListener('click', closeMenu);
+        
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showEmojiPicker]);
 
     const submitMessage = (e) => {
         e.preventDefault();
@@ -80,6 +97,20 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const handleHoverOff = () => {
         setShowHoverTime(false)
         setShowMessagePopup(false)
+    }
+
+    const handleEmoji = (emoji) => {
+        setMessage(message + emoji.native);
+        messageRef.current.focus();
+        setShowEmojiPicker(false);
+    }
+
+    const handleEmojiPicker = () => {
+        if (showEmojiPicker) {
+            setShowEmojiPicker(false);
+        } else {
+            setShowEmojiPicker(true);
+        }
     }
 
     return ( 
@@ -165,6 +196,17 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
 
             <div onSubmit={submitMessage} className="channel-content-chat-input-container">
                 <form className="new-message-form">
+                    { showEmojiPicker && 
+                        <NimblePicker 
+                            set='apple'
+                            data={data} 
+                            theme={"dark"} 
+                            style={{position: 'absolute', zIndex: 3, left: "10px", bottom: "100px"}} 
+                            onSelect={(emoji) => handleEmoji(emoji)}
+                        />
+                    }
+
+                    <p onClick={handleEmojiPicker} className="emoji-selector">😁</p>
                     <label className="new-message-label">
                         <textarea 
                             type="text" 
