@@ -75,4 +75,25 @@
     background-color: #36393F;
     z-index: 100;
 }
-  
+
+.about-links-container {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    position: absolute;
+    bottom: 0;
+    right: 25%;
+    left: 50%;
+    margin-left: -140px;
+}
+
+.about-links-dev-name {
+    color: #3E3E3E;
+    font-weight: 600;
+}
+
+.about-links-image {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+}
