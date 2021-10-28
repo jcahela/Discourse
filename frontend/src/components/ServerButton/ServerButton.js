@@ -13,17 +13,15 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
     const whiteLineRef = useRef();
 
     const showPopupMessage = () => {
-        // setShowServerPopup(true);
         setWhiteLine(true);
     }
 
     const hidePopupMessage = () => {
-        // setShowServerPopup(false)
         setWhiteLine(false);
     }
 
     useEffect(() => {
-        const serverName = server.name;
+        const serverName = server.name.trim();
         const serverNameArr = serverName.split(' ');
 
         let serverNameInitials = '';

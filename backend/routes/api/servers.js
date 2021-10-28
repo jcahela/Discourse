@@ -39,13 +39,13 @@ router.post(
             
             newServer = await Server.create({
                 ownerId: currentUser.id,
-                name: serverName,
+                name: serverName.trim(),
                 serverPicture: serverImageUrl,
             })
         } else {
             newServer = await Server.create({
                 ownerId: currentUser.id,
-                name: serverName,
+                name: serverName.trim(),
             })
         }
         
