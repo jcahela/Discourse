@@ -126,116 +126,129 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     }
 
     return ( 
-        <div className="channel-content-container">
+        <div className="channel-content-outer-container">
+            <div className="channel-content-container">
 
-            <div className="channel-content-header-container">
-                <span className="channel-content-header-hashtag">#</span>
-                <h1 className="channel-content-header">{channel?.name}</h1>
-                { channel?.topic && 
-                    <>
-                        <span className="channel-content-header-divider">|</span>
-                        <p className="channel-content-topic">{channel.topic}</p>
-                    </>
-                }
-            </div>
-
-            <div className="channel-content-messages-container">
-                {orderedMessages.map((message, index) => {
-                    const nextMessage = orderedMessages[index+1]
-                    const nextMessageSameOwnerAsCurrentMessage = nextMessage?.User?.id === message?.User?.id
-                    const messageDate = new Date(message.createdAt)
-                    const formattedDate = messageDate.toLocaleString();
-                    const formattedTime = messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                    
-                    return (
-                        <div key={message.id}>
-                        { showDeleteMessageModal === message.id &&
-                            <Modal onClose={() => setShowDeleteMessageModal(false)} message={message}>
-                                <DeleteMessageForm onClose={() => setShowDeleteMessageModal(false)} message={message} socket={socket}/>
-                            </Modal>
-                        }
-                        {nextMessageSameOwnerAsCurrentMessage ? (
-                            <div 
-                                className="message-without-profile-pic-container"
-                                onMouseOver={() => handleHoverOn(message.id)}
-                                onMouseLeave={handleHoverOff}
-                            >
-                                <div className="message-profile-standin">
-                                    { showHoverTime === message.id && <p className="message-hover-time">{formattedTime}</p>}
-                                </div>
-                                <div className="username-message-container">
-                                    <MessageDisplay 
-                                        socket={socket} 
-                                        setMessageBeingEdited={setMessageBeingEdited} 
-                                        message={message} 
-                                        messageBeingEdited={messageBeingEdited} 
-                                        setShowDeleteMessageModal={setShowDeleteMessageModal}
-                                    />
-                                </div>
-                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
-                            </div>
-                        ):(
-                            <div 
-                                className="message-with-profile-pic-container"
-                                onMouseOver={() => handleHoverOn(message.id)}
-                                onMouseLeave={handleHoverOff}
-                            >
-                                <div className="message-profile-pic-container">
-                                    <img className="message-profile-pic" src={message.User.profilePicture} alt="" />
-                                </div>
-                                <div className="username-message-container">
-                                    <div className="message-username">{message.User.username}<span className="message-date-time">{formattedDate}</span></div>
-                                    
-                                    <MessageDisplay 
-                                        socket={socket} 
-                                        setMessageBeingEdited={setMessageBeingEdited} 
-                                        message={message} 
-                                        messageBeingEdited={messageBeingEdited}
-                                        setShowDeleteMessageModal={setShowDeleteMessageModal}
-                                    />
-                                </div>
-                                { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
-                            </div>
-                        )}
-                        </div>
-                    
-                    )
-
-                })}
-                <ChannelWelcomeMessage channel={channel} setChannelSelected={setChannelSelected}/>
-                
-            </div>
-
-            <div onSubmit={submitMessage} className="channel-content-chat-input-container">
-                <form className="new-message-form">
-                    { showEmojiPicker && 
-                        <NimblePicker 
-                            set='google'
-                            data={data}
-                            theme={"dark"} 
-                            style={{position: 'absolute', zIndex: 3, left: "10px", bottom: "100px"}} 
-                            onSelect={(emoji) => handleEmoji(emoji)}
-                        />
+                <div className="channel-content-header-container">
+                    <span className="channel-content-header-hashtag">#</span>
+                    <h1 className="channel-content-header">{channel?.name}</h1>
+                    { channel?.topic && 
+                        <>
+                            <span className="channel-content-header-divider">|</span>
+                            <p className="channel-content-topic">{channel.topic}</p>
+                        </>
                     }
+                </div>
 
-                    <p onMouseOver={shuffleEmoji} onClick={handleEmojiPicker} className="emoji-selector">{emoji}</p>
-                    <label className="new-message-label">
-                        <textarea 
-                            type="text" 
-                            className="new-message-input"
-                            value={message}
-                            onChange={handleChange}
-                            onKeyDown={handleEnter}
-                            ref={messageRef}
-                            placeholder={`Message #${channel?.name}`}
-                        ></textarea>
-                        <p className={`message-character-counter message-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
-                        { messageError && 
-                            <p className="message-error">{messageError}</p>
+                <div className="channel-content-messages-container">
+                    {orderedMessages.map((message, index) => {
+                        const nextMessage = orderedMessages[index+1]
+                        const nextMessageSameOwnerAsCurrentMessage = nextMessage?.User?.id === message?.User?.id
+                        const messageDate = new Date(message.createdAt)
+                        const formattedDate = messageDate.toLocaleString();
+                        const formattedTime = messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        
+                        return (
+                            <div key={message.id}>
+                            { showDeleteMessageModal === message.id &&
+                                <Modal onClose={() => setShowDeleteMessageModal(false)} message={message}>
+                                    <DeleteMessageForm onClose={() => setShowDeleteMessageModal(false)} message={message} socket={socket}/>
+                                </Modal>
+                            }
+                            {nextMessageSameOwnerAsCurrentMessage ? (
+                                <div 
+                                    className="message-without-profile-pic-container"
+                                    onMouseOver={() => handleHoverOn(message.id)}
+                                    onMouseLeave={handleHoverOff}
+                                >
+                                    <div className="message-profile-standin">
+                                        { showHoverTime === message.id && <p className="message-hover-time">{formattedTime}</p>}
+                                    </div>
+                                    <div className="username-message-container">
+                                        <MessageDisplay 
+                                            socket={socket} 
+                                            setMessageBeingEdited={setMessageBeingEdited} 
+                                            message={message} 
+                                            messageBeingEdited={messageBeingEdited} 
+                                            setShowDeleteMessageModal={setShowDeleteMessageModal}
+                                        />
+                                    </div>
+                                    { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
+                                </div>
+                            ):(
+                                <div 
+                                    className="message-with-profile-pic-container"
+                                    onMouseOver={() => handleHoverOn(message.id)}
+                                    onMouseLeave={handleHoverOff}
+                                >
+                                    <div className="message-profile-pic-container">
+                                        <img className="message-profile-pic" src={message.User.profilePicture} alt="" />
+                                    </div>
+                                    <div className="username-message-container">
+                                        <div className="message-username">{message.User.username}<span className="message-date-time">{formattedDate}</span></div>
+                                        
+                                        <MessageDisplay 
+                                            socket={socket} 
+                                            setMessageBeingEdited={setMessageBeingEdited} 
+                                            message={message} 
+                                            messageBeingEdited={messageBeingEdited}
+                                            setShowDeleteMessageModal={setShowDeleteMessageModal}
+                                        />
+                                    </div>
+                                    { showMessagePopup === message.id && sessionUser.id === message.userId && <MessagePopup message={message} setMessageBeingEdited={setMessageBeingEdited} setShowMessagePopup={setShowMessagePopup} setShowDeleteMessageModal={setShowDeleteMessageModal}/>}
+                                </div>
+                            )}
+                            </div>
+                        
+                        )
+
+                    })}
+                    <ChannelWelcomeMessage channel={channel} setChannelSelected={setChannelSelected}/>
+                    
+                </div>
+
+                <div onSubmit={submitMessage} className="channel-content-chat-input-container">
+                    <form className="new-message-form">
+                        { showEmojiPicker && 
+                            <NimblePicker 
+                                set='google'
+                                data={data}
+                                theme={"dark"} 
+                                style={{position: 'absolute', zIndex: 3, left: "10px", bottom: "100px"}} 
+                                onSelect={(emoji) => handleEmoji(emoji)}
+                            />
                         }
-                    </label>
-                    <button className="new-message-submit"></button>
-                </form>
+
+                        <p onMouseOver={shuffleEmoji} onClick={handleEmojiPicker} className="emoji-selector">{emoji}</p>
+                        <label className="new-message-label">
+                            <textarea 
+                                type="text" 
+                                className="new-message-input"
+                                value={message}
+                                onChange={handleChange}
+                                onKeyDown={handleEnter}
+                                ref={messageRef}
+                                placeholder={`Message #${channel?.name}`}
+                            ></textarea>
+                            <p className={`message-character-counter message-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
+                            { messageError && 
+                                <p className="message-error">{messageError}</p>
+                            }
+                        </label>
+                        <button className="new-message-submit"></button>
+                    </form>
+                </div>
+            </div>
+            <div className="users-list-container">
+                <div className="channel-content-header-container"></div>
+                <div className="users-list">
+                    <div className="online-users-container">
+                        <h1 className="online-users-header">ONLINE</h1>
+                    </div>
+                    <div className="offline-users-container">
+                        <h1 className="offline-users-header">OFFLINE</h1>
+                    </div>
+                </div>
             </div>
         </div>
      );
