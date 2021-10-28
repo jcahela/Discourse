@@ -125,7 +125,7 @@ function DashboardPage() {
                 </div>
             </div>
             <div className="chat-container">
-                { channelSelected ? (
+                { channelSelected && serverSelected ? (
                     <ChannelContent channel={channelFromState} setChannelSelected={setChannelSelected} socket={socket}/>
                 ):(
                     <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />

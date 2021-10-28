@@ -31,7 +31,7 @@ function SettingsOverlay({ server, onClose, channel, setServerSelected, setChann
             { showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     {server ? (
-                        <DeleteServerForm server={server} onCloseOuter={onClose} onCloseInner={() => setShowModal(false)}/>
+                        <DeleteServerForm server={server} onCloseOuter={onClose} onCloseInner={() => setShowModal(false)} setServerSelected={setServerSelected}/>
                     ):(
                         <DeleteChannelForm channel={channel} onCloseOuter={onClose} onCloseInner={() => setShowModal(false)} setChannelSelected={setChannelSelected}/>
                     )}

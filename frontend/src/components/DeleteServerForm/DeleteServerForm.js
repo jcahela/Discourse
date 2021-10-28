@@ -4,13 +4,14 @@ import { useDispatch } from 'react-redux';
 
 import './DeleteServerForm.css'
 
-function DeleteServerForm({ server, onCloseOuter, onCloseInner }) {
+function DeleteServerForm({ server, onCloseOuter, onCloseInner, setServerSelected }) {
     const dispatch = useDispatch();
     const [confirmDeleteInput, setConfirmDeleteInput] = useState('');
 
     const submitServerDelete = async (e) => {
         e.preventDefault();
         await dispatch(deleteServerThunk(server.id))
+        setServerSelected(false);
         onCloseInner();
         onCloseOuter();
     }
