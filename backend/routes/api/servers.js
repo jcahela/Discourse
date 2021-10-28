@@ -64,12 +64,12 @@ router.patch(
         if (req.file) {
             const serverImageUrl = await singlePublicFileUpload(req.file);
             await serverToUpdate.update({
-                name: serverName,
+                name: serverName.trim(),
                 serverPicture: serverImageUrl
             })
         } else {
             await serverToUpdate.update({
-                name: serverName,
+                name: serverName.trim(),
                 serverPicture: image || null
             })
         }

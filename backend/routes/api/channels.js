@@ -36,7 +36,7 @@ router.post('/', validateNewChannels, requireAuth, asyncHandler(async (req, res)
     const { name, serverId } = req.body;
     const newChannel = await Channel.create({
         serverId,
-        name
+        name: name.trim()
     });
     return res.json(newChannel)
 }))
@@ -56,7 +56,7 @@ router.patch(
         const channelToUpdate = await Channel.findOne({ where: {id: channelId} });
 
         await channelToUpdate.update({
-            name,
+            name: name.trim(),
             topic: topic || null
         });
 
