@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import './MessageDisplay.css'
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css'
@@ -11,11 +11,6 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
     const [messageCharacterCounter, setMessageCharacterCounter] = useState(message.content.length);
     const [showEmojiPicker, setShowEmojiPicker] = useState('');
     const [emoji, setEmoji] = useState('😁');
-
-    useEffect(() => {
-        editMessageRef.current?.focus();
-        editMessageRef.current?.setSelectionRange(editMessageRef.current?.value.length,editMessageRef.current?.value.length);
-    })
     
     const handleChange = (e) => {
         setEditedMessage(e.target.value);
@@ -64,9 +59,9 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
         e.preventDefault();
 
         if (messageCharacterCounter === 0) {
+            setShowDeleteMessageModal(message.id);
             setMessageBeingEdited(false);
             setEditedMessage(message.content);
-            setShowDeleteMessageModal(message.id);
             return
         }
 
@@ -119,7 +114,7 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
     return ( 
         messageBeingEdited === message.id ? (
             <>
-                <form className="message-edit-form" onSubmit={handleSubmit}>
+                <form className="message-edit-form">
                     { showEmojiPicker && 
                         <NimblePicker 
                             set='google'
@@ -144,7 +139,7 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
                         <div className="message-edit-options-container">
                             <p className="message-edit-cancel">escape to <span onClick={handleCancel} className="message-edit-cancel-button">cancel</span></p>
                             <span className="message-edit-dot">•</span>
-                            <span className="message-edit-save">enter to <button className="message-edit-save-button">save</button></span>
+                            <span className="message-edit-save">enter to <button onClick={handleSubmit} className="message-edit-save-button">save</button></span>
                             { editMessageError && 
                                 <p className="message-edit-error">{editMessageError}</p>
                             }
