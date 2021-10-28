@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './MessageDisplay.css'
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css'
@@ -11,6 +11,11 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
     const [messageCharacterCounter, setMessageCharacterCounter] = useState(message.content.length);
     const [showEmojiPicker, setShowEmojiPicker] = useState('');
     const [emoji, setEmoji] = useState('😁');
+
+    useEffect(() => {
+        editMessageRef.current?.focus();
+        editMessageRef.current?.setSelectionRange(editMessageRef.current?.value.length,editMessageRef.current?.value.length);
+    })
     
     const handleChange = (e) => {
         setEditedMessage(e.target.value);
@@ -113,7 +118,8 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
 
     return ( 
         messageBeingEdited === message.id ? (
-            <form className="message-edit-form" onSubmit={handleSubmit}>
+            <>
+                <form className="message-edit-form" onSubmit={handleSubmit}>
                     { showEmojiPicker && 
                         <NimblePicker 
                             set='google'
@@ -125,24 +131,26 @@ function MessageDisplay({ socket, setMessageBeingEdited, messageBeingEdited, mes
                     }
 
                     <p onMouseOver={shuffleEmoji} onClick={handleEmojiPicker} className="emoji-selector-edit">{emoji}</p>
-                    
+                        
                     <textarea 
                         ref={editMessageRef}
                         className="message-edit-input" 
                         value={editedMessage} 
                         onChange={handleChange}
                         onKeyDown={handleEscEnter}
+                        rows={(editedMessage.length / 200) + 3}
                     ></textarea>
-                    <div className="message-edit-options-container">
-                        <p className="message-edit-cancel">escape to <span onClick={handleCancel} className="message-edit-cancel-button">cancel</span></p>
-                        <span className="message-edit-dot">•</span>
-                        <span className="message-edit-save">enter to <button className="message-edit-save-button">save</button></span>
-                        { editMessageError && 
-                            <p className="message-edit-error">{editMessageError}</p>
-                        }
-                    </div>
-                    <p className={`message-edit-character-counter message-edit-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
-            </form>
+                </form>
+                        <div className="message-edit-options-container">
+                            <p className="message-edit-cancel">escape to <span onClick={handleCancel} className="message-edit-cancel-button">cancel</span></p>
+                            <span className="message-edit-dot">•</span>
+                            <span className="message-edit-save">enter to <button className="message-edit-save-button">save</button></span>
+                            { editMessageError && 
+                                <p className="message-edit-error">{editMessageError}</p>
+                            }
+                        </div>
+                        <p className={`message-edit-character-counter message-edit-counter-negative-${messageCharacterCounter > 2000}`}>{messageCharacterCounter}/2000</p>
+            </>
         ):(
             <div className="channel-content-message">{message.content}{message.updatedAt !== message.createdAt && <span className="message-edited-true">(edited)</span>}</div>
         )
