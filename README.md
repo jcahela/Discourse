@@ -25,7 +25,16 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#usage">User Authentication</a></li>
+        <li><a href="#servers">Servers</a></li>
+        <li><a href="#channels">Channels</a></li>
+        <li><a href="#messages">Messages</a></li>
+        <li><a href="#real-time-messaging-demo">Real Time Messaging Demo</a></li>
+      </ul>
+    </li>
     <li>
       <a href="#interesting-issues">Interesting Issues</a>
       <ul>
@@ -80,7 +89,7 @@ Users can login with an option to choose between two Demo users, in order to tes
 
 
 # Servers
-
+[Back to top](#table-of-contents)
 ## Server List and Dashboard Home
 Once logged in, users will see the dashboard of Discourse, with servers listed on the left side of the screen. Clicking a server will open its text channel list
 [![Product Name Screen Shot][dashboard-home]](https://discourse-aa.herokuapp.com)
@@ -102,7 +111,7 @@ Users can delete their servers
 <br/>
 
 # Channels
-
+[Back to top](#table-of-contents)
 ## Adding a Channel
 Users can create channels on servers they own
 [![Product Name Screen Shot][adding-channel]](https://discourse-aa.herokuapp.com)
@@ -116,7 +125,7 @@ Users can delete channels on servers they own
 [![Product Name Screen Shot][deleting-channel]](https://discourse-aa.herokuapp.com)
 
 # Messages
-
+[Back to top](#table-of-contents)
 ## Adding a Message (with Emojis!)
 Users can create messages on any server's channel
 [![Product Name Screen Shot][adding-message]](https://discourse-aa.herokuapp.com)
@@ -129,8 +138,8 @@ Users can edit messages, pressing escape to cancel, and enter to submit the edit
 Users can delete messages by either clicking the delete icon, or saving an edited message after deleting all content
 [![Product Name Screen Shot][deleting-message]](https://discourse-aa.herokuapp.com)
 
-# Socket Demo
-
+# Real Time Messaging Demo
+[Back to top](#table-of-contents)
 ## Adding, editing, and deleting messages are all done with sockets, so other users can see these actions occur in real time!
 [![Product Name Screen Shot][socket-demo]](https://discourse-aa.herokuapp.com)
 
