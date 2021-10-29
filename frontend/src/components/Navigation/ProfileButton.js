@@ -29,9 +29,9 @@ function ProfileButton({ user, socket }) {
 
   const logout = async (e) => {
     e.preventDefault();
-    socket.emit('set-offline', sessionUser.id)
     await dispatch(sessionActions.logout());
     history.push('/')
+    socket.emit('set-offline', sessionUser.id)
   };
 
   return (
