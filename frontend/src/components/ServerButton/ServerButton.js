@@ -26,10 +26,14 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
 
         let serverNameInitials = '';
 
-        serverNameArr.forEach(serverWord => {
+        for (let i = 0; i < serverNameArr.length; i++) {
+            const serverWord = serverNameArr[i]
             const initial = serverWord[0];
+            if (!initial) {
+                continue;
+            }
             serverNameInitials += initial;
-        })
+        }
 
         setNoPicContent(serverNameInitials);
     }, [server.name])
