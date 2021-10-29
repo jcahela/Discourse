@@ -18,15 +18,19 @@ function ServerSettingsInfo({ server, onClose, setServerSelected }) {
     const [nameCharacterCounter, setNameCharacterCounter] = useState(50 - serverName.length)
 
     useEffect(() => {
-        const serverName = server.name;
+        const serverName = server.name.trim();
         const serverNameArr = serverName.split(' ');
 
         let serverNameInitials = '';
 
-        serverNameArr.forEach(serverWord => {
+        for (let i = 0; i < serverNameArr.length; i++) {
+            const serverWord = serverNameArr[i]
             const initial = serverWord[0];
+            if (!initial) {
+                continue;
+            }
             serverNameInitials += initial;
-        })
+        }
 
         setNoPicContent(serverNameInitials);
     }, [server.name])
