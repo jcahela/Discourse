@@ -5,8 +5,8 @@
     align-items: center;
     padding: 3px 5px;
     padding-top: 4px;
-    /* border: 1px solid red; */
     border-radius: 5px;
+    position: relative;
 }
 
 .online-user-profile-picture {
@@ -19,7 +19,6 @@
 .online-user-image-container {
     height: fit-content;
     position: relative;
-    /* border: 1px solid green; */
 }
 
 .online-green-status-indicator {

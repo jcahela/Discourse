@@ -1,0 +1,77 @@
+.user-info-card-container {
+    position: absolute;
+    left: -310px;
+    top: 5px;
+    height: 200px;
+    width: 280px;
+    background-color: #282a2e;
+    border-radius: 10px;
+    z-index: 5;
+}
+
+.user-info-card-banner {
+    height: 60px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+}
+
+.user-info-card-profile-picture {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    position: absolute;
+    left: 20px;
+    bottom: -50px;
+    border: 6px solid #282a2e;
+    object-fit: cover;
+}
+
+.user-info-online-status-online {
+    width: 28px;
+    height: 28px;
+    background-color: #3dbe66;
+    border: 6px solid #282a2e;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -45px;
+    right: 170px;
+}
+
+.user-info-online-status-offline {
+    width: 28px;
+    height: 28px;
+    background-color: #889294;
+    border: 6px solid #282a2e;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -45px;
+    right: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-info-online-status-offline-inner {
+    width: 8px;
+    height: 8px;
+    background-color: #282a2e;
+    border-radius: 50%;
+}
+
+.user-info-card-username-container {
+    margin-top: 50px;
+    padding-left: 15px;
+}
+
+.user-info-card-username {
+    font-size: 24px;
+    color: white;
+    font-weight: 500;
+}
+
+.user-info-card-email {
+    color: #889294;
+    margin-top: 5px;
+    font-size: 15px;
+}
