@@ -6,6 +6,8 @@ import MessagePopup from '../MessagePopup';
 import MessageDisplay from '../MessageDisplay';
 import DeleteMessageForm from '../DeleteMessageForm';
 import { Modal } from '../../context/Modal';
+import OnlineUserCard from '../OnlineUserCard';
+import OfflineUserCard from '../OfflineUserCard';
 
 import data from 'emoji-mart/data/google.json'
 import 'emoji-mart/css/emoji-mart.css'
@@ -245,15 +247,15 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                 <div className="channel-content-header-container"></div>
                 <div className="users-list">
                     <div className="online-users-container">
-                        <h1 className="online-users-header">ONLINE</h1>
+                        <h1 className="online-users-header">ONLINE -- {onlineUsers.length}</h1>
                         { onlineUsers.map(onlineUser => (
-                            <div>{onlineUser.username}</div>
+                            <OnlineUserCard user={onlineUser}/>
                         ))}
                     </div>
                     <div className="offline-users-container">
-                        <h1 className="offline-users-header">OFFLINE</h1>
+                        <h1 className="offline-users-header">OFFLINE -- {offlineUsers.length}</h1>
                         { offlineUsers.map(offlineUser => (
-                            <div>{offlineUser.username}</div>
+                            <OfflineUserCard user={offlineUser}/>
                         ))}
                     </div>
                 </div>

@@ -1,0 +1,37 @@
+.offline-user-container {
+    width: 100%;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    padding-top: 4px;
+    border-radius: 5px;
+}
+
+.offline-user-profile-picture {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    filter: brightness(45%);
+}
+
+.offline-user-username {
+    font-size: 16px;
+    font-weight: normal;
+    color: #889294;
+    filter: brightness(60%);
+    margin-left: 15px;
+}
+
+.offline-user-container:hover > .offline-user-username,
+.offline-user-container:hover > .offline-user-profile-picture {
+    color: #DCDDD9;
+    filter: brightness(90%);
+    cursor: pointer;
+}
+
+.offline-user-container:hover {
+    background-color: #34373C;
+    cursor: pointer;
+}

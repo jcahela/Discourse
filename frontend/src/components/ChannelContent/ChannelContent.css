@@ -257,3 +257,7 @@
     color: #889294;
     font-weight: 500;
 }
+
+.offline-users-header {
+    margin-top: 25px;
+}

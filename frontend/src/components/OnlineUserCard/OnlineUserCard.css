@@ -1,0 +1,51 @@
+.online-user-container {
+    width: 100%;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    padding-top: 4px;
+    /* border: 1px solid red; */
+    border-radius: 5px;
+}
+
+.online-user-profile-picture {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.online-user-image-container {
+    height: fit-content;
+    position: relative;
+    /* border: 1px solid green; */
+}
+
+.online-green-status-indicator {
+    background-color: #3dbe66;
+    border: 3px solid #2F3136;
+    position: absolute;
+    border-radius: 50%;
+    bottom: 2px;
+    right: 0px;
+    width: 16px;
+    height: 16px;
+}
+
+.online-user-username {
+    font-size: 16px;
+    font-weight: normal;
+    color: #889294;
+    margin-left: 15px;
+}
+
+.online-user-container:hover > .online-user-username {
+    color: #DCDDD9;
+    cursor: pointer;
+}
+
+.online-user-container:hover {
+    background-color: #34373C;
+    cursor: pointer;
+}
