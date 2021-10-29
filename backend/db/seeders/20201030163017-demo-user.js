@@ -39,11 +39,23 @@ const profilePictures = [
 function createUsers() {
   const users = []
   for (let i = 0; i < 30; i++) {
+
+    const onlineStatusChoices = [true, false]
+
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    const randomStatusIndex = getRandomInt(0, 2);
+
     const user = {
       email: faker.internet.email(),
       username: faker.internet.userName(),
       hashedPassword: bcrypt.hashSync('password'),
-      profilePicture: profilePictures[i]
+      profilePicture: profilePictures[i],
+      onlineStatus: onlineStatusChoices[randomStatusIndex]
     }
     users.push(user);
   };
