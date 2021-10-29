@@ -17,7 +17,7 @@ import { io } from 'socket.io-client';
 
 let serverUrl;
 if (process.env.NODE_ENV === "production") {
-    serverUrl = 'https://discourse-aa.herokuapp.com/'
+    serverUrl = 'https://aa-discourse.herokuapp.com/'
 } else {
     serverUrl = 'http://localhost:5000'
 }
