@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 import * as sessionActions from '../../store/session';
 
-function ProfileButton({ user }) {
+function ProfileButton({ user, socket }) {
+  const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
@@ -27,6 +29,7 @@ function ProfileButton({ user }) {
 
   const logout = async (e) => {
     e.preventDefault();
+    socket.emit('set-offline', sessionUser.id)
     await dispatch(sessionActions.logout());
     history.push('/')
   };

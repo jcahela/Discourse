@@ -8,27 +8,14 @@ import SettingsOverlay from '../SettingsOverlay';
 import NewChannelForm from '../NewChannelForm';
 import ChannelButton from '../ChannelButton';
 import ChannelContent from '../ChannelContent';
+import { useDispatch } from 'react-redux';
+import { updateUser } from '../../store/users';
 
 import { Modal } from '../../context/Modal';
 import './DashboardPage.css'
 
-// socket chat instance
-import { io } from 'socket.io-client';
-
-let serverUrl;
-if (process.env.NODE_ENV === "production") {
-    serverUrl = 'https://discourse-aa.herokuapp.com/'
-} else {
-    serverUrl = 'http://localhost:5000'
-}
-
-const socket = io(serverUrl);
-
-socket.on('connect', () => {
-  console.log(`You connected with id: ${socket.id}`);
-})
-
-function DashboardPage() {
+function DashboardPage({ socket }) {
+    const dispatch = useDispatch();
     const [serverSelected, setServerSelected] = useState(null);
     const [channelSelected, setChannelSelected] = useState(null);
     const serverFromState = useSelector(state => state.servers[serverSelected?.id])
@@ -58,6 +45,16 @@ function DashboardPage() {
         
         return () => document.removeEventListener("click", closeMenu);
     }, [showServerSettingsMenu]);
+
+    useEffect(() => {
+        socket.on('receive-set-online', user => {
+          dispatch(updateUser(user));
+        });
+
+        socket.on('receive-set-offline', user => {
+            dispatch(updateUser(user));
+        })
+    }, [dispatch, socket])
 
     const currentUserIsOwner = serverFromState?.ownerId === sessionUser.id
     
@@ -121,7 +118,7 @@ function DashboardPage() {
                 <div className="session-user-container">
                     <img className="session-user-profile-pic" src={sessionUser.profilePicture} alt="" />
                     <p className="session-user-username">{sessionUser.username}</p>
-                    <ProfileButton user={sessionUser}/>
+                    <ProfileButton user={sessionUser} socket={socket}/>
                 </div>
             </div>
             <div className="chat-container">

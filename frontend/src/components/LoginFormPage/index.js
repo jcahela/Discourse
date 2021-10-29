@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { Modal } from '../../context/Modal'
 import './LoginForm.css';
 
-function LoginFormPage() {
+function LoginFormPage({ socket }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
@@ -36,8 +36,9 @@ function LoginFormPage() {
         } else {
           setCredentialsError(error)
         }
-      })
+      });
     }
+    socket.emit('set-online', credential)
   };
 
   const loginAsDemo1 = async (e) => {
@@ -45,15 +46,17 @@ function LoginFormPage() {
     setUsernameError('');
     setPasswordError('');
     setCredentialsError('');
-    await dispatch(login("Demo-lition", "password"))
+    await dispatch(login("Demo-lition", "password"));
+    socket.emit('set-online', "Demo-lition");
   }
-
+  
   const loginAsDemo2 = async (e) => {
     e.preventDefault();
     setUsernameError('');
     setPasswordError('');
     setCredentialsError('');
     await dispatch(login("Demo-cat", "password"))
+    socket.emit('set-online', "Demo-cat");
   }
 
   return (

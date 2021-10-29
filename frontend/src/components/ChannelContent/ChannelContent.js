@@ -17,6 +17,8 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
     const dispatch = useDispatch();
     const messageRef = useRef();
     const [message, setMessage] = useState('');
+    const offlineUsers = useSelector(state => Object.values(state.users).filter(user => user.onlineStatus === false));
+    const onlineUsers = useSelector(state => Object.values(state.users).filter(user => user.onlineStatus === true));
     const sessionUser = useSelector(state => state.session.user);
     const messages = useSelector(state => Object.values(state.messages).filter(message => message.channelId === channel?.id));
     const [messageCharacterCounter, setMessageCharacterCounter] = useState(0);
@@ -244,9 +246,15 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                 <div className="users-list">
                     <div className="online-users-container">
                         <h1 className="online-users-header">ONLINE</h1>
+                        { onlineUsers.map(onlineUser => (
+                            <div>{onlineUser.username}</div>
+                        ))}
                     </div>
                     <div className="offline-users-container">
                         <h1 className="offline-users-header">OFFLINE</h1>
+                        { offlineUsers.map(offlineUser => (
+                            <div>{offlineUser.username}</div>
+                        ))}
                     </div>
                 </div>
             </div>

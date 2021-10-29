@@ -10,6 +10,23 @@ import DashboardPage from './components/DashboardPage';
 import { restoreServersThunk } from './store/servers';
 import { restoreChannelsThunk } from './store/channels';
 import { restoreMessagesThunk } from './store/messages';
+import { restoreUsersThunk } from './store/users';
+
+// socket chat instance
+import { io } from 'socket.io-client';
+
+let serverUrl;
+if (process.env.NODE_ENV === "production") {
+    serverUrl = 'https://discourse-aa.herokuapp.com/'
+} else {
+    serverUrl = 'http://localhost:5000'
+}
+
+const socket = io(serverUrl);
+
+socket.on('connect', () => {
+  console.log(`You connected with id: ${socket.id}`);
+})
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +36,7 @@ function App() {
       .then(() => dispatch(restoreServersThunk()))
       .then(() => dispatch(restoreChannelsThunk()))
       .then(() => dispatch(restoreMessagesThunk()))
+      .then(() => dispatch(restoreUsersThunk()))
       .then(() => setIsLoaded(true));
   }, [dispatch]);
 
@@ -30,13 +48,13 @@ function App() {
             <LandingPage />
           </Route>
           <Route path="/login" >
-            <LoginFormPage />
+            <LoginFormPage socket={socket}/>
           </Route>
           <Route path='/signup'>
-            <SignupFormPage />
+            <SignupFormPage socket={socket}/>
           </Route>
           <ProtectedRoute path='/dashboard'>
-            <DashboardPage />
+            <DashboardPage socket={socket}/>
           </ProtectedRoute>
         </Switch>
       )}

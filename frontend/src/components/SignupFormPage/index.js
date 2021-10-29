@@ -6,7 +6,7 @@ import LoginSignupBackgroundSvg from "../auth/LoginSignupBackgroundSvg";
 import ImageDropzone from '../ImageDropzone'
 import './SignupForm.css';
 
-function SignupFormPage() {
+function SignupFormPage({ socket }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -51,6 +51,7 @@ function SignupFormPage() {
         }
       })
     }
+    socket.emit('set-online', username)
   };
 
   return (

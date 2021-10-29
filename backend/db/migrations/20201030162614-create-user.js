@@ -22,6 +22,10 @@ module.exports = {
         type: Sequelize.TEXT,
         defaultValue: "https://cdn.discordapp.com/attachments/886336420552269847/900130882671751250/default_user_picture.png"
       },
+      onlineStatus: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,
         allowNull: false,

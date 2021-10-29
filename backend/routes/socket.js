@@ -1,4 +1,6 @@
 const { Message, User } = require('../db/models')
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const storeMessage = async (message) => {
     const { userId, channelId, content } = message;
@@ -25,8 +27,30 @@ const deleteMessage = async (messageId) => {
     return messageId;
 }
 
+const setOnlineStatus = async (credential) => {
+    const user = await User.findOne({
+        where: {
+            [Op.or]: [{username: credential}, {email: credential}]
+        }
+    });
+    await user.update({
+        onlineStatus: true
+    })
+    return user;
+}
+
+const setOfflineStatus = async (userId) => {
+    const user = await User.findByPk(userId);
+    await user.update({
+        onlineStatus: false
+    })
+    return user
+}
+
 module.exports = {
     storeMessage, 
     editMessage,
-    deleteMessage
+    deleteMessage,
+    setOnlineStatus,
+    setOfflineStatus
 };
