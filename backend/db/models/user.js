@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       });
       if (user && user.validatePassword(password)) {
-        return await User.findByPk(user.id, {include: ['Friends1', 'Friends2']});
+        return await User.findByPk(user.id, {include: ['Friends1', 'Friends2', 'Requests']});
       }
     }
     static async signup({ username, email, password }) {
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         email,
         hashedPassword,
       });
-      const signedUpUser = await User.findByPk(user.id, {include: ["Friends1", "Friends2"]})
+      const signedUpUser = await User.findByPk(user.id, {include: ["Friends1", "Friends2", 'Requests']})
       return signedUpUser;
     };
     static associate(models) {
@@ -56,9 +56,17 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'user1',
         foreignKey: 'user2'
       }
+
+      const columnMapping3 = {
+        as: 'Requests',
+        through: 'PendingRequests',
+        otherKey: 'sender',
+        foreignKey: 'receiver'
+      }
   
       User.belongsToMany(models.User, columnMapping1);
       User.belongsToMany(models.User, columnMapping2);
+      User.belongsToMany(models.User, columnMapping3);
     }
   };
   User.init(

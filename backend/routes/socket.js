@@ -31,7 +31,7 @@ const setOnlineStatus = async (credential) => {
         where: {
             [Op.or]: [{username: credential}, {email: credential}]
         },
-        include: ["Friends1", "Friends2"]
+        include: ["Friends1", "Friends2", 'Requests']
     });
     await user.update({
         onlineStatus: true

@@ -1,19 +1,19 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Friendships', {
+    await queryInterface.createTable('PendingRequests', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user1: {
+      sender: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Users" }
       },
-      user2: {
+      receiver: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Users" }
@@ -31,6 +31,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Friendships');
+    await queryInterface.dropTable('PendingRequests');
   }
 };

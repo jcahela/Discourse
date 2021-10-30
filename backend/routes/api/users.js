@@ -100,7 +100,7 @@ router.post(
 
 router.get('/', asyncHandler(async (req, res) => {
   const users = await User.findAll({
-    include: ["Friends1", "Friends2"]
+    include: ["Friends1", "Friends2", 'Requests']
   });
   return res.json(users);
 }))
