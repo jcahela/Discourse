@@ -110,7 +110,7 @@ function FriendsContent() {
                         <div className="friend-search-results">
                             {notFriendsArr.map(user => {
                                 const userObj = allUsers[user.id];
-                                const friendRequestSent = userObj?.Requests.some(user => user.id === sessionUser.id)
+                                const friendRequestSent = userObj?.Requests?.some(user => user.id === sessionUser.id)
                                 return (
                                     <div key={user.id} className="friend-search-result">
                                         <FriendCard friend={user} />
