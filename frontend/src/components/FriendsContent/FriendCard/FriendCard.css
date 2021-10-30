@@ -1,16 +1,13 @@
 .friend-card-container {
     border-top: 1px solid #3A3E44;
-}
-
-.friend-card-container:hover {
-    background-color: #3A3E44;
-}
-
-.friend-card-container {
     display: flex;
     padding: 10px;
     align-items: center;
     border-radius: 10px;
+}
+
+.friend-card-container:hover {
+    background-color: #3A3E44;
 }
 
 .friend-image-container {

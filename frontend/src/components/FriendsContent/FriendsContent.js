@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import FriendCard from './FriendCard';
+import RequestCard from './RequestCard';
 import './FriendsContent.css'
 
 function FriendsContent() {
     const [friendsCategory, setFriendsCategory] = useState('online');
     const onlineFriendsArr = useSelector(state => [...state.session.user.Friends1, ...state.session.user.Friends2].filter(user => user.onlineStatus === true))
     const allFriendsArr = useSelector(state => [...state.session.user.Friends1, ...state.session.user.Friends2])
-    console.log(onlineFriendsArr)
-    console.log(allFriendsArr)
+    const friendRequestsArr = useSelector(state => state.session.user.Requests)
+    
+    console.log(friendRequestsArr)
+
     return ( 
         <div className="friends-content-container">
             <div className="friends-content-navigator">
@@ -26,6 +29,9 @@ function FriendsContent() {
                 
                 <div onClick={() => setFriendsCategory('pending')} className={`friends-link-container friends-pending-container friend-category-${friendsCategory === 'pending'}`}>
                     <p className={`friends-navigator-link friends-content-navigator-pending friend-link-${friendsCategory === 'pending'}`}>Pending</p>
+                    { friendRequestsArr.length > 0 && 
+                        <div className="pending-requests-count">{friendRequestsArr.length}</div>
+                    }
                 </div>
             </div>
             <div className="friends-lists-container">
@@ -46,6 +52,20 @@ function FriendsContent() {
                         ))}
                     </>
                 }
+
+                { friendsCategory === 'pending' && friendRequestsArr.length > 0 && (
+                    <>
+                        <p className="friends-status-header">PENDING -- {friendRequestsArr.length}</p>
+                        {friendRequestsArr.map(friendRequest => (
+                            <RequestCard requestUser={friendRequest} />
+                        ))}
+                    </>
+                )}
+                { friendsCategory === 'pending' && friendRequestsArr.length === 0 && (
+                    <div className="no-friend-requests-container">
+                        <img src="https://cdn.discordapp.com/attachments/886336420552269847/904109968293265440/unknown.png" alt="" className="no-friend-requests-image" />
+                    </div>
+                )}
             </div>
         </div>
     );

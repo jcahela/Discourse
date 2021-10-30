@@ -1,0 +1,64 @@
+.friend-request-container {
+    background-color: #3A3E44;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    width: 70%;
+}
+
+.friend-request-profile-picture {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.friend-request-info-container {
+    margin-left: 10px;
+}
+
+.friend-request-username {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.friend-request-notifier-message {
+    color: #B9BBBE;
+    font-size: 14px;
+}
+
+.friend-request-username:hover,
+.friend-request-notifier-message:hover {
+    cursor: default;
+}
+
+.friend-request-options-container {
+    margin-left: auto;
+    display: flex;
+}
+
+.friend-request-accept-container,
+.friend-request-decline-container {
+    background-color: #202225;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.friend-request-accept-container {
+    margin-right: 12px;
+}
+
+.friend-request-accept-container:hover,
+.friend-request-decline-container:hover {
+    cursor: pointer;
+}
+
+.friend-request-accept-icon,
+.friend-request-decline-icon {
+    color: rgb(179, 179, 179);
+}

@@ -1,5 +1,4 @@
 .friends-content-container {
-    /* border: 1px solid red; */
     height: 100%;
     width: 100%;
 }
@@ -51,8 +50,27 @@
     color: white;
 }
 
+.friends-pending-container {
+    display: flex;
+}
+
+.pending-requests-count {
+    margin-left: 8px;
+    background-color: #ED4245;
+    padding: 3px;
+    height: 20px;
+    width: 20px;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
 .friends-lists-container {
     padding: 20px;
+    height: 80%;
 }
 
 .friends-status-header {
@@ -60,4 +78,12 @@
     color: #889294;
     font-weight: 500;
     margin-bottom: 10px;
+}
+
+.no-friend-requests-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
