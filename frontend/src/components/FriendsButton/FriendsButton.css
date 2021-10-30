@@ -1,0 +1,43 @@
+.home-friends-header {
+    border-bottom: solid 1px #202225;
+    height: 55px;
+}
+
+.friends-button-container {
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+    margin-right: 7px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.friends-icon {
+    color: #6B6F76;
+}
+
+.friends-button-text {
+    color: #6B6F76;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.friends-container-active-true {
+    background-color: #393C43;
+}
+
+.friends-icon-active-true,
+.friends-button-text-active-true {
+    color: white;
+}
+
+.friends-button-container:hover {
+    background-color: #393C43;
+    cursor: pointer;
+}
+
+.friends-button-container:hover > .friends-button-text,
+.friends-button-container:hover > .friends-icon {
+    color: white;
+}

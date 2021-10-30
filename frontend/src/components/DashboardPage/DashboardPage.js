@@ -10,6 +10,8 @@ import ChannelButton from '../ChannelButton';
 import ChannelContent from '../ChannelContent';
 import { useDispatch } from 'react-redux';
 import { updateUser } from '../../store/users';
+import FriendsButton from '../FriendsButton';
+import FriendsContent from '../FriendsContent/FriendsContent';
 
 import { Modal } from '../../context/Modal';
 import './DashboardPage.css'
@@ -127,7 +129,10 @@ function DashboardPage({ socket }) {
                     </div>
                 }
                 { serverSelected?.id === 0 && 
-                    <h1>Home</h1>
+                    <>
+                        <div className="home-friends-header"></div>
+                        <FriendsButton setChannelSelected={setChannelSelected}/>
+                    </>
                 }
 
                 <div className="session-user-container">
@@ -137,11 +142,15 @@ function DashboardPage({ socket }) {
                 </div>
             </div>
             <div className="chat-container">
-                { channelSelected && serverSelected ? (
+                { channelSelected && serverSelected && serverSelected?.id !== 0 && (
                     <ChannelContent channel={channelFromState} setChannelSelected={setChannelSelected} socket={socket}/>
-                ):(
-                    <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />
                 )}
+                { serverSelected?.id === 0 && !channelSelected && (
+                    <FriendsContent />
+                )}
+                { serverSelected?.id !== 0 && !channelSelected && 
+                    <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />    
+                }
             </div>
         </div>
     );

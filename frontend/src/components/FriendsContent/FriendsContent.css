@@ -1,0 +1,52 @@
+.friends-content-container {
+    /* border: 1px solid red; */
+    height: 100%;
+    width: 100%;
+}
+
+.friends-content-navigator {
+    border-bottom: solid 1px #202225;
+    display: flex;
+    height: 55px;
+    padding: 15px;
+    align-items: center;
+}
+
+.navigator-friends-icon {
+    color: #6B6F76;
+}
+
+.navigator-friends-button-text {
+    color: white;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.navigator-divider {
+    height: 25px;
+    border-left: 1px solid #6b6f7665;
+    margin-left: 15px;
+}
+
+.friends-link-container {
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.friends-navigator-link {
+    color: #B9BBBE;
+}
+
+.friends-link-container:hover {
+    background-color: #3A3E44;
+    cursor: pointer;
+}
+
+.friend-category-true {
+    background-color: #464952;
+}
+
+.friend-link-true {
+    color: white;
+}
