@@ -4,9 +4,13 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('PendingRequests', [
       {
-        sender: 2,
+        sender: 14,
         receiver: 1
-      }
+      },
+      {
+        sender: 25,
+        receiver: 1
+      },
     ], {});
   },
 

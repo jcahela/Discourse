@@ -10,10 +10,10 @@ function RequestCard({ requestUser }) {
             </div>
             <div className="friend-request-options-container">
                 <div className="friend-request-accept-container">
-                    <span class="material-icons friend-request-accept-icon">done</span>
+                    <span className="material-icons friend-request-accept-icon">done</span>
                 </div>
                 <div className="friend-request-decline-container">
-                    <span class="material-icons friend-request-decline-icon">close</span>
+                    <span className="material-icons friend-request-decline-icon">close</span>
                 </div>
             </div>
         </div>

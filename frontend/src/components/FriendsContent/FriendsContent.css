@@ -31,6 +31,8 @@
     margin-left: 20px;
     padding: 5px 10px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
 }
 
 .friends-navigator-link {
@@ -68,9 +70,32 @@
     border-radius: 50%;
 }
 
+.add-friend-container {
+    background-color: #3BA55D;
+    color: white;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.add-friend-container:hover {
+    cursor: pointer;
+}
+
+.add-friend-category-true {
+    background-color: #3ba55d00;
+    color: #3BA55D;
+}
+
+.add-friend-category-true:hover {
+    background-color: #3A3E44;
+}
+
 .friends-lists-container {
     padding: 20px;
-    height: 80%;
+    height: 70%;
 }
 
 .friends-status-header {
@@ -86,4 +111,95 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.add-friend-header {
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.add-friend-message {
+    color: #B9BBBE;
+    font-size: 15px;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.add-friend-form {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.add-friend-input {
+    height: 50px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #303339;
+    padding-left: 10px;
+    border: 1px solid rgb(29, 29, 29);
+    color: #D2D3D4;
+}
+
+.add-friend-input:focus {
+    border: 1px solid #00AFF4;
+}
+
+.friend-search-results {
+    max-height: 80%;
+    overflow: auto;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.friend-search-results::-webkit-scrollbar {
+    background-color: rgba(255, 0, 0, 0);
+    width: 10px;
+}
+
+.friend-search-results::-webkit-scrollbar-thumb {
+    background-color: #232529;
+    margin-left: 2px;
+    border-radius: 100px;
+}
+
+.friend-search-result {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid;
+}
+
+.add-friend-button {
+    margin-left: auto;
+    height: 30px;
+    padding: 0 15px;
+    font-size: 14px;
+    background-color: #5865F2;
+    color: white;
+    font-weight: 500;
+    border-radius: 3px;
+    margin-right: 15px;
+}
+
+.cancel-friend-request-button {
+    margin-left: auto;
+    height: 30px;
+    padding: 0 15px;
+    font-size: 14px;
+    background: none;
+    color: white;
+    font-weight: 500;
+    border-radius: 3px;
+    margin-right: 15px;
+}
+
+.add-friend-button:hover,
+.cancel-friend-request-button:hover {
+    cursor: pointer;
 }
