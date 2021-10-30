@@ -11,6 +11,10 @@ module.exports = {
         sender: 25,
         receiver: 1
       },
+      {
+        sender: 1,
+        receiver: 26
+      },
     ], {});
   },
 
