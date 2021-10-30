@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import LoginSignupBackgroundSvg from "../auth/LoginSignupBackgroundSvg";
 import { NavLink } from "react-router-dom";
-import { Modal } from '../../context/Modal'
+import { Modal } from '../../context/Modal';
 import './LoginForm.css';
 
 function LoginFormPage({ socket }) {
@@ -24,7 +24,7 @@ function LoginFormPage({ socket }) {
     setUsernameError('');
     setPasswordError('');
     setCredentialsError('');
-    const data = await dispatch(login(credential, password))
+    const data = await dispatch(login(credential, password));
     if (data) {
       const errors = data.errors;
       errors.forEach(error => {

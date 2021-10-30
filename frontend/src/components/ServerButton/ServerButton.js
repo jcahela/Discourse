@@ -56,7 +56,7 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
     }, [serverSelected?.id, server?.id])
 
     const setSelected = () => {
-        if (serverSelected.id === server.id) {
+        if (serverSelected?.id === server?.id) {
             return;
         }
         setServerSelected(server);

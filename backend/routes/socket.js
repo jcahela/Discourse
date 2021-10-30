@@ -22,7 +22,6 @@ const editMessage = async (message) => {
 
 const deleteMessage = async (messageId) => {
     const messageToDelete = await Message.findByPk(messageId);
-    console.log('THIS IS THE MESSAGE I WANT TO DELETE', messageToDelete)
     await messageToDelete.destroy();
     return messageId;
 }
@@ -31,7 +30,8 @@ const setOnlineStatus = async (credential) => {
     const user = await User.findOne({
         where: {
             [Op.or]: [{username: credential}, {email: credential}]
-        }
+        },
+        include: ["Friends1", "Friends2"]
     });
     await user.update({
         onlineStatus: true

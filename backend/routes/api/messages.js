@@ -7,6 +7,11 @@ const router = express.Router();
 module.exports = router;
 
 router.get('/', asyncHandler(async (req, res) => {
-    const messages = await Message.findAll({ include: User });
+    const messages = await Message.findAll({ 
+        include: {
+            model: User,
+            include: ["Friends1", "Friends2"]
+        } 
+    });
     return res.json(messages);
 }))

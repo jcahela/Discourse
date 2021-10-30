@@ -55,14 +55,16 @@ router.delete(
 router.get(
   '/',
   restoreUser,
-  (req, res) => {
+  asyncHandler( async (req, res) => {
     const { user } = req;
     if (user) {
+      const restoredUser = await User.findByPk(user.id, {include: ["Friends1", "Friends2"]});
+      console.log(restoredUser);
       return res.json({
-        user: user.toSafeObject()
+        user: restoredUser
       });
     } else return res.json({});
-  }
+  })
 );
 
 module.exports = router;
