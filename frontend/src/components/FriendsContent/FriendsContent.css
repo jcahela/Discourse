@@ -50,3 +50,14 @@
 .friend-link-true {
     color: white;
 }
+
+.friends-lists-container {
+    padding: 20px;
+}
+
+.friends-status-header {
+    font-size: 13.5px;
+    color: #889294;
+    font-weight: 500;
+    margin-bottom: 10px;
+}

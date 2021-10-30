@@ -1,6 +1,15 @@
 .home-friends-header {
     border-bottom: solid 1px #202225;
     height: 55px;
+    display: flex;
+    align-items: center;
+}
+
+.home-page-header {
+    color: white;
+    font-weight: normal;
+    font-size: 18px;
+    margin-left: 20px;
 }
 
 .friends-button-container {
@@ -10,7 +19,7 @@
     margin-right: 7px;
     padding: 10px;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .friends-icon {

@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import FriendCard from './FriendCard';
 import './FriendsContent.css'
 
 function FriendsContent() {
     const [friendsCategory, setFriendsCategory] = useState('online');
-    
+    const onlineFriendsArr = useSelector(state => [...state.session.user.Friends1, ...state.session.user.Friends2].filter(user => user.onlineStatus === true))
+    const allFriendsArr = useSelector(state => [...state.session.user.Friends1, ...state.session.user.Friends2])
+    console.log(onlineFriendsArr)
+    console.log(allFriendsArr)
     return ( 
         <div className="friends-content-container">
             <div className="friends-content-navigator">
@@ -23,6 +27,25 @@ function FriendsContent() {
                 <div onClick={() => setFriendsCategory('pending')} className={`friends-link-container friends-pending-container friend-category-${friendsCategory === 'pending'}`}>
                     <p className={`friends-navigator-link friends-content-navigator-pending friend-link-${friendsCategory === 'pending'}`}>Pending</p>
                 </div>
+            </div>
+            <div className="friends-lists-container">
+                { friendsCategory === 'online'  &&
+                    <>
+                        <p className="friends-status-header">ONLINE -- {onlineFriendsArr.length}</p>
+                        {onlineFriendsArr.map(onlineFriend => (
+                            <FriendCard key={onlineFriend.id} friend={onlineFriend} />
+                        ))}
+                    </>
+                }
+
+                { friendsCategory === 'all' && 
+                    <>
+                        <p className="friends-status-header">ALL FRIENDS -- {allFriendsArr.length}</p>
+                        {allFriendsArr.map(friend => (
+                            <FriendCard key={friend.id} friend={friend} />
+                        ))}
+                    </>
+                }
             </div>
         </div>
     );

@@ -1,0 +1,76 @@
+.friend-card-container {
+    border-top: 1px solid #3A3E44;
+}
+
+.friend-card-container:hover {
+    background-color: #3A3E44;
+}
+
+.friend-card-container {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.friend-image-container {
+    position: relative;
+}
+
+.friend-profile-picture {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.friend-online-status-indicator-true {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+    background-color: #3dbe66;
+    border: 3px solid #36393F;
+}
+
+.friend-online-status-indicator-false {
+    position: absolute;
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+    background-color: #889294;
+    border: 3px solid #36393F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.friend-online-status-indicator-false > .offline-friend-inner {
+    background-color: #36393F;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.friend-info-container {
+    margin-left: 10px;
+}
+
+.friend-username {
+    font-weight: 500;
+    color: white;
+    font-size: 15px;
+}
+
+.friend-online-status {
+    color: #B9BBBE;
+}
+
+.friend-username:hover,
+.friend-online-status:hover {
+    cursor: default;
+}

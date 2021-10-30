@@ -10,6 +10,7 @@ import ChannelButton from '../ChannelButton';
 import ChannelContent from '../ChannelContent';
 import { useDispatch } from 'react-redux';
 import { updateUser } from '../../store/users';
+import { restoreUser } from '../../store/session';
 import FriendsButton from '../FriendsButton';
 import FriendsContent from '../FriendsContent/FriendsContent';
 
@@ -51,10 +52,12 @@ function DashboardPage({ socket }) {
     useEffect(() => {
         socket.on('receive-set-online', user => {
           dispatch(updateUser(user));
+          dispatch(restoreUser());
         });
-
+        
         socket.on('receive-set-offline', user => {
             dispatch(updateUser(user));
+            dispatch(restoreUser());
         })
     }, [dispatch, socket])
 
@@ -130,7 +133,9 @@ function DashboardPage({ socket }) {
                 }
                 { serverSelected?.id === 0 && 
                     <>
-                        <div className="home-friends-header"></div>
+                        <div className="home-friends-header">
+                            <h1 className="home-page-header">Home</h1>
+                        </div>
                         <FriendsButton setChannelSelected={setChannelSelected}/>
                     </>
                 }
