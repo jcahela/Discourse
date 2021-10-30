@@ -50,9 +50,15 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
             serverButtonPicRef.current?.classList.remove('server-button-pic-active')
             setWhiteLineActive(false);
         }
+        if (server.id === 0) {
+            serverButtonPicRef.current.style.objectFit = "scale-down";
+        }
     }, [serverSelected?.id, server?.id])
 
     const setSelected = () => {
+        if (serverSelected.id === server.id) {
+            return;
+        }
         setServerSelected(server);
         setWhiteLineActive(true);
         setChannelSelected(null);

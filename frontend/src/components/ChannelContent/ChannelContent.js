@@ -249,13 +249,13 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                     <div className="online-users-container">
                         <h1 className="online-users-header">ONLINE -- {onlineUsers.length}</h1>
                         { onlineUsers.map(onlineUser => (
-                            <OnlineUserCard user={onlineUser}/>
+                            <OnlineUserCard key={onlineUser.id} user={onlineUser}/>
                         ))}
                     </div>
                     <div className="offline-users-container">
                         <h1 className="offline-users-header">OFFLINE -- {offlineUsers.length}</h1>
                         { offlineUsers.map(offlineUser => (
-                            <OfflineUserCard user={offlineUser}/>
+                            <OfflineUserCard key={offlineUser.id} user={offlineUser}/>
                         ))}
                     </div>
                 </div>

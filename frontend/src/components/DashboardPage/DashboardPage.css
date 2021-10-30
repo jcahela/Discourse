@@ -30,6 +30,12 @@
     border-radius: 100px;
 }
 
+.home-button-divider {
+    width: 30px;
+    border: 1px solid #2F3136;
+    margin-top: 10px;
+}
+
 .channel-container {
     width: 250px;
     height: 100vh;

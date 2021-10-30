@@ -58,10 +58,22 @@ function DashboardPage({ socket }) {
 
     const currentUserIsOwner = serverFromState?.ownerId === sessionUser.id
     
+    const homeObject = {
+        id: 0,
+        name: "Home",
+        serverPicture: "https://cdn.discordapp.com/attachments/886336420552269847/903881337679790100/Discourse-logo-white-small.png",
+    }
 
     return ( 
         <div className="dashboard-page-container">
             <div className="server-container">
+                <ServerButton 
+                    server={homeObject}
+                    setServerSelected={setServerSelected}
+                    serverSelected={serverSelected}
+                    setChannelSelected={setChannelSelected}
+                />
+                <div className="home-button-divider"></div>
                 {serversArr.map(server => (
                     <ServerButton 
                         key={server.id} 
@@ -113,6 +125,9 @@ function DashboardPage({ socket }) {
                             <ChannelButton key={index} channel={channel} setChannelSelected={setChannelSelected} channelSelected={channelSelected}/>
                         ))}
                     </div>
+                }
+                { serverSelected?.id === 0 && 
+                    <h1>Home</h1>
                 }
 
                 <div className="session-user-container">
