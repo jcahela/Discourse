@@ -4,10 +4,15 @@
     padding: 10px;
     align-items: center;
     border-radius: 10px;
+    width: 80%;
 }
 
 .friend-card-container:hover {
     background-color: #3A3E44;
+}
+
+.friend-card-container:hover > .friend-options-container {
+    background-color: #282b30;
 }
 
 .friend-image-container {
@@ -71,4 +76,126 @@
 .friend-username:hover,
 .friend-online-status:hover {
     cursor: default;
+}
+
+.friend-options-container {
+    height: 38px;
+    width: 38px;
+    background-color: #2f3236;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-left: auto;
+    position: relative;
+}
+
+.friend-options-icon {
+    color: rgb(179, 179, 179);
+    font-size: 20px;
+}
+
+.friend-options-container:hover {
+    cursor: pointer;
+}
+
+.friend-options-menu-container {
+    background-color: #27292e;
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    height: 50px;
+    width: 150px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.remove-friend-button-container {
+    padding: 5px 10px;
+    border-radius: 5px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-friend-button-container:hover {
+    background-color: #ED4245;
+}
+
+.remove-friend-button {
+    color: #ED4245;
+}
+
+.remove-friend-button-container:hover > .remove-friend-button {
+    color: white;
+}
+
+.remove-friend-confirm-container {
+    height: 220px;
+    width: 450px;
+    background-color: #31343a;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.remove-friend-confirm-header {
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+    padding: 0 15px;
+    margin-top: 20px;
+}
+
+.remove-friend-confirm-message {
+    margin-top: 20px;
+    color: #B9BBBE;
+    font-size: 15px;
+    padding: 0 15px;
+}
+
+.remove-friend-confirm-username {
+    color:#dbdbdb;
+    font-weight: 500;
+}
+
+.remove-friend-options-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: auto;
+    background-color: #292b30;
+    height: 70px;
+}
+
+.remove-friend-cancel-button-container,
+.remove-friend-confirm-button-container {
+    padding: 10px 15px;
+    border-radius: 3px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-friend-cancel-button-container:hover,
+.remove-friend-confirm-button-container:hover {
+    cursor: pointer;
+}
+
+
+.remove-friend-cancel-button-container {
+    margin-right: 10px;
+}
+
+.remove-friend-confirm-button-container {
+    margin-right: 15px;
+    background-color: #ED4245;
+}
+
+.remove-friend-cancel-text,
+.remove-friend-confirm-text {
+    color: white;
+    font-size: 14px;
 }

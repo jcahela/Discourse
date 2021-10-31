@@ -159,6 +159,38 @@ const declineFriendRequest = async (senderId, receiverId) => {
     }
 }
 
+const removeFriendship = async (user1Id, user2Id) => {
+    const friendship1 = await Friendship.findOne({
+        where: {
+            user1: user1Id,
+            user2: user2Id
+        }
+    })
+
+    const friendship2 = await Friendship.findOne({
+        where: {
+            user2: user1Id,
+            user1: user2Id
+        }
+    })
+
+    if (friendship1) await friendship1.destroy();
+    if (friendship2) await friendship2.destroy();
+
+    const user1 = await User.findByPk(user1Id, {
+        include: ["Friends1", "Friends2", "Requests"]
+    });
+
+    const user2 = await User.findByPk(user2Id, {
+        include: ["Friends1", "Friends2", "Requests"]
+    });
+
+    return {
+        user1,
+        user2
+    }
+}
+
 module.exports = {
     storeMessage, 
     editMessage,
@@ -168,5 +200,6 @@ module.exports = {
     addFriendRequest,
     cancelFriendRequest,
     acceptFriendRequest,
-    declineFriendRequest
+    declineFriendRequest,
+    removeFriendship
 };

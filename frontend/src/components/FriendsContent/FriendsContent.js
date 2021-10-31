@@ -40,6 +40,13 @@ function FriendsContent({ socket }) {
             dispatch(updateUser(user2));
             dispatch(restoreUser());
         })
+
+        socket.on('receive-remove-friendship', nonFriendsToUpdate => {
+            const {user1, user2} = nonFriendsToUpdate;
+            dispatch(updateUser(user1));
+            dispatch(updateUser(user2));
+            dispatch(restoreUser());
+        })
     }, [dispatch, socket])
 
     const notFriendsArr = useSelector(state => {
@@ -102,7 +109,7 @@ function FriendsContent({ socket }) {
                     <>
                         <p className="friends-status-header">ONLINE -- {onlineFriendsArr.length}</p>
                         {onlineFriendsArr.map(onlineFriend => (
-                            <FriendCard key={onlineFriend.id} friend={onlineFriend} />
+                            <FriendCard key={onlineFriend.id} friend={onlineFriend} socket={socket}/>
                         ))}
                     </>
                 }
@@ -111,7 +118,7 @@ function FriendsContent({ socket }) {
                     <>
                         <p className="friends-status-header">ALL FRIENDS -- {allFriendsArr.length}</p>
                         {allFriendsArr.map(friend => (
-                            <FriendCard key={friend.id} friend={friend} />
+                            <FriendCard key={friend.id} friend={friend} socket={socket}/>
                         ))}
                     </>
                 }

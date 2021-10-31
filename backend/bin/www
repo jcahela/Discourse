@@ -13,7 +13,8 @@ const {
   addFriendRequest,
   cancelFriendRequest,
   acceptFriendRequest,
-  declineFriendRequest
+  declineFriendRequest,
+  removeFriendship
 } = require("../routes/socket")
 
 const httpServer = createServer(app);
@@ -75,6 +76,12 @@ io.on("connection", socket => {
     const {senderId, receiverId} = friendRequestObj;
     const nonFriendsToUpdate = await declineFriendRequest(senderId, receiverId);
     io.emit('receive-decline-friend-request', nonFriendsToUpdate)
+  })
+
+  socket.on('remove-friendship', async (friendshipObj) => {
+    const {user1Id, user2Id} = friendshipObj;
+    const nonFriendsToUpdate = await removeFriendship(user1Id, user2Id);
+    io.emit('receive-remove-friendship', nonFriendsToUpdate)
   })
 
 })
