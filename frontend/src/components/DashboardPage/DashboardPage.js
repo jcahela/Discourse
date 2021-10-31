@@ -151,7 +151,7 @@ function DashboardPage({ socket }) {
                     <ChannelContent channel={channelFromState} setChannelSelected={setChannelSelected} socket={socket}/>
                 )}
                 { serverSelected?.id === 0 && !channelSelected && (
-                    <FriendsContent />
+                    <FriendsContent socket={socket}/>
                 )}
                 { serverSelected?.id !== 0 && !channelSelected && 
                     <img src="https://cdn.discordapp.com/attachments/886336420552269847/900587720794050640/Blank_Server_Background.PNG" alt="" />    

@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { updateUser } from '../../store/users';
+import { useSelector, useDispatch } from 'react-redux';
+import { restoreUser } from '../../store/session';
 import FriendCard from './FriendCard';
 import RequestCard from './RequestCard';
 import './FriendsContent.css'
 
-function FriendsContent() {
+function FriendsContent({ socket }) {
+    const dispatch = useDispatch();
     const [friendsCategory, setFriendsCategory] = useState('online');
     const onlineFriendsArr = useSelector(state => [...state.session.user.Friends1, ...state.session.user.Friends2].filter(user => user.onlineStatus === true))
     const allFriendsArr = useSelector(state => [...state.session.user.Friends1, ...state.session.user.Friends2])
@@ -12,6 +15,32 @@ function FriendsContent() {
     const allUsers = useSelector(state => state.users)
     const sessionUser = useSelector(state => state.session.user)
     const [searchInput, setSearchInput] = useState('')
+
+    useEffect(() => {
+        socket.on('receive-friend-request-add', requestRecipient => {
+            dispatch(updateUser(requestRecipient));
+            dispatch(restoreUser());
+        });
+
+        socket.on('receive-cancel-friend-request', requestRecipient => {
+            dispatch(updateUser(requestRecipient));
+            dispatch(restoreUser());
+        })
+
+        socket.on('receive-accept-friend-request', friendsToUpdate => {
+            const {user1, user2} = friendsToUpdate;
+            dispatch(updateUser(user1));
+            dispatch(updateUser(user2));
+            dispatch(restoreUser());
+        })
+
+        socket.on('receive-decline-friend-request', nonFriendsToUpdate => {
+            const {user1, user2} = nonFriendsToUpdate;
+            dispatch(updateUser(user1));
+            dispatch(updateUser(user2));
+            dispatch(restoreUser());
+        })
+    }, [dispatch, socket])
 
     const notFriendsArr = useSelector(state => {
         const allUsers = Object.values(state.users)
@@ -30,12 +59,18 @@ function FriendsContent() {
         e.preventDefault();
     }
     
-    const addFriend = (user) => {
-        console.log(user)
+    const sendFriendRequest = (user) => {
+        socket.emit('add-friend-request', {
+            senderId: sessionUser.id,
+            receiverId: user.id
+        })
     }
 
     const cancelRequest = (user) => {
-        console.log(user);
+        socket.emit('cancel-friend-request', {
+            senderId: sessionUser.id,
+            receiverId: user.id
+        })
     }
 
     return ( 
@@ -85,7 +120,7 @@ function FriendsContent() {
                     <>
                         <p className="friends-status-header">PENDING -- {friendRequestsArr.length}</p>
                         {friendRequestsArr.map(friendRequest => (
-                            <RequestCard key={friendRequest.id} requestUser={friendRequest} />
+                            <RequestCard key={friendRequest.id} requestUser={friendRequest} socket={socket} />
                         ))}
                     </>
                 )}
@@ -117,7 +152,7 @@ function FriendsContent() {
                                         { friendRequestSent ? (
                                             <button onClick={() => cancelRequest(user)} className="cancel-friend-request-button">Cancel Request</button>
                                         ):(
-                                            <button onClick={() => addFriend(user)} className="add-friend-button">Send Friend Request</button>
+                                            <button onClick={() => sendFriendRequest(user)} className="add-friend-button">Send Friend Request</button>
                                         )}
                                     </div>
                                 )

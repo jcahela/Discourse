@@ -2,14 +2,18 @@
 const { port } = require('../config');
 const app = require('../app');
 const db = require('../db/models');
-const { createServer } = require("http");
+const { createServer, request } = require("http");
 const { Server } = require("socket.io");
 const { 
   storeMessage, 
   editMessage, 
   deleteMessage, 
   setOnlineStatus,
-  setOfflineStatus
+  setOfflineStatus,
+  addFriendRequest,
+  cancelFriendRequest,
+  acceptFriendRequest,
+  declineFriendRequest
 } = require("../routes/socket")
 
 const httpServer = createServer(app);
@@ -47,6 +51,30 @@ io.on("connection", socket => {
   socket.on('set-offline', async (userId) => {
     const userSetOffline = await setOfflineStatus(userId);
     io.emit('receive-set-offline', userSetOffline)
+  })
+
+  socket.on('add-friend-request', async (friendRequestObj) => {
+    const {senderId, receiverId} = friendRequestObj;
+    const requestRecipient = await addFriendRequest(senderId, receiverId);
+    io.emit('receive-friend-request-add', requestRecipient)
+  })
+
+  socket.on('cancel-friend-request', async (cancelRequestObj) => {
+    const {senderId, receiverId} = cancelRequestObj;
+    const requestRecipient = await cancelFriendRequest(senderId, receiverId);
+    io.emit('receive-cancel-friend-request', requestRecipient)
+  })
+
+  socket.on('accept-friend-request', async (friendRequestObj) => {
+    const {senderId, receiverId} = friendRequestObj;
+    const friendsToUpdate = await acceptFriendRequest(senderId, receiverId);
+    io.emit('receive-accept-friend-request', friendsToUpdate)
+  })
+
+  socket.on('decline-friend-request', async (friendRequestObj) => {
+    const {senderId, receiverId} = friendRequestObj;
+    const nonFriendsToUpdate = await declineFriendRequest(senderId, receiverId);
+    io.emit('receive-decline-friend-request', nonFriendsToUpdate)
   })
 
 })
