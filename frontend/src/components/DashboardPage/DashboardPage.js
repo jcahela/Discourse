@@ -29,7 +29,7 @@ function DashboardPage({ socket }) {
     const [showNewChannelModal, setShowNewChannelModal] = useState(false)
     const sessionUser = useSelector(state => state.session.user)
     const serversArr = useSelector(state => Object.values(state.servers).sort((a, b) => (a.createdAt < b.createdAt ? 1: -1)))
-    const channelsArr = useSelector(state => Object.values(state.channels).filter(channel => channel.serverId === serverFromState?.id).sort((a, b) => a.createdAt < b.createdAt ? 1: -1))
+    const channelsArr = useSelector(state => Object.values(state.channels).filter(channel => channel.serverId === serverFromState?.id).sort((a, b) => a.id > b.id ? 1: -1))
 
     const openMenu = () => {
         if (showServerSettingsMenu) return;

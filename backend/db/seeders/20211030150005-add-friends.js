@@ -5,14 +5,6 @@ module.exports = {
     await queryInterface.bulkInsert('Friendships', [
       {
         user1: 1,
-        user2: 2
-      },
-      {
-        user1: 1,
-        user2: 3
-      },
-      {
-        user1: 1,
         user2: 4
       },
       {
@@ -46,14 +38,6 @@ module.exports = {
       {
         user1: 2,
         user2: 10
-      },
-      {
-        user1: 2,
-        user2: 11
-      },
-      {
-        user1: 2,
-        user2: 12
       },
     ], {});
   },
