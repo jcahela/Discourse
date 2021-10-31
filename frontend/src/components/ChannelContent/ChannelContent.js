@@ -18,6 +18,7 @@ import './ChannelContent.css'
 function ChannelContent({ channel, setChannelSelected, socket }) {
     const dispatch = useDispatch();
     const messageRef = useRef();
+    const scrollRef = useRef();
     const [message, setMessage] = useState('');
     const offlineUsers = useSelector(state => Object.values(state.users).filter(user => user.onlineStatus === false));
     const onlineUsers = useSelector(state => Object.values(state.users).filter(user => user.onlineStatus === true));
@@ -59,6 +60,13 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
         
         return () => document.removeEventListener("click", closeMenu);
     }, [showEmojiPicker]);
+
+    useEffect(() => {
+        scrollRef.current.scrollTo({
+            top: 0,
+            behavior: 'instant'
+        });
+    }, [channel])
 
     const submitMessage = (e) => {
         e.preventDefault();
@@ -144,7 +152,7 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
                     }
                 </div>
 
-                <div className="channel-content-messages-container">
+                <div ref={scrollRef} className="channel-content-messages-container">
                     {orderedMessages.map((message, index) => {
                         const nextMessage = orderedMessages[index+1]
                         const nextMessageSameOwnerAsCurrentMessage = nextMessage?.User?.id === message?.User?.id
@@ -208,7 +216,6 @@ function ChannelContent({ channel, setChannelSelected, socket }) {
 
                     })}
                     <ChannelWelcomeMessage channel={channel} setChannelSelected={setChannelSelected}/>
-                    
                 </div>
 
                 <div onSubmit={submitMessage} className="channel-content-chat-input-container">
