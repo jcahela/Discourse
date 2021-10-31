@@ -40,6 +40,14 @@ function App() {
       .then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  if (!isLoaded) {
+    return (
+      <div className="loading-background">
+        <img className="loading-screen" src="https://cdn.discordapp.com/attachments/886336420552269847/900936387031887892/discord-loading-screen.gif" alt="" />
+      </div>
+    )
+  }
+
   return (
     <>
       {isLoaded && (

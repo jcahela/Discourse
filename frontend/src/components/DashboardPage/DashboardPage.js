@@ -19,6 +19,7 @@ import './DashboardPage.css'
 
 function DashboardPage({ socket }) {
     const dispatch = useDispatch();
+    const [isLoaded, setIsLoaded] = useState(false);
     const [serverSelected, setServerSelected] = useState(null);
     const [channelSelected, setChannelSelected] = useState(null);
     const serverFromState = useSelector(state => state.servers[serverSelected?.id])
@@ -59,6 +60,8 @@ function DashboardPage({ socket }) {
             dispatch(updateUser(user));
             dispatch(restoreUser());
         })
+
+        setIsLoaded(true);
     }, [dispatch, socket])
 
     const currentUserIsOwner = serverFromState?.ownerId === sessionUser.id
@@ -67,6 +70,14 @@ function DashboardPage({ socket }) {
         id: 0,
         name: "Home",
         serverPicture: "https://cdn.discordapp.com/attachments/886336420552269847/903881337679790100/Discourse-logo-white-small.png",
+    }
+
+    if (!isLoaded) {
+        return (
+          <div className="loading-background">
+            <img className="loading-screen" src="https://cdn.discordapp.com/attachments/886336420552269847/900936387031887892/discord-loading-screen.gif" alt="" />
+          </div>
+        )
     }
 
     return ( 
