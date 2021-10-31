@@ -32,11 +32,14 @@ function createMessages() {
   for (let i = 0; i < 1000; i++) {
     const userId = getRandomUser();
     const channelId = getRandomChannel();
+    const randomDateTime = faker.date.between('2021-10-21', '2021-10-31')
     for (let j = 0; j < getRandomConsecutiveMessageCount(); j++) {
       messagesArr.push({
         userId: userId,
         channelId: channelId,
-        content: faker.random.words(getRandomWordCount())
+        content: faker.random.words(getRandomWordCount()),
+        createdAt: randomDateTime,
+        updatedAt: randomDateTime
       })
     }
   }
