@@ -98,6 +98,28 @@
     height: 70%;
 }
 
+.online-friends-container,
+.all-friends-container,
+.pending-friends-container {
+    height: 100%;
+    overflow: auto;
+}
+
+.online-friends-container::-webkit-scrollbar,
+.all-friends-container::-webkit-scrollbar,
+.pending-friends-container::-webkit-scrollbar {
+    background-color: rgba(255, 0, 0, 0);
+    width: 10px;
+}
+
+.online-friends-container::-webkit-scrollbar-thumb,
+.all-friends-container::-webkit-scrollbar-thumb,
+.pending-friends-container::-webkit-scrollbar-thumb {
+    background-color: #232529;
+    margin-left: 2px;
+    border-radius: 100px;
+}
+
 .friends-status-header {
     font-size: 13.5px;
     color: #889294;

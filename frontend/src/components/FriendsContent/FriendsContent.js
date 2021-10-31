@@ -93,30 +93,30 @@ function FriendsContent({ socket }) {
             </div>
             <div className="friends-lists-container">
                 { friendsCategory === 'online'  &&
-                    <>
+                    <div className="online-friends-container">
                         <p className="friends-status-header">ONLINE -- {onlineFriendsArr.length}</p>
                         {onlineFriendsArr.map(onlineFriend => (
                             <FriendCard key={onlineFriend.id} friend={onlineFriend} socket={socket}/>
                         ))}
-                    </>
+                    </div>
                 }
 
                 { friendsCategory === 'all' && 
-                    <>
+                    <div className="all-friends-container">
                         <p className="friends-status-header">ALL FRIENDS -- {allFriendsArr.length}</p>
                         {allFriendsArr.map(friend => (
                             <FriendCard key={friend.id} friend={friend} socket={socket}/>
                         ))}
-                    </>
+                    </div>
                 }
 
                 { friendsCategory === 'pending' && friendRequestsArr.length > 0 && (
-                    <>
+                    <div className="pending-friends-container">
                         <p className="friends-status-header">PENDING -- {friendRequestsArr.length}</p>
                         {friendRequestsArr.map(friendRequest => (
                             <RequestCard key={friendRequest.id} requestUser={friendRequest} socket={socket} />
                         ))}
-                    </>
+                    </div>
                 )}
                 { friendsCategory === 'pending' && friendRequestsArr.length === 0 && (
                     <div className="no-friend-requests-container">
