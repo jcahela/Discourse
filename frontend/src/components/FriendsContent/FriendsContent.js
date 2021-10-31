@@ -3,6 +3,7 @@ import { updateUser } from '../../store/users';
 import { useSelector, useDispatch } from 'react-redux';
 import { restoreUser } from '../../store/session';
 import FriendCard from './FriendCard';
+import NonFriendCard from './NonFriendCard';
 import RequestCard from './RequestCard';
 import './FriendsContent.css'
 
@@ -52,7 +53,7 @@ function FriendsContent({ socket }) {
     const notFriendsArr = useSelector(state => {
         const allUsers = Object.values(state.users)
             .filter(user => user.id !== state.session.user.id)
-            .filter(user => user.username.toLowerCase().startsWith(searchInput))
+            .filter(user => user.username.toLowerCase().startsWith(searchInput.toLowerCase()))
 
         const friendIndexes = [];
         
@@ -64,20 +65,6 @@ function FriendsContent({ socket }) {
 
     const preventSubmit = (e) => {
         e.preventDefault();
-    }
-    
-    const sendFriendRequest = (user) => {
-        socket.emit('add-friend-request', {
-            senderId: sessionUser.id,
-            receiverId: user.id
-        })
-    }
-
-    const cancelRequest = (user) => {
-        socket.emit('cancel-friend-request', {
-            senderId: sessionUser.id,
-            receiverId: user.id
-        })
     }
 
     return ( 
@@ -155,12 +142,7 @@ function FriendsContent({ socket }) {
                                 const friendRequestSent = userObj?.Requests?.some(user => user.id === sessionUser.id)
                                 return (
                                     <div key={user.id} className="friend-search-result">
-                                        <FriendCard friend={user} />
-                                        { friendRequestSent ? (
-                                            <button onClick={() => cancelRequest(user)} className="cancel-friend-request-button">Cancel Request</button>
-                                        ):(
-                                            <button onClick={() => sendFriendRequest(user)} className="add-friend-button">Send Friend Request</button>
-                                        )}
+                                        <NonFriendCard nonFriend={user} friendRequestSent={friendRequestSent} socket={socket}/>
                                     </div>
                                 )
                             }

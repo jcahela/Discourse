@@ -1,0 +1,109 @@
+.nonfriend-card-container {
+    border-top: 1px solid #3A3E44;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.nonfriend-card-container:hover {
+    background-color: #3A3E44;
+}
+
+.nonfriend-card-container:hover > .nonfriend-options-container {
+    background-color: #282b30;
+}
+
+.nonfriend-image-container {
+    position: relative;
+}
+
+.nonfriend-profile-picture {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.nonfriend-online-status-indicator-true {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+    background-color: #3dbe66;
+    border: 3px solid #36393F;
+}
+
+.nonfriend-online-status-indicator-false {
+    position: absolute;
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+    background-color: #889294;
+    border: 3px solid #36393F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nonfriend-online-status-indicator-false > .offline-nonfriend-inner {
+    background-color: #36393F;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.nonfriend-info-container {
+    margin-left: 10px;
+}
+
+.nonfriend-username {
+    font-weight: 500;
+    color: white;
+    font-size: 15px;
+}
+
+.nonfriend-online-status {
+    color: #B9BBBE;
+    font-size: 14px;
+}
+
+.nonfriend-username:hover,
+.nonfriend-online-status:hover {
+    cursor: default;
+}
+
+
+.add-friend-button {
+    margin-left: auto;
+    height: 30px;
+    padding: 0 15px;
+    font-size: 14px;
+    background-color: #5865F2;
+    color: white;
+    font-weight: 500;
+    border-radius: 3px;
+    margin-right: 15px;
+}
+
+.cancel-friend-request-button {
+    margin-left: auto;
+    height: 30px;
+    padding: 0 15px;
+    font-size: 14px;
+    background: none;
+    color: white;
+    font-weight: 500;
+    border-radius: 3px;
+    margin-right: 15px;
+}
+
+.add-friend-button:hover,
+.cancel-friend-request-button:hover {
+    cursor: pointer;
+}
