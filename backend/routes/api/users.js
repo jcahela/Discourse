@@ -58,6 +58,8 @@ const validateSignup = [
   handleValidationErrors,
 ];
 
+// Possible refactor: combine signup for profile pic and no profile pic into one route, and manipulate the singleMulterUpload method so it doesn't error out when not given a file to upload (original reason why I separated these two routes)
+
 // Sign up - no profile picture
 router.post(
   '',

@@ -1,9 +1,7 @@
-// import ServerPopupMessage from '../ServerPopupMessage';
 import { useState, useEffect, useRef } from 'react';
 import './ServerButton.css'
 
 function ServerButton({ server, setServerSelected, serverSelected, setChannelSelected }) {
-    // const [showServerPopup, setShowServerPopup] = useState(false);
     const [noPicContent, setNoPicContent] = useState('');
     const [whiteLine, setWhiteLine] = useState(false);
     const [whiteLineActive, setWhiteLineActive] = useState(false);
@@ -11,14 +9,6 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
     const serverButtonNoPicRef = useRef();
     const serverButtonPicRef = useRef();
     const whiteLineRef = useRef();
-
-    const showPopupMessage = () => {
-        setWhiteLine(true);
-    }
-
-    const hidePopupMessage = () => {
-        setWhiteLine(false);
-    }
 
     useEffect(() => {
         const serverName = server.name.trim();
@@ -41,13 +31,9 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
     useEffect(() => {
         if (serverSelected?.id === server.id) {
             serverButtonContainerRef.current.classList.add('server-button-container-active')
-            serverButtonNoPicRef.current?.classList.add('server-button-no-pic-active')
-            serverButtonPicRef.current?.classList.add('server-button-pic-active')
             setWhiteLineActive(true);
         } else {
             serverButtonContainerRef.current.classList.remove('server-button-container-active')
-            serverButtonNoPicRef.current?.classList.remove('server-button-no-pic-active')
-            serverButtonPicRef.current?.classList.remove('server-button-pic-active')
             setWhiteLineActive(false);
         }
         if (server.id === 0) {
@@ -69,8 +55,8 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
             <div ref={whiteLineRef} className={`white-line-effect white-line-${whiteLine} white-line-active-${whiteLineActive}`}></div>
 
             <div 
-                onMouseOver={showPopupMessage} 
-                onMouseLeave={hidePopupMessage}
+                onMouseOver={() => setWhiteLine(true)} 
+                onMouseLeave={() => setWhiteLine(false)}
                 onClick={setSelected}
                 className="server-button-container"
                 ref={serverButtonContainerRef}
@@ -81,9 +67,6 @@ function ServerButton({ server, setServerSelected, serverSelected, setChannelSel
                     <span ref={serverButtonNoPicRef} className="server-button-no-pic-content">{noPicContent}</span>
                 )}
             </div>
-            {/* { showServerPopup && (
-                <ServerPopupMessage content={server.name} />
-            )} */}
         </div>
     );
 }

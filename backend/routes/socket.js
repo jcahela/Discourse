@@ -57,6 +57,7 @@ const addFriendRequest = async (senderId, receiverId) => {
     const requestRecipient = await User.findByPk(receiverId, {
         include: ["Friends1", "Friends2", 'Requests']
     });
+    console.log(requestRecipient)
     return requestRecipient
 }
 
@@ -75,6 +76,7 @@ const cancelFriendRequest = async (senderId, receiverId) => {
 }
 
 const acceptFriendRequest = async (senderId, receiverId) => {
+    // Refactor idea: change query of where using [Op.or] in order to avoid unecessary if statements
     const friendRequest1 = await PendingRequest.findOne({
         where: {
             sender: senderId,
@@ -90,14 +92,9 @@ const acceptFriendRequest = async (senderId, receiverId) => {
     });
 
     // remove the pending request from the requests table
-    console.log('start')
     if (friendRequest1) await friendRequest1.destroy();
     if (friendRequest2) await friendRequest2.destroy();
-    console.log('end')
-    // where: {
-    //     [Op.or]: [{username: credential}, {email: credential}]
-    // },
-    // check if they are already friends
+    
     const friendshipExists = await Friendship.findOne({
         where: {
             [Op.or]: [

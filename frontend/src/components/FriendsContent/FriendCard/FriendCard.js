@@ -40,7 +40,7 @@ function FriendCard({ friend, socket }) {
                 <p className="friend-online-status">{friend.onlineStatus ? 'Online': 'Offline'}</p>
             </div>
             <div onClick={() => setShowFriendOptionsMenu(true)} className="friend-options-container">
-                <span class="material-icons friend-options-icon">more_vert</span>
+                <span className="material-icons friend-options-icon">more_vert</span>
                 { showFriendOptionsMenu &&
                     <div className="friend-options-menu-container">
                         <div onClick={() => setShowConfirmDeleteFriend(true)} className="remove-friend-button-container">
