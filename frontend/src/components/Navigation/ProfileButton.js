@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as sessionActions from '../../store/session';
 

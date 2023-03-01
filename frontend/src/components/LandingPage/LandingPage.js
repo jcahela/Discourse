@@ -1,4 +1,5 @@
 import Navigation from '../Navigation';
+import React from 'react';
 import LandingCloudsSvg from './LandingCloudsSvg';
 import LandingGraphicLeft from './LandingGraphicLeft';
 import LandingGraphicRight from './LandingGraphicRight';
