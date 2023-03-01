@@ -68,6 +68,12 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsToMany(models.User, columnMapping2);
       User.belongsToMany(models.User, columnMapping3);
     }
+    static async bulkCreate(users) {
+      for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        await User.create(user);
+      }
+    }
   };
   User.init(
     {
