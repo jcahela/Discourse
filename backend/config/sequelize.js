@@ -5,7 +5,7 @@ const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME
   host: config.environment === 'development' ? 'localhost' : 'dpg-cfvse3t269v0ptnouacg-a',
   dialect: 'postgres',
   dialectOptions: {
-    ssl: { rejectUnauthorized: false }, // Required for connecting to Render's managed PostgreSQL service
+    ssl: config.environment === 'development' ? false : { rejectUnauthorized: false }, // Required for connecting to Render's managed PostgreSQL service
   },
 });
 
