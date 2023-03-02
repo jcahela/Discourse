@@ -29,7 +29,7 @@ function getRandomWordCount() {
 
 function createMessages() {
   const messagesArr = [];
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 500; i++) {
     const userId = getRandomUser();
     const channelId = getRandomChannel();
     const randomDateTime = faker.date.between('2021-10-21', '2021-10-31')

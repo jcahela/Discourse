@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       Message.belongsTo(models.Channel, { foreignKey: 'channelId' })
       Message.belongsTo(models.User, { foreignKey: 'userId' })
     }
+    static async bulkCreate(messages) {
+      for (let i = 0; i < messages.length; i++) {
+        const message = messages[i];
+        await Message.create(message);
+      }
+    }
   };
   Message.init({
     userId: DataTypes.INTEGER,

@@ -12,6 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+    static async bulkCreate(friendships) {
+      for (let i = 0; i < friendships.length; i++) {
+        const friendship = friendships[i];
+        await Friendship.create(friendship);
+      }
+    }
   };
   Friendship.init({
     user1: DataTypes.INTEGER,

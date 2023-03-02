@@ -12,6 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+    static async bulkCreate(pendingRequests) {
+      for (let i = 0; i < pendingRequests.length; i++) {
+        const pendingRequest = pendingRequests[i];
+        await PendingRequest.create(pendingRequest);
+      }
+    }
   };
   PendingRequest.init({
     sender: DataTypes.INTEGER,
