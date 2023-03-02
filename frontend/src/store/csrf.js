@@ -3,8 +3,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export async function csrfFetch(url, options = {}) {
-  console.log('----------------\n Path \n --------------------', url);
-  console.log('----------------\n Domain/URL \n --------------------', process.env.REACT_APP_API_URL);
   // const domain = process.env.API_URL;
   // set options.method to 'GET' if there is no method
   options.method = options.method || "GET";
