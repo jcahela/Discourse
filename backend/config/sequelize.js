@@ -1,8 +1,7 @@
 const config = require('./index');
 const Sequelize = require('sequelize');
 
-console.log(process.env.DATABASE_URL);
-console.log(config);
+console.log(process.env.NODE_ENV);
 
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
   host: config.environment === 'development' ? 'localhost' : 'dpg-cfvse3t269v0ptnouacg-a',
