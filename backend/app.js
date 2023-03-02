@@ -20,7 +20,7 @@ app.use(express.json());
 
 // Security Middleware
 if (isProduction) {
-  app.use(cors({ origin: 'https://discourse-aa.onrender.com' }));
+  app.use(cors({ origin: 'https://discourse-aa.onrender.com', credentials: true }));
 }
 // helmet helps set a variety of headers to better secure your app
 app.use(helmet({
