@@ -3,6 +3,8 @@ const { User, Friendship, PendingRequest, Server, Channel, Message } = require("
 const bcrypt = require("bcryptjs");
 const faker = require("faker");
 
+console.log(process.env.DATABASE_URL);
+
 const profilePictures = [
   'https://cdn.discordapp.com/attachments/886336420552269847/903508380314898432/unknown.png',
   'https://cdn.discordapp.com/attachments/886336420552269847/903508381862625320/unknown.png',
