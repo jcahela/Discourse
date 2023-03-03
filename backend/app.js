@@ -34,6 +34,8 @@ app.use(
       secure: isProduction,
       sameSite: "none",
       httpOnly: false,
+      domain: "https://discourse-aa-backend.onrender.com",
+      path: '/',
     },
   })
 );
