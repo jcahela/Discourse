@@ -32,6 +32,7 @@ app.use(
   csurf({
     cookie: {
       secure: isProduction,
+      sameSite: "none",
       httpOnly: true,
     },
   })
