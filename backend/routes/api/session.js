@@ -59,7 +59,6 @@ router.get(
     const { user } = req;
     if (user) {
       const restoredUser = await User.findByPk(user.id, {include: ["Friends1", "Friends2", 'Requests']});
-      console.log(restoredUser);
       return res.json({
         user: restoredUser
       });

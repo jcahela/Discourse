@@ -57,7 +57,6 @@ const addFriendRequest = async (senderId, receiverId) => {
     const requestRecipient = await User.findByPk(receiverId, {
         include: ["Friends1", "Friends2", 'Requests']
     });
-    console.log(requestRecipient)
     return requestRecipient
 }
 
