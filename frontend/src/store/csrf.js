@@ -20,7 +20,8 @@ export async function csrfFetch(url, options = {}) {
       options.headers["Content-Type"] =
         options.headers["Content-Type"] || "application/json";
     }
-    options.headers["XSRF-Token"] = Cookies.get("XSRF-TOKEN");
+    const cookieKey = process.env.NODE_ENV === 'production' ? "_csrf" : "XSRF-TOKEN"
+    options.headers["XSRF-Token"] = Cookies.get(cookieKey);
   }
   // call the default window's fetch with the url and the options passed in
   const res = await window.fetch(`${process.env.REACT_APP_API_URL || ''}${url}`, options);
