@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export async function csrfFetch(url, options = {}) {
+  console.log(Cookies.get("XSRF-TOKEN"));
   // const domain = process.env.API_URL;
   // set options.method to 'GET' if there is no method
   options.method = options.method || "GET";

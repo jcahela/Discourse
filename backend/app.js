@@ -33,7 +33,7 @@ app.use(
     cookie: {
       secure: isProduction,
       sameSite: "none",
-      httpOnly: true,
+      httpOnly: false,
     },
   })
 );
