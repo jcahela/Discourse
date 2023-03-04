@@ -28,17 +28,17 @@ app.use(helmet({
 }));
 
 // Set the _csrf token and create req.csrfToken method
-app.use(
-  csurf({
-    cookie: {
-      secure: isProduction,
-      sameSite: "none",
-      httpOnly: false,
-      domain: "discourse-aa-backend.onrender.com",
-      path: '/',
-    },
-  })
-);
+// app.use(
+//   csurf({
+//     cookie: {
+//       secure: isProduction,
+//       sameSite: "none",
+//       httpOnly: false,
+//       domain: "discourse-aa-backend.onrender.com",
+//       path: '/',
+//     },
+//   })
+// );
 
 app.use(routes); // Connect all the routes
 
