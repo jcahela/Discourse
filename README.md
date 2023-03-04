@@ -7,7 +7,7 @@
   <p align="center">
     A portfolio clone of <a target="_blank" href="https://discord.com/">Discord.com</a>
     <br />
-    <a href="https://discourse-aa.herokuapp.com/" target="_blank"><strong>Explore the website »</strong></a>
+    <a href="https://discourse-aa.onrender.com/" target="_blank"><strong>Explore the website »</strong></a>
     <br />
     <br />
   </p>
