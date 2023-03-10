@@ -181,21 +181,6 @@ Issue: When adding, editing, and deleting messages, the message would be changed
 
 Solution: This was an interesting addition to the project which was the inclusion of the socket.io library to allow for real-time communication between users. By adding a socket connection to the backend and connecting it to the frontend react dashboard component, I was able to make every user start a socket connection upon connecting to the website. I then made each action to add/edit/delete a message have a socket.emit method sent to the backend. The backend receives this method, then uses the information sent with it to make the necessary changes to the database. After the database has been updated, the backend sends a socket method back to the front end, which is listened to inside of a useEffect in the channel component. Finally, the useEffect calls the action creators to update Redux state appropriately for every user currently connected to the website via sockets.
 
-# Features to Implement Next
-## Private Servers
-[Back to top](#table-of-contents)
-
-An interesting addition to the project would be private servers. Users would make a server that is not public, then invite specific users to be able to see/interact with that server.
-
-How I would do it: I would add a column to the servers table in the database indicating if the server is public or private. I would also add a joins table between the Servers and Users tables that indicates which Users are members of specific Servers. I would then change the dashboard page so that each user will only see a list of Servers that are public, and private Servers that have their user id's listed in the joins table for that specific Server. Lastly, I would add invite functionality so that a user that owns a private server can search for other users and invite them. When that user accepts the invite, their user Id and that private server Id will get added to the joins table, which updates their server list to include the newly joined private server.
-
-## Voice Chat
-[Back to top](#table-of-contents)
-
-A functionality I would really like to add is the ability to use voice/video chat. Ideally it would be like discord, where clicking a voice channel will join an environment that would make you audible to anyone else in that environment who joined that voice channel.
-
-How I would do it: I would use Web RTC, an open-source software that provides real-time voice/video communication, in order to create voice chat sessions between users. I would need to figure out how to make it more like a private voice chat room that only allows users that have joined that room (by clicking on the voice channel) to hear other users in that same voice channel, rather than the typical voice call between two users that is the most basic implementation of Web RTC.
-
 <!-- CONTACT -->
 ## Contact
 [Back to top](#table-of-contents)
