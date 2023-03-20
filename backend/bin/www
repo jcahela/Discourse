@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { port } = require('../config');
+const { port, environment } = require('../config');
 const app = require('../app');
 const db = require('../db/models');
 const { createServer, request } = require("http");
@@ -21,7 +21,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: 'https://discourse-aa.onrender.com',
+    origin: environment === 'development' ? 'http://localhost:3000' : 'https://discourse-aa.onrender.com',
     methods: ["GET", "POST", "PATCH", "DELETE"]
   }
 });
