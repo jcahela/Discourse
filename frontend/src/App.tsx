@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import SignupFormPage from './components/SignupFormPage';
 import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from './store/session';
@@ -32,12 +32,17 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(sessionActions.restoreUser())
-      .then(() => dispatch(restoreServersThunk()))
-      .then(() => dispatch(restoreChannelsThunk()))
-      .then(() => dispatch(restoreMessagesThunk()))
-      .then(() => dispatch(restoreUsersThunk()))
-      .then(() => setIsLoaded(true));
+
+    async function restoreApp() {
+      await dispatch(sessionActions.restoreUser());
+      await dispatch(restoreServersThunk());
+      await dispatch(restoreChannelsThunk());
+      await dispatch(restoreMessagesThunk());
+      await dispatch(restoreUsersThunk());
+      setIsLoaded(true);
+    }
+    
+    restoreApp();
   }, [dispatch]);
 
   if (!isLoaded) {
@@ -51,20 +56,22 @@ function App() {
   return (
     <>
       {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route path="/login" >
-            <LoginFormPage socket={socket}/>
-          </Route>
-          <Route path='/signup'>
-            <SignupFormPage socket={socket}/>
-          </Route>
-          <ProtectedRoute path='/dashboard'>
-            <DashboardPage socket={socket}/>
-          </ProtectedRoute>
-        </Switch>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/">
+              <LandingPage />
+            </Route>
+            <Route path="/login" >
+              <LoginFormPage socket={socket}/>
+            </Route>
+            <Route path='/signup'>
+              <SignupFormPage socket={socket}/>
+            </Route>
+            <ProtectedRoute path='/dashboard'>
+              <DashboardPage socket={socket}/>
+            </ProtectedRoute>
+          </Switch>
+        </BrowserRouter>
       )}
     </>
   );
