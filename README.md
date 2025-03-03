@@ -182,11 +182,6 @@ Jason Cahela:
  - LinkedIn: https://www.linkedin.com/in/jason-cahela/
  - Email: jpacahela@gmail.com
 
-Project Repo Link: https://github.com/jcahela/Discourse
-
-Project Link: https://discourse-aa.herokuapp.com/
-
-
 <!-- ACKNOWLEDGEMENTS --
 
 <!-- MARKDOWN LINKS & IMAGES -->
