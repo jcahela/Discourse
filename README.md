@@ -42,14 +42,7 @@
         <li><a href="#real-time-message-crud">Real Time Message CRUD</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#features-to-implement-next">Features to Implement Next</a>
-      <ul>
-        <li><a href="#private-servers">Private Servers</a></li>
-        <li><a href="#voice-chat">Voice Chat</a></li>
-      </ul>
     <li><a href="#contact">Contact</a></li>
-    </li>
   </ol>
 </details>
 
